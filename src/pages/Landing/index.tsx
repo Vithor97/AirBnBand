@@ -7,7 +7,7 @@ import styles from './styles';
 function Landing () {
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>AirBnBand 2</Text>
+            <Text style={styles.titulo}>AirBnBand 3</Text>
         </View>
     )
 }
