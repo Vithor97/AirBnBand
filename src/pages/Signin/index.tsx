@@ -21,7 +21,7 @@ function Signin () {
         <View style={styles.container}>
             <View>
                 <Text style={styles.titulo}>AirBnBand | {} 
-                    <Image source={require('../Resources/Icons/calendario.png')} style={styles.imageLogo} />
+                    <Image source={require('../../resources/Icons/calendario.png')} style={styles.imageLogo} />
                     {/* <div className="logo-container">
                         <img src={logoImg} alt="Proffy"/>
                     </div> */}
