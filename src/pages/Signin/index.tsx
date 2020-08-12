@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, Text, TextInput } from 'react-native';
 import {RectButton } from 'react-native-gesture-handler'
 
-
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,7 +16,6 @@ function Signin () {
         navigate('Signup');
     }
     
-
     return (
         <View style={styles.container}>
             <View>
@@ -27,13 +25,13 @@ function Signin () {
                 <TextInput 
                     placeholder="Email"  
                     style={styles.textInput}
-                    placeholderTextColor="#FFF"
+                    placeholderTextColor="#FFFFFF"
                     value={email}
                     onChangeText={text => setEmail(text)}
                     />
                 <TextInput 
                     placeholder="Senha"
-                    placeholderTextColor="#FFF" 
+                    placeholderTextColor="#FFFFFF" 
                     style={styles.textInput}
                     value={senha}
                     onChangeText={text => setSenha(text)} 
