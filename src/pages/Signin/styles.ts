@@ -8,9 +8,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
 
-    // imageLogo: {
-
-    // },
+    imageLogo: {
+      height: 50,
+      width: 50
+    },
 
     textInput: {
       height: 50,

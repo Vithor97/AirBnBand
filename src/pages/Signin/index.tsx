@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Image } from 'react-native';
 import {RectButton } from 'react-native-gesture-handler'
 
 import styles from './styles';
+// import logoImg from '../Resources/Icons/calendario.svg';
 import { useNavigation } from '@react-navigation/native';
 
 function Signin () {
@@ -19,7 +20,12 @@ function Signin () {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.titulo}>AirBnBand | @</Text>
+                <Text style={styles.titulo}>AirBnBand | 
+                    <Image source={require('../Resources/Icons/calendario.png')} style={styles.imageLogo} />
+                    {/* <div className="logo-container">
+                        <img src={logoImg} alt="Proffy"/>
+                    </div> */}
+                </Text>
             </View>
             <View style={styles.formContainer}>
                 <TextInput 
