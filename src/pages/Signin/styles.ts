@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
     imageLogo: {
       height: 50,
-      width: 50
+      width: 50,
     },
 
     textInput: {
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       backgroundColor: '#FD9A0B',
       margin: 5,
-      fontSize: 20
+      fontSize: 20,
+      
     },
     formContainer: {
       backgroundColor: '#FFF',
@@ -32,7 +33,8 @@ const styles = StyleSheet.create({
       top:-45,
       fontSize: 48,
       fontFamily: 'sans-serif-medium',
-      color: '#FD9A0B'
+      color: '#FD9A0B',
+      
     },
     submitButton:{
       marginTop: 20,
