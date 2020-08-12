@@ -3,11 +3,16 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Landing from './src/pages/Landing'
+import Signin from './src/pages/Signin'
+import Signup from './src/pages/Signup';
+import AuthStack from './src/routes/AuthStack';
 
 export default function App() {
   return (
     <>
-      <Landing/>
+      {/* <Signin/> */}
+      {/* <Signup/> */}
+      <AuthStack/>
       <StatusBar style="auto"/>
     </>
   );
