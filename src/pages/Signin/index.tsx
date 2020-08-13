@@ -16,6 +16,17 @@ function Signin () {
     function goToSignup(){
         navigate('Signup');
     }
+
+    function login(){
+        if(email === 'vitor' || senha === '123'){
+            setSenha('')
+            setEmail('')
+            navigate('Landing')
+        }
+        else{
+            alert('Senha inválida')
+        }
+    }
     
     return (
         <View style={styles.container}>
@@ -43,7 +54,7 @@ function Signin () {
                     onChangeText={text => setSenha(text)} 
                     />
 
-                <RectButton style={styles.submitButton}>
+                <RectButton onPress={login} style={styles.submitButton}>
                     <Text style={styles.submitButtonText}>Entrar</Text>
                 </RectButton>
 
