@@ -3,9 +3,18 @@ import {StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#FFFF',
+      display: 'flex',
+      height: '100%',
+      width: '100%',
+      paddingTop: 150,
+      backgroundColor: '#ffffff',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
+    },
+
+    containerTitulo:{
+      // height: 80,
+      width: '90%',
     },
 
     imageLogo: {
@@ -16,11 +25,11 @@ const styles = StyleSheet.create({
     textInput: {
       height: 50,
       padding: 10,
+      paddingLeft: 20,
       borderRadius: 20,
       backgroundColor: '#FD9A0B',
       margin: 5,
       fontSize: 20,
-      
     },
     formContainer: {
       backgroundColor: '#FFF',
@@ -34,7 +43,6 @@ const styles = StyleSheet.create({
       fontSize: 48,
       fontFamily: 'sans-serif-medium',
       color: '#FD9A0B',
-      
     },
     submitButton:{
       marginTop: 20,
@@ -64,7 +72,20 @@ const styles = StyleSheet.create({
       marginLeft: 16,
       alignSelf: 'center',
       textDecorationLine:"underline"
-    }
+    },
+    
+    imageFooter:{
+      height: 200,
+      marginLeft: -350,
+      marginTop: -200,
+      width: '200%',
+    },
+
+    imageFooterDark:{
+      height: 200,
+      marginLeft: 0,
+      width: '100%',
+    },
 });
 
 

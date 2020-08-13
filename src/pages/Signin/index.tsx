@@ -30,7 +30,7 @@ function Signin () {
     
     return (
         <View style={styles.container}>
-            <View>
+            <View style={styles.containerTitulo}>
                 <Text style={styles.titulo}>AirBnBand | {} 
                     <Image source={require('../../resources/Icons/calendario.png')} style={styles.imageLogo} />
                     {/* <div className="logo-container">
@@ -64,7 +64,11 @@ function Signin () {
                 <RectButton onPress={goToSignup}>
                     <Text style={styles.signupButtonText}>Cadastre-se</Text>
                 </RectButton>
-            </View> 
+            </View>
+            
+            <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={styles.imageFooterDark} />
+
+            <Image source={require('../../resources/Images/onda_laranja.png')} style={styles.imageFooter} />
         </View>
     )
 }
