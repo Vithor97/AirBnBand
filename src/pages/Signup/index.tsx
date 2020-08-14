@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import {RectButton } from 'react-native-gesture-handler'
-
+import {RectButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
+import components from '../../resources/components/components';
+import colors from '../../resources/values/colors.json';
+import strings from '../../resources/values/strings.json';
 import { useNavigation } from '@react-navigation/native';
 
 function Signup () {
-
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -17,35 +18,34 @@ function Signup () {
     function goToSignin(){
         navigate('Signin')
     }
-    
 
     return (
-        <View style={styles.container}>
-            
+        <View style={styles.container}>       
             <View style={styles.headerComponent}>
-                <Text style={styles.label}>Cadastro</Text>
+                <Text style={styles.label}>{strings.register}</Text>
             </View>
-            <View style={styles.lineStyle}/>
+
+            <View style={components.divisorBar}/>
             
             <View style={styles.formContainer}>
                 <TextInput 
                     placeholder="Nome"  
-                    style={styles.textInput}
-                    placeholderTextColor="#8A927F"
+                    style={components.textInput}
+                    placeholderTextColor= {colors.white}
                     value={nome}
                     onChangeText={text => setNome(text)}
                     />
                 <TextInput 
                     placeholder="Email"  
-                    style={styles.textInput}
-                    placeholderTextColor="#8A927F"
+                    style={components.textInput}
+                    placeholderTextColor= {colors.white}
                     value={email}
                     onChangeText={text => setEmail(text)}
                     />
                 <TextInput 
                     placeholder="Senha"
-                    placeholderTextColor="#8A927F"
-                    style={styles.textInput}
+                    placeholderTextColor= {colors.white}
+                    style={components.textInput}
                     value={senha}
                     onChangeText={text => setSenha(text)} 
                     />

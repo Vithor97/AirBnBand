@@ -8,6 +8,9 @@
     "secundaryDark" : "#c8bf00",
     "secundaryLight" : "#ffff6b",
 
+    "placeHolder" : "#C4C4C4",
+    "placeHolderAlternative" : "#8A927F",
+
     "background" : "#FFFFFF",
     "backgroundAlternative" : "#000000",
 

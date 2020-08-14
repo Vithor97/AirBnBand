@@ -1,9 +1,12 @@
-import {StyleSheet } from 'react-native'
+import {StyleSheet } from 'react-native';
+import colors from '../../resources/values/colors.json';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FD9A0B',
+        width: '100%',
+        height: '100%',
+        backgroundColor: colors.white,
         alignItems: 'center',
         justifyContent: 'center',
       },
@@ -11,7 +14,7 @@ const styles = StyleSheet.create({
         height: 50,
         padding: 10,
         borderRadius: 20,
-        backgroundColor: '#FFF',
+        backgroundColor: colors.primary,
         marginBottom: 6,
         fontSize: 20
     },
@@ -22,7 +25,7 @@ const styles = StyleSheet.create({
     },
     lineStyle:{
         position: 'relative',
-        borderBottomColor: 'white',
+        borderBottomColor: colors.primary,
         borderBottomWidth: 4,
         width:'80%',
         top: 0
@@ -32,21 +35,21 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         height: 50,
-        backgroundColor: '#FFF',
+        backgroundColor: colors.primary,
         borderRadius: 20,
         width: '95%',
         justifyContent: 'center',
         alignItems: 'center',
     },
   submitButtonText: {
-        color: '#FD9A0B',
+        color: colors.white,
         fontFamily: 'sans-serif-medium',
         fontSize: 25,
         marginLeft: 16,
         alignSelf: 'center'
     },
   backButtonText: {
-    color: '#fff',
+    color: colors.primary,
     fontFamily: 'sans-serif-medium',
     fontSize: 20,
     marginLeft: 16,
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
   },
   signupContainer: {
     top: 60,
+    width: '90%',
   },
 
   headerComponent:{
@@ -63,8 +67,8 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'relative',
-    color: '#FFF',
-    fontSize: 25
+    color: colors.primary,
+    fontSize: 40
   }   
 });
 
