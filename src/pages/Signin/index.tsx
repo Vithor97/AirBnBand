@@ -4,6 +4,8 @@ import {RectButton } from 'react-native-gesture-handler'
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
 
+import api from '../../services/api'
+
 
 import styles from './styles';
 // import logoImg from '../Resources/Icons/calendario.svg';
@@ -28,6 +30,28 @@ function Signin () {
         }
         else{
             alert('Senha inválida')
+        }
+    }
+
+    async function signinn(){
+        if(!email || ! senha){
+            alert('Email ou senha invalidos')
+        }
+        else{
+            try {
+                const response = await api.post('login', {
+                    user: email,
+                    password: senha
+                })
+                console.log(response.data)
+                api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
+
+                navigate('Landing')
+
+            } catch (error) {
+                alert(error)
+            }
+
         }
     }
     
