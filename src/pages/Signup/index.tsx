@@ -50,7 +50,7 @@ function Signup () {
                     onChangeText={text => setSenha(text)} 
                     />
 
-                <RectButton style={styles.submitButton}>
+                <RectButton style={components.defaultButton}>
                     <Text style={styles.submitButtonText}>Continuar cadastro</Text>
                 </RectButton>
 

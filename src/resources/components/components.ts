@@ -20,6 +20,17 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         alignSelf: 'center'
       },
+
+      defaultButton:{
+        marginTop: 20,
+        marginBottom: 10,
+        height: 50,
+        backgroundColor: colors.primary,
+        borderRadius: 25,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
 })
 
 export default styles;
