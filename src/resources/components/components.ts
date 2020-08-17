@@ -31,6 +31,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
       },
+
+      waveFooter:{
+        height: 200,
+        marginLeft: -350,
+        marginTop: -200,
+        width: '200%',
+      },
+  
+      waveFooterDark:{
+        height: 200,
+        marginLeft: 0,
+        width: '100%',
+      },
 })
 
 export default styles;
