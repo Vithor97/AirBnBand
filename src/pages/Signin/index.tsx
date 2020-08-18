@@ -87,6 +87,23 @@ function Signin () {
 
                 <View style={styles.divisorBar}></View>
 
+
+                <View style={styles.socialMediaBox}>
+                    
+                        <Image 
+                            source={require('../../resources/Icons/facebook.png')}
+                            style={styles.faceBook}
+                        />
+                    
+                    
+                        <Image 
+                            source={require('../../resources/Icons/gmail.png')}
+                            style={styles.faceBook}
+                        />
+                    
+                </View>
+
+
                 <Text style={styles.orText}> {strings.or} </Text>
 
                 <Text onPress={goToSignup} style={styles.signupButtonText}> {strings.create_account} </Text>
