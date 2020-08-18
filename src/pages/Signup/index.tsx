@@ -19,10 +19,34 @@ function Signup () {
 
     return (
         <View style={styles.container}>
-            <View style={styles.headerComponent}>
+            <View style={components.headerContainer}>
+                <View style={components.backArrowContainer}>
+                    <Image source={require('../../resources/Icons/seta_voltar_laranja.png')} style={components.backArrow}/>
+                </View>
+            </View>
+
+            <View style={components.contentContainer}>
+                <Text style={styles.registerText}>{strings.registerQuestion}</Text>
+
+                <View style={styles.optionContainer}>
+                    <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.optionIcon} />
+
+                    <Text style={styles.optionText}>{strings.artist}</Text>
+                </View>
+
+                {/* <View style={components.divisorBar}/> */}
+
+                <View style={styles.optionContainer}>
+                    <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.optionIcon} />
+
+                    <Text style={styles.optionText}>{strings.hirer}</Text>
+                </View>
+            </View>
+
+            {/* <View style={styles.headerComponent}>
                 <Text onPress={goToSignin} style={styles.backButtonText}> Já possui conta? </Text>
 
-                <Text style={styles.label}>{strings.register}</Text>
+                <Text style={styles.label}>Como você deseja se cadastrar?</Text>
             </View>
 
             <View style={components.divisorBar}/>
@@ -34,7 +58,7 @@ function Signup () {
                     style={components.textInput}
                     value={senha}
                     onChangeText={text => setSenha(text)} 
-                    />
+                />
 
                 <RectButton style={components.defaultButton}>
                     <Text style={styles.submitButtonText}>Continuar cadastro</Text>
@@ -42,10 +66,13 @@ function Signup () {
             </View>
 
             <Text onPress={goToSignin} style={styles.backButtonText}> Já possui conta? </Text>
-            
-            <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={components.waveFooterDark} />
+             */}
 
-            <Image source={require('../../resources/Images/onda_laranja.png')} style={components.waveFooter} />
+            <View style={components.wavesContainer}>
+                <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={components.waveFooterDark} />
+
+                <Image source={require('../../resources/Images/onda_laranja.png')} style={components.waveFooter} />
+            </View>
         </View>
     )
 }

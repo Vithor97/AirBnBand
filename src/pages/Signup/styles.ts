@@ -3,65 +3,52 @@ import colors from '../../resources/values/colors.json';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
     height: '100%',
-    paddingTop: 50,
+    paddingTop: 30,
     backgroundColor: colors.white,
+
+    display: "flex",
     alignItems: 'center',
     justifyContent: 'space-between',
   },
 
-  headerComponent:{
-    // position: 'relative',
-    // top: 1,
+  registerText: {
+    color: colors.primary,
+    fontSize: 40,
+    marginBottom: 10,
   },
 
-  formContainer: {
+  optionContainer: {
+    width: "100%",
+    // height: 100,
     padding: 20,
-    width: '90%',
-    top: 10,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: colors.primary,
+
+    marginBottom: 10,
+
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
   },
-    
-  submitButton:{
-    marginTop: 20,
-    padding: 10,
-    margin: 10,
+
+  optionIcon: {
+    width: 50,
     height: 50,
-    backgroundColor: colors.primary,
-    borderRadius: 20,
-    width: '95%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginBottom: 10,
+    alignSelf: "center"
   },
 
-  submitButtonText: {
-    color: colors.white,
-    fontFamily: 'sans-serif-medium',
-    fontSize: 25,
-    marginLeft: 16,
-    alignSelf: 'center'
-  },
-
-  backButtonText: {
+  optionText: {
     color: colors.primary,
-    fontFamily: 'sans-serif-medium',
-    fontSize: 20,
-    marginLeft: 16,
-    alignSelf: 'center',
-    textDecorationLine: "underline"
+    // backgroundColor: colors.black,
+    fontSize: 40,
+    alignSelf: "center",
   },
-
-  signupContainer: {
-    top: 60,
-    width: '90%',
-  },
-
-  label: {
-    position: 'relative',
-    color: colors.primary,
-    fontSize: 40
-  }   
 });
 
 export default styles;
