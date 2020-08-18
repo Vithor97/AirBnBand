@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image } from 'react-native';
-import {RectButton } from 'react-native-gesture-handler';
+import {BorderlessButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import components from '../../resources/components/components';
@@ -11,18 +11,22 @@ import { useNavigation } from '@react-navigation/native';
 function Signup () {
     const [senha, setSenha] = useState('')
     
-    const {navigate} = useNavigation();
+    const {navigate, goBack} = useNavigation();
 
     function goToSignin(){
         navigate('Signin')
     }
 
+    function goBackScreen(){
+        return goBack();
+    }
+
     return (
         <View style={styles.container}>
             <View style={components.headerContainer}>
-                <View style={components.backArrowContainer}  onPress={goToSignin}>
+                <BorderlessButton style={components.backArrowContainer}  onPress={goBackScreen}>
                     <Image source={require('../../resources/Icons/seta_voltar_laranja.png')} style={components.backArrow} />
-                </View>
+                </BorderlessButton>
             </View>
 
             <View style={components.contentContainer}>
