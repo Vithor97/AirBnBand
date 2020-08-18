@@ -20,8 +20,8 @@ function Signup () {
     return (
         <View style={styles.container}>
             <View style={components.headerContainer}>
-                <View style={components.backArrowContainer}>
-                    <Image source={require('../../resources/Icons/seta_voltar_laranja.png')} style={components.backArrow}/>
+                <View style={components.backArrowContainer}  onPress={goToSignin}>
+                    <Image source={require('../../resources/Icons/seta_voltar_laranja.png')} style={components.backArrow} />
                 </View>
             </View>
 
