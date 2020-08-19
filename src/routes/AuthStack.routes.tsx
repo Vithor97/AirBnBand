@@ -11,13 +11,13 @@ const {Navigator, Screen} = createStackNavigator();
 
 function AuthStack(){
     return (
-        <NavigationContainer>
+        // <NavigationContainer>
             <Navigator screenOptions={{headerShown: false}}>
                 <Screen name="Signin" component={Signin}/>
                 <Screen name="Signup" component={Signup}/>
-                <Screen name="Landing" component={Landing}/>
+                {/* <Screen name="Landing" component={Landing}/> */}
             </Navigator>
-        </NavigationContainer>
+        // </NavigationContainer>
     )
 }
 

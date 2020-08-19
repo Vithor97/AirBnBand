@@ -5,14 +5,25 @@ import { StyleSheet, Text, View } from 'react-native';
 import Landing from './src/pages/Landing'
 import Signin from './src/pages/Signin'
 import Signup from './src/pages/Signup';
-import AuthStack from './src/routes/AuthStack';
+import AuthStack from './src/routes/AuthStack.routes';
+
+import { NavigationContainer } from '@react-navigation/native'
+import Routes from './src/routes';
+
+
+import {AuthProvider} from "./src/contexts/auth";
 
 export default function App() {
   return (
     <>
       {/* <Signin/> */}
       {/* <Signup/> */}
-      <AuthStack/>
+      {/* <AuthStack/> */}
+      <NavigationContainer>
+        <AuthProvider>
+          <Routes/>
+        </AuthProvider>
+      </NavigationContainer>
       <StatusBar style="auto"/>
     </>
   );

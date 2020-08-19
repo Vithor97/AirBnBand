@@ -13,10 +13,6 @@ function Signup () {
     
     const {navigate, goBack} = useNavigation();
 
-    function goToSignin(){
-        navigate('Signin')
-    }
-
     function goBackScreen(){
         return goBack();
     }
