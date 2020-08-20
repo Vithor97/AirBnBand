@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image } from 'react-native';
 import {RectButton } from 'react-native-gesture-handler'
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
-import components from '../../resources/components/components'
+import components from '../../components/components'
 
 //importando contexto
 import AuthContext from '../../contexts/auth';
@@ -39,9 +39,6 @@ function Signin () {
     async function handleSign() {
         signIn()
     }
-
-    
-    
     
     function goToSignup(){
         navigate('Signup');
