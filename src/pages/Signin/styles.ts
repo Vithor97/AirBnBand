@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
       height: 50,
       display: "flex",
       justifyContent: "center",
-      flexDirection: "row",
+      flexDirection: "row"
     },
 
     faceBook: {
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
       //borderRadius: 25,
       width: 50,
       //backgroundColor: colors.facebookBlue,
-      marginRight: 20,
+      //marginRight: 20,
       //alignContent: "center"
     },
 
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
       //borderRadius: 25,
       width: 50,
       //backgroundColor: colors.gmailRed,
-      marginLeft: 20,
+      //marginLeft: 9,
       //alignContent: "center"
     },
 
