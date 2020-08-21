@@ -14,3 +14,5 @@ function Waves () {
         </>
     )
 }
+
+export default Waves;
