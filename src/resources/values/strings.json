@@ -5,5 +5,8 @@
     "sign_in" : "Entrar",
     "create_account" : "CADASTRE-SE",
     "or" : "ou",
-    "register" : "Cadastro"
+    "register" : "Cadastro",
+    "registerQuestion": "Como você deseja se cadastrar?",
+    "artist": "Artista",
+    "hirer": "Contratante"
 }

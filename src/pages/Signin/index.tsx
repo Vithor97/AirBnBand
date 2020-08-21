@@ -3,6 +3,7 @@ import { View, Text, TextInput, Image } from 'react-native';
 import {RectButton } from 'react-native-gesture-handler'
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
+import components from '../../resources/components/components'
 
 import api from '../../services/api'
 
@@ -113,9 +114,9 @@ function Signin () {
                 
             </View> */}
             
-            <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={styles.imageFooterDark} />
+            <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={components.waveFooterDark} />
 
-            <Image source={require('../../resources/Images/onda_laranja.png')} style={styles.imageFooter} />
+            <Image source={require('../../resources/Images/onda_laranja.png')} style={components.waveFooter} />
         </View>
     )
 }
