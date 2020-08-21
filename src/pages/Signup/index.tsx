@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import components from '../../resources/components/components';
+import components from '../../components/components';
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
 import { useNavigation } from '@react-navigation/native';
@@ -12,10 +12,6 @@ function Signup () {
     const [senha, setSenha] = useState('')
     
     const {navigate, goBack} = useNavigation();
-
-    function goToSignin(){
-        navigate('Signin')
-    }
 
     function goBackScreen(){
         return goBack();

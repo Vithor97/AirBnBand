@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Text, TextInput, Image } from 'react-native';
 import {RectButton } from 'react-native-gesture-handler'
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
-import components from '../../resources/components/components'
+import components from '../../components/components'
+
+//importando contexto
+import AuthContext from '../../contexts/auth';
 
 import api from '../../services/api'
 
@@ -12,6 +15,12 @@ import styles from './styles';
 // import logoImg from '../Resources/Icons/calendario.svg';
 import { useNavigation } from '@react-navigation/native';
 
+
+interface Usuario {
+    email: string;
+    senha: string;
+}
+
 function Signin () {
 
     const {navigate} = useNavigation();
@@ -19,8 +28,36 @@ function Signin () {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
+    const [userr, setUserr] = useState<Usuario>({} as Usuario)
+
+    //contexto
+    const { signed, signIn, user, logar } = useContext(AuthContext);
+
+    // console.log("Logado::: " +signed);
+    // console.log("user::: " +user);
+
+    async function handleSign() {
+        signIn()
+    }
+    
     function goToSignup(){
         navigate('Signup');
+    }
+    
+    async function passaUsuario(){
+        // console.log(`Valor do email ${email}`)
+        // console.log(`Valor da senha ${senha}`)
+        if(!email){
+            alert('Campo email vazio')
+        }
+        if(!senha){
+            alert('Campo senha vazio')
+        }
+
+        if(email && senha) {
+            setUserr({email: email, senha: senha})
+            logar(email, senha)
+        }
     }
 
     function login(){
@@ -35,7 +72,7 @@ function Signin () {
     }
 
     async function signinn(){
-        if(!email || ! senha){
+        if(!email || !senha){
             alert('Email ou senha invalidos')
         }
         else{
@@ -82,7 +119,7 @@ function Signin () {
                     onChangeText={text => setSenha(text)} 
                     />
 
-                <RectButton onPress={login} style={styles.submitButton}>
+                <RectButton onPress={passaUsuario} style={styles.submitButton}>
                     <Text style={styles.submitButtonText}> {strings.sign_in} </Text>
                 </RectButton>
 
