@@ -5,7 +5,7 @@ import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
 import components from '../../components/components'
 
-import Waves from '../../components/waves/waves';
+// import Waves from '../../components/waves/waves';
 
 //importando contexto
 import AuthContext from '../../contexts/auth';
@@ -153,7 +153,7 @@ function Signin () {
                 
             </View> */}
             
-            <Waves />
+            {/* <Waves /> */}
         </View>
     )
 }

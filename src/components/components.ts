@@ -1,39 +1,7 @@
 import {StyleSheet } from 'react-native'
 import colors from '../resources/values/colors.json';
 
-const styles = StyleSheet.create({
-<<<<<<< HEAD
-    textInput: {
-        height: 50,
-        padding: 10,
-        paddingLeft: 20,
-        borderRadius: 25,
-        backgroundColor: colors.primary,
-        marginBottom: 10,
-        fontSize: 20,
-      },
-
-      divisorBar: {
-        height: 5,
-        borderRadius: 2.5,
-        width: '95%',
-        marginBottom: 10,
-        backgroundColor: colors.primary,
-        alignSelf: 'center'
-      },
-
-      defaultButton:{
-        marginTop: 20,
-        marginBottom: 10,
-        height: 50,
-        backgroundColor: colors.primary,
-        borderRadius: 25,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-
-=======
+const styles = StyleSheet.create({  
   headerContainer: {
     width: "90%",
     height: 50,
@@ -125,7 +93,6 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     width: '100%',
   },
->>>>>>> 67905dc0cf5a9fea5070887b942f883e7f40e685
 })
 
 export default styles;
