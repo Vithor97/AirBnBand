@@ -1,5 +1,6 @@
 import {StyleSheet } from 'react-native'
 import colors from '../resources/values/colors.json';
+import fonts from '../resources/values/fonts.json';
 
 const styles = StyleSheet.create({  
   headerContainer: {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: colors.primary,
     marginBottom: 10,
-    fontSize: 20,
+    fontSize: fonts.textInputFontSize,
   },
 
   divisorBar: {

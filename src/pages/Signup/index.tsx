@@ -43,31 +43,6 @@ function Signup () {
                 </View>
             </View>
 
-            {/* <View style={styles.headerComponent}>
-                <Text onPress={goToSignin} style={styles.backButtonText}> Já possui conta? </Text>
-
-                <Text style={styles.label}>Como você deseja se cadastrar?</Text>
-            </View>
-
-            <View style={components.divisorBar}/>
-            
-            <View style={styles.formContainer}>
-                <TextInput 
-                    placeholder="Senha"
-                    placeholderTextColor= {colors.white}
-                    style={components.textInput}
-                    value={senha}
-                    onChangeText={text => setSenha(text)} 
-                />
-
-                <RectButton style={components.defaultButton}>
-                    <Text style={styles.submitButtonText}>Continuar cadastro</Text>
-                </RectButton>
-            </View>
-
-            <Text onPress={goToSignin} style={styles.backButtonText}> Já possui conta? </Text>
-             */}
-
             <View style={components.wavesContainer}>
                 <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={components.waveFooterDark} />
 

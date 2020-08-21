@@ -1,5 +1,6 @@
 import {StyleSheet } from 'react-native';
 import colors from '../../resources/values/colors.json';
+import fonts from '../../resources/values/fonts.json'
 
 const styles = StyleSheet.create({
   container: {
@@ -10,24 +11,26 @@ const styles = StyleSheet.create({
 
     display: "flex",
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'center',
   },
 
   registerText: {
     color: colors.primary,
-    fontSize: 40,
-    marginBottom: 10,
+    fontSize: fonts.titleFontSize,
+    marginTop: 10,
+    marginBottom: 30,
   },
 
   optionContainer: {
-    width: "100%",
+    width: "90%",
     // height: 100,
-    padding: 20,
+    padding: 10,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: colors.primary,
 
     marginBottom: 10,
+    alignSelf: "center",
 
     display: "flex",
     flexWrap: "wrap",
@@ -37,8 +40,8 @@ const styles = StyleSheet.create({
   },
 
   optionIcon: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     marginBottom: 10,
     alignSelf: "center"
   },
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
   optionText: {
     color: colors.primary,
     // backgroundColor: colors.black,
-    fontSize: 40,
+    fontSize: fonts.titleFontSize,
     alignSelf: "center",
   },
 });

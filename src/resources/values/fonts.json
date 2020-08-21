@@ -1,0 +1,10 @@
+{
+    "AppTheme" : "Theme.AppCompat.Light.NoActionBar",
+    "fontTheme" : "Maven Pro",
+    "appNameFontSize" : 45,
+    "titleFontSize" : 30,
+    "textInputFontSize" : 20,
+    "buttonFontSize" : 25,
+    "floatingTextFontSize" : 26,
+    "onlyTextButtonFontSize" : 30
+}

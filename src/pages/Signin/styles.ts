@@ -1,13 +1,13 @@
 import {StyleSheet } from 'react-native'
 import colors from '../../resources/values/colors.json';
+import fonts from '../../resources/values/fonts.json'
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       display: 'flex',
       height: '100%',
       width: '100%',
-      paddingTop: 50,
+      paddingTop: 20,
       backgroundColor: colors.background,
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -16,6 +16,15 @@ const styles = StyleSheet.create({
     containerTitulo:{
       // height: 80,
       width: '85%',
+    },
+
+    titulo: {
+      width: '100%',
+      alignContent: 'center',
+      // top:-45,
+      fontSize: fonts.appNameFontSize,
+      fontFamily: 'sans-serif-medium',
+      color: colors.primary
     },
 
     imageLogo: {
@@ -30,20 +39,14 @@ const styles = StyleSheet.create({
       borderRadius: 25,
       backgroundColor: colors.primary,
       marginBottom: 10,
-      fontSize: 20,
+      fontSize: fonts.textInputFontSize,
     },
+
     formContainer: {
       paddingTop: 20,
       width: '75%',
     },
-    titulo: {
-      width: '100%',
-      alignContent: 'center',
-      // top:-45,
-      fontSize: 45,
-      fontFamily: 'sans-serif-medium',
-      color: colors.primary
-    },
+    
     submitButton:{
       marginTop: 20,
       // padding: 10,
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
     submitButtonText: {
       color: colors.white,
       fontFamily: 'sans-serif-medium',
-      fontSize: 25,
+      fontSize: fonts.buttonFontSize,
       textAlign: 'center',
       alignSelf: 'center'
     },
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
     orText: {
       color: colors.primary,
       fontFamily: 'sans-serif-medium',
-      fontSize: 26,
+      fontSize: fonts.floatingTextFontSize,
       alignSelf: 'center',
       marginBottom: 10
     },
@@ -113,7 +116,7 @@ const styles = StyleSheet.create({
     signupButtonText: {
       color: colors.primary,
       fontFamily: 'sans-serif-medium',
-      fontSize: 30,
+      fontSize: fonts.onlyTextButtonFontSize,
       alignSelf: 'center',
     },
     
@@ -129,9 +132,6 @@ const styles = StyleSheet.create({
       marginLeft: 0,
       width: '100%',
     },
-
-
-
 });
 
 export default styles;

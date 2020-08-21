@@ -1,7 +1,0 @@
-{
-    "AppTheme" : "Theme.AppCompat.Light.NoActionBar",
-    "fontTheme" : "Maven Pro",
-    "colorPrimary" : "@color/colorPrimary",
-    "colorPrimaryDark" : "@color/colorPrimaryDark",
-    "colorAccent" : "@color/colorAccent"
-}
