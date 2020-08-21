@@ -72,6 +72,32 @@ const styles = StyleSheet.create({
       alignSelf: 'center'
     },
 
+    socialMediaBox: {
+      width: '100%',
+      height: 50,
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "row",
+    },
+
+    faceBook: {
+      height: 50,
+      //borderRadius: 25,
+      width: 50,
+      //backgroundColor: colors.facebookBlue,
+      marginRight: 20,
+      //alignContent: "center"
+    },
+
+    gMail: {
+      height: 50,
+      //borderRadius: 25,
+      width: 50,
+      //backgroundColor: colors.gmailRed,
+      marginLeft: 20,
+      //alignContent: "center"
+    },
+
     orText: {
       color: colors.primary,
       fontFamily: 'sans-serif-medium',
@@ -103,6 +129,9 @@ const styles = StyleSheet.create({
       marginLeft: 0,
       width: '100%',
     },
+
+
+
 });
 
 export default styles;
