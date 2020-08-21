@@ -3,20 +3,17 @@ import { View, Text, TextInput, Image } from 'react-native';
 import {RectButton } from 'react-native-gesture-handler'
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
-import components from '../../components/components'
 
-// import Waves from '../../components/waves/waves';
+import Waves from '../../components/waves/waves';
 
 //importando contexto
 import AuthContext from '../../contexts/auth';
 
 import api from '../../services/api'
 
-
 import styles from './styles';
 // import logoImg from '../Resources/Icons/calendario.svg';
 import { useNavigation } from '@react-navigation/native';
-
 
 interface Usuario {
     email: string;
