@@ -5,6 +5,7 @@ import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
 
 import Waves from '../../components/waves/waves';
+import DivisorBar from '../../components/divisorBar/divisorBar';
 
 //importando contexto
 import AuthContext from '../../contexts/auth';
@@ -97,9 +98,6 @@ function Signin () {
             <View style={styles.containerTitulo}>
                 <Text style={styles.titulo}>{strings.app_name} | {}
                     <Image source={require('../../resources/Icons/calendario.png')} style={styles.imageLogo} />
-                    {/* <div className="logo-container">
-                        <img src={logoImg} alt="Proffy"/>
-                    </div> */}
                 </Text>
             </View>
             <View style={styles.formContainer}>
@@ -122,7 +120,7 @@ function Signin () {
                     <Text style={styles.submitButtonText}> {strings.sign_in} </Text>
                 </RectButton>
 
-                <View style={styles.divisorBar}></View>
+                <DivisorBar />
 
 
                 <View style={styles.socialMediaBox}>
@@ -144,13 +142,9 @@ function Signin () {
                 <Text style={styles.orText}> {strings.or} </Text>
 
                 <Text onPress={goToSignup} style={styles.signupButtonText}> {strings.create_account} </Text>
-            </View>  
-{/* 
-            <View style={styles.signupContainer}>
-                
-            </View> */}
-            
-            {/* <Waves /> */}
+            </View>
+
+            <Waves />
         </View>
     )
 }

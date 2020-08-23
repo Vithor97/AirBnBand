@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Image } from 'react-native';
 
-import waves from './waves';
+import waves from './styles';
 
 function Waves () {
     return (

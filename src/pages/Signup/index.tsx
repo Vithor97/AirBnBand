@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 
+import Waves from '../../components/waves/waves';
+import BackArrow from '../../components/backArrow/backArrow';
+
 import styles from './styles';
 import components from '../../components/components';
 import colors from '../../resources/values/colors.json';
@@ -20,9 +23,7 @@ function Signup () {
     return (
         <View style={styles.container}>
             <View style={components.headerContainer}>
-                <BorderlessButton style={components.backArrowContainer}  onPress={goBackScreen}>
-                    <Image source={require('../../resources/Icons/seta_voltar_laranja.png')} style={components.backArrow} />
-                </BorderlessButton>
+                <BackArrow />
             </View>
 
             <View style={components.contentContainer}>
@@ -34,8 +35,6 @@ function Signup () {
                     <Text style={styles.optionText}>{strings.artist}</Text>
                 </View>
 
-                {/* <View style={components.divisorBar}/> */}
-
                 <View style={styles.optionContainer}>
                     <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.optionIcon} />
 
@@ -43,11 +42,7 @@ function Signup () {
                 </View>
             </View>
 
-            <View style={components.wavesContainer}>
-                <Image source={require('../../resources/Images/onda_laranja_escura.png')} style={components.waveFooterDark} />
-
-                <Image source={require('../../resources/Images/onda_laranja.png')} style={components.waveFooter} />
-            </View>
+            <Waves />
         </View>
     )
 }

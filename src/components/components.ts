@@ -13,29 +13,6 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.secundary,
   },
 
-  backArrowContainer: {
-    width: 40,
-    height: 40,
-    // width: 50,
-    // height: 50,
-    borderRadius: 25,
-    borderWidth: 2,
-    borderColor: colors.primary,
-    alignSelf: "flex-start",
-
-    display: "flex",
-    // alignContent: "center",
-    justifyContent: "center",
-  },
-
-  backArrow: {
-    width: 25,
-    height: 25,
-    // width: 35,
-    // height: 35,
-    alignSelf: "center",
-  },
-
   contentContainer: {
     width: "90%",
     height: "100%",
@@ -55,16 +32,6 @@ const styles = StyleSheet.create({
     fontSize: fonts.textInputFontSize,
   },
 
-  divisorBar: {
-    height: 5,
-    borderRadius: 2.5,
-    width: '95%',
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: colors.primary,
-    alignSelf: 'center'
-  },
-
   defaultButton:{
     marginTop: 20,
     marginBottom: 10,
@@ -74,25 +41,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  wavesContainer: {
-    width: "100%",
-    height: 150,
-    // backgroundColor: colors.black,
-  },
-
-  waveFooter:{
-    height: 150,
-    marginLeft: -350,
-    marginTop: -150,
-    width: '200%',
-  },
-
-  waveFooterDark:{
-    height: 150,
-    marginLeft: 0,
-    width: '100%',
   },
 })
 

@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-import backArrow from './backArrow';
+import backArrow from './styles';
 
 function BackArrow () {
     const { goBack } = useNavigation();
