@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image } from 'react-native';
-import {BorderlessButton } from 'react-native-gesture-handler';
+import { View, Text, Image } from 'react-native';
 
 import Waves from '../../components/waves/waves';
-import BackArrow from '../../components/backArrow/backArrow';
+import BackArrow from '../../components/backArrow';
 
 import styles from './styles';
-import components from '../../components/components';
-import colors from '../../resources/values/colors.json';
+import global from '../../styles/global';
 import strings from '../../resources/values/strings.json';
 import { useNavigation } from '@react-navigation/native';
 
@@ -20,16 +18,20 @@ function Signup () {
         return goBack();
     }
 
+    function goToUserSign(){
+        navigate('CadastroUsuario');
+    }
+
     return (
         <View style={styles.container}>
-            <View style={components.headerContainer}>
+            <View style={global.headerContainer}>
                 <BackArrow />
             </View>
 
-            <View style={components.contentContainer}>
+            <View style={global.contentContainer}>
                 <Text style={styles.registerText}>{strings.registerQuestion}</Text>
 
-                <View style={styles.optionContainer}>
+                <View style={styles.optionContainer} onPress={goToUserSign}>
                     <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.optionIcon} />
 
                     <Text style={styles.optionText}>{strings.artist}</Text>

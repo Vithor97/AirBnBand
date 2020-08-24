@@ -5,7 +5,8 @@ import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
 
 import Waves from '../../components/waves/waves';
-import DivisorBar from '../../components/divisorBar/divisorBar';
+import DivisorBar from '../../components/divisorBar';
+import TextInputBox from '../../components/textInputBox';
 
 //importando contexto
 import AuthContext from '../../contexts/auth';
@@ -107,7 +108,15 @@ function Signin () {
                     placeholderTextColor= {colors.white}
                     value={email}
                     onChangeText={text => setEmail(text)}
-                    />
+                    /> 
+
+                {/* <TextInputBox
+                    placeholder={strings.email}
+                    placeholderTextColor= {colors.white}
+                    value={email}
+                    onChangeText={text => setEmail(text)}
+                /> */}
+                
                 <TextInput 
                     placeholder= {strings.password}
                     placeholderTextColor= {colors.white} 

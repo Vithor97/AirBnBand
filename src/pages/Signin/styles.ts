@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
       display: 'flex',
       height: '100%',
       width: '100%',
-      paddingTop: 20,
+      paddingTop: 30,
       backgroundColor: colors.background,
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     signupButtonText: {
       color: colors.primary,
       fontFamily: 'sans-serif-medium',
-      fontSize: fonts.onlyTextButtonFontSize,
+      fontSize: fonts.floatingTextFontSize,
       alignSelf: 'center',
     },
     
