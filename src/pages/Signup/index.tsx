@@ -8,6 +8,7 @@ import styles from './styles';
 import global from '../../styles/global';
 import strings from '../../resources/values/strings.json';
 import { useNavigation } from '@react-navigation/native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 function Signup () {
     const [senha, setSenha] = useState('')
@@ -31,11 +32,13 @@ function Signup () {
             <View style={global.contentContainer}>
                 <Text style={styles.registerText}>{strings.registerQuestion}</Text>
 
-                <View style={styles.optionContainer}>
-                    <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.optionIcon} />
+                <BorderlessButton style={styles.optionContainer}  onPress={goBackScreen}>
+                    <View style={styles.optionContainer}>
+                        <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.optionIcon} />
 
-                    <Text style={styles.optionText}>{strings.artist}</Text>
-                </View>
+                        <Text style={styles.optionText}>{strings.artist}</Text>
+                    </View>
+                </BorderlessButton>
 
                 <View style={styles.optionContainer}>
                     <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.optionIcon} />
