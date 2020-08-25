@@ -31,7 +31,7 @@ function Signup () {
             <View style={global.contentContainer}>
                 <Text style={styles.registerText}>{strings.registerQuestion}</Text>
 
-                <View style={styles.optionContainer} onPress={goToUserSign}>
+                <View style={styles.optionContainer}>
                     <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.optionIcon} />
 
                     <Text style={styles.optionText}>{strings.artist}</Text>

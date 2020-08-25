@@ -89,6 +89,8 @@ export const AuthProvider: React.FC = ({children}) =>{
                 setLogado(true);
                 
                 api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
+            }else{
+                alert("Sem dados do sevidor")
             }
             
             

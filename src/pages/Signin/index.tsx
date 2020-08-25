@@ -61,38 +61,38 @@ function Signin () {
         }
     }
 
-    function login(){
-        if(email === 'vitor' || senha === '123'){
-            setSenha('')
-            setEmail('')
-            navigate('Landing')
-        }
-        else{
-            alert('Senha inválida')
-        }
-    }
+    // function login(){
+    //     if(email === 'vitor' || senha === '123'){
+    //         setSenha('')
+    //         setEmail('')
+    //         navigate('Landing')
+    //     }
+    //     else{
+    //         alert('Senha inválida')
+    //     }
+    // }
 
-    async function signinn(){
-        if(!email || !senha){
-            alert('Email ou senha invalidos')
-        }
-        else{
-            try {
-                const response = await api.post('login', {
-                    user: email,
-                    password: senha
-                })
-                console.log(response.data)
-                api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
+    // async function signinn(){
+    //     if(!email || !senha){
+    //         alert('Email ou senha invalidos')
+    //     }
+    //     else{
+    //         try {
+    //             const response = await api.post('login', {
+    //                 user: email,
+    //                 password: senha
+    //             })
+    //             console.log(response.data)
+    //             api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
 
-                navigate('Landing')
+    //             navigate('Landing')
 
-            } catch (error) {
-                alert(error)
-            }
+    //         } catch (error) {
+    //             alert(error)
+    //         }
 
-        }
-    }
+    //     }
+    // }
     
     return (
         <View style={styles.container}>
@@ -114,13 +114,14 @@ function Signin () {
                     placeholder={strings.email}
                     placeholderTextColor= {colors.white}
                     value={email}
-                    onChangeText={text => setEmail(text)}
+                    onChangeText={(text:string) => setEmail(text)}
                 /> */}
                 
                 <TextInput 
                     placeholder= {strings.password}
                     placeholderTextColor= {colors.white} 
                     style={styles.textInput}
+                    secureTextEntry={true}
                     value={senha}
                     onChangeText={text => setSenha(text)} 
                     />
