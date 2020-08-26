@@ -23,6 +23,10 @@ function Signup () {
         navigate('ArtistSignUp');
     }
 
+    function goToHirerSignUp(){
+        navigate('HirerSignUp');
+    }
+
     return (
         <View style={styles.container}>
             <View style={global.headerContainer}>
@@ -41,9 +45,11 @@ function Signup () {
                 </View>
 
                 <View style={styles.optionContainer}>
-                    <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.optionIcon} />
+                    <BorderlessButton onPress={goToHirerSignUp}>
+                        <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.optionIcon} />
 
-                    <Text style={styles.optionText}>{strings.hirer}</Text>
+                        <Text style={styles.optionText}>{strings.hirer}</Text>
+                    </BorderlessButton>
                 </View>
             </View>
 

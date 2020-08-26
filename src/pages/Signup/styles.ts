@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     padding: 10,
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignContent: "center",
+    // display: "flex",
+    // flexWrap: "wrap",
+    // flexDirection: "column",
+    // justifyContent: "center",
+    // alignContent: "center",
   },
 
   optionIcon: {
