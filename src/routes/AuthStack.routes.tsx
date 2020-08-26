@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Signin from '../pages/Signin'
 import Signup from '../pages/Signup'
+import ArtistSignUp from '../pages/CadastroUsuario'
 import Landing from '../pages/Landing'
-
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -15,6 +15,7 @@ function AuthStack(){
             <Navigator screenOptions={{headerShown: false}}>
                 <Screen name="Signin" component={Signin}/>
                 <Screen name="Signup" component={Signup}/>
+                <Screen name="ArtistSignUp" component={ArtistSignUp}/>
                 {/* <Screen name="Landing" component={Landing}/> */}
             </Navigator>
         // </NavigationContainer>

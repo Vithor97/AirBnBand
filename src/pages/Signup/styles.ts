@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
   optionContainer: {
     width: "90%",
     // height: 100,
-    padding: 10,
-    borderRadius: 15,
     borderWidth: 2,
+    borderRadius: 15,
     borderColor: colors.primary,
 
     marginBottom: 10,
     alignSelf: "center",
 
+    padding: 10,
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",

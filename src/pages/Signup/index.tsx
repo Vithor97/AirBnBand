@@ -19,8 +19,8 @@ function Signup () {
         return goBack();
     }
 
-    function goToUserSign(){
-        navigate('CadastroUsuario');
+    function goToArtistSignUp(){
+        navigate('ArtistSignUp');
     }
 
     return (
@@ -32,13 +32,13 @@ function Signup () {
             <View style={global.contentContainer}>
                 <Text style={styles.registerText}>{strings.registerQuestion}</Text>
 
-                <BorderlessButton style={styles.optionContainer}  onPress={goBackScreen}>
-                    <View style={styles.optionContainer}>
+                <View style={styles.optionContainer}>
+                    <BorderlessButton onPress={goToArtistSignUp}>
                         <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.optionIcon} />
 
                         <Text style={styles.optionText}>{strings.artist}</Text>
-                    </View>
-                </BorderlessButton>
+                    </BorderlessButton>
+                </View>
 
                 <View style={styles.optionContainer}>
                     <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.optionIcon} />
