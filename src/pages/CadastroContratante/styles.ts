@@ -13,10 +13,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 
+    hirerIconContainer: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        // justifyContent: "center",
+        // justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: colors.backgroundAlternative
+    },
+
     hirerIcon: {
         width: 50,
         height: 50,
-        
+        alignSelf: "flex-end"
     }
 });
 

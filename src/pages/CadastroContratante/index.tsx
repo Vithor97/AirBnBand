@@ -13,14 +13,20 @@ function CadastroContratante () {
     return (
         <View style={styles.container}>
             <View style={global.headerContainer}>
-                <View style={global.headerContainer}>
+                {/* <View style={global.headerContainer}> */}
+                <View style={styles.hirerIconContainer}>
                     <BackArrow />
-                    <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.hirerIcon} />
+
+                    {/* <View style={styles.hirerIconContainer}> */}
+                        <Image source={require('../../resources/Icons/acordo_laranja.png')} style={styles.hirerIcon} />
+                    {/* </View> */}
+
+                    {/* <View></View> */}
                 </View>
                 
-                <View style={global.contentContainer}>
+                {/* <View style={global.contentContainer}>
                     <DivisorBar />
-                </View>
+                </View> */}
             </View>
         </View>
     );
