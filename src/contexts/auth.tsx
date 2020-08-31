@@ -6,6 +6,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "../routes/AuthStack.routes";
 import { AxiosResponse } from "axios";
 
+
+//Firebase
+import base from '../../firebase'
+
 interface User {
     name: string;
     email: string;
@@ -19,7 +23,7 @@ interface Usuario {
 interface AuthContextData {
     signed: boolean;
     user: User | null;
-    usuario: string,
+    usuario: null | string | undefined ,
     signIn(): Promise<void>;
     logar(email: string, senha:string): Promise<void>;
     signOut(): void;
@@ -34,7 +38,7 @@ export const AuthProvider: React.FC = ({children}) =>{
     const [user, setUser] = useState<User | null >(null);
     const [loading, setLoading] = useState(true);
 
-    const [usuario, setUsuario] = useState('');
+    const [usuario, setUsuario] = useState<null | string | undefined>('');
 
     //verifica se usuario está logado ou não
     const [logado, setLogado] = useState(false)
@@ -74,25 +78,41 @@ export const AuthProvider: React.FC = ({children}) =>{
         // await AsyncStorage.setItem('@RNAuth:token', response.token);
     }
 
+    // async function logar(email: string, senha: string) {
+
+    //     try {
+    //         const response = await api.post('login', {
+    //             user: email,
+    //             password: senha
+    //         })
+
+    //         if (response.data){
+       
+    //             console.log(response.data)
+    //             setUsuario(response.data.user)
+    //             setLogado(true);
+                
+    //             api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
+    //         }else{
+    //             alert("Sem dados do sevidor")
+    //         }
+            
+            
+    //     } catch (error) {
+    //         alert('errro ao achar usuario')
+    //     }
+    
+    // }
+
     async function logar(email: string, senha: string) {
 
         try {
-            const response = await api.post('login', {
-                user: email,
-                password: senha
-            })
 
-            if (response.data){
-       
-                console.log(response.data)
-                setUsuario(response.data.user)
-                setLogado(true);
-                
-                api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
-            }else{
-                alert("Sem dados do sevidor")
-            }
-            
+            let userr = await base.auth().signInWithEmailAndPassword(email, senha)
+            console.log(userr)
+            var valor = userr.user?.email
+            setUsuario(valor)
+            setLogado(true)
             
         } catch (error) {
             alert('errro ao achar usuario')
