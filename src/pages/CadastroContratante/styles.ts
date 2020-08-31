@@ -13,20 +13,33 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 
+    backArrowContainer: {
+        width: "20%"
+    },
+
     hirerIconContainer: {
-        width: "100%",
-        display: "flex",
+        width: "60%",
+        // display: "flex",
         flexDirection: "row",
-        // justifyContent: "center",
-        // justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: colors.backgroundAlternative
+        justifyContent: "center",
+        // alignItems: "center",
+        // backgroundColor: colors.backgroundAlternative
     },
 
     hirerIcon: {
         width: 50,
         height: 50,
-        alignSelf: "flex-end"
+        // alignSelf: "flex-end"
+    },
+
+    divisorContainer: {
+        width: "90%"
+    },
+
+    contentContainer: {
+        width: "90%",
+        marginTop: 20,
+        flex: 1
     }
 });
 

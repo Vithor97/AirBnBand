@@ -12,7 +12,9 @@ const backArrow = StyleSheet.create({
     borderColor: colors.primary,
     alignSelf: "flex-start",
 
-    backgroundColor: colors.gmailRed,
+    // position:"absolute",
+
+    // backgroundColor: colors.gmailRed,
 
     display: "flex",
     // alignContent: "center",
