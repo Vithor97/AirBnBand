@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
 import TextInputBox from '../../components/textInputBox';
+import NextArrowButton from '../../components/nextArrowButton';
+import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 
 import styles from './styles';
 import global from '../../styles/global';
@@ -51,15 +53,12 @@ function CadastroContratante () {
                     placeholderTextColor= {colors.white}
                 />
 
-                <TextInputBox
-                    placeholder={strings.cpfcnpj}
-                    placeholderTextColor= {colors.white}
-                />
+                <ProgressBallsContainer>
+                    <ProgressBallFilled />
+                    <ProgressBallEmpty />
+                </ProgressBallsContainer>
 
-                <TextInputBox
-                    placeholder={strings.telephone}
-                    placeholderTextColor= {colors.white}
-                />
+                <NextArrowButton/>
             </View>
         </View>
     );

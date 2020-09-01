@@ -5,28 +5,33 @@ const backArrow = StyleSheet.create({
   backArrowContainer: {
     width: 40,
     height: 40,
-    // width: 50,
-    // height: 50,
-    borderRadius: 25,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: colors.primary,
     alignSelf: "flex-start",
 
-    // position:"absolute",
+    // backgroundColor: colors.gmailRed,
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  backArrowButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
 
     // backgroundColor: colors.gmailRed,
 
     display: "flex",
-    // alignContent: "center",
     justifyContent: "center",
+    alignItems: "center"
   },
 
   backArrow: {
     width: 25,
     height: 25,
-    // width: 35,
-    // height: 35,
-    alignSelf: "center",
   },
 })
 

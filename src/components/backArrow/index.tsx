@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,14 +13,14 @@ function BackArrow () {
     }
 
     return (
-        <>
-            <BorderlessButton style={backArrow.backArrowContainer}  onPress={goBackScreen}>
+        <View  style={backArrow.backArrowContainer}>
+            <BorderlessButton style={backArrow.backArrowButton}  onPress={goBackScreen}>
                 <Image
                     source={require('../../resources/Icons/seta_voltar_laranja.png')}
                     style={backArrow.backArrow}
                 />
             </BorderlessButton>
-        </>
+        </View>
     );
 }
 
