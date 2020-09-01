@@ -109,10 +109,11 @@ export const AuthProvider: React.FC = ({children}) =>{
         try {
 
             let userr = await base.auth().signInWithEmailAndPassword(email, senha)
-            console.log(userr)
+            //console.log(userr)
             var valor = userr.user?.email
             setUsuario(valor)
             setLogado(true)
+            //console.log(base.auth().currentUser)
             
         } catch (error) {
             alert('errro ao achar usuario')
@@ -120,9 +121,22 @@ export const AuthProvider: React.FC = ({children}) =>{
     
     }
     
-    async function signOut() {
+     function signOut() {
         //await AsyncStorage.clear() 
-        setLogado(false)
+        console.log('----------------------------------------------------------')
+        console.log('------------------Usuario que etsá logado-----------------------')
+        console.log(base.auth().currentUser)
+        try {
+            var sair =  base.auth().signOut().then((valor)=>{
+
+                console.log("sair: " + valor)
+                setLogado(false)
+            })
+            console.log(base.auth().currentUser)
+    
+        } catch (error) {
+            alert('não dá para sair')
+        }
         //setUser(null);
     }
     // Retorno todas as variaveis ou funções para que os outros componentes tenham acesso
