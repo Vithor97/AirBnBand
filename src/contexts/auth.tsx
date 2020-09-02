@@ -5,6 +5,7 @@ import api from "../services/api";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "../routes/AuthStack.routes";
 import { AxiosResponse } from "axios";
+import { AsyncStorage } from "react-native";
 
 interface User {
     name: string;
@@ -41,23 +42,24 @@ export const AuthProvider: React.FC = ({children}) =>{
 
     //----------É criado na criação do component e deixa o usuario salvo no AsyncStorage----------//
 
-    // useEffect(() => {
-    //     async function loadStorageData() {
-    //       const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
-    //       const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
+    useEffect(() => {
+        async function loadStorageData() {
+          const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
+          const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
     
-    //       // simular uma lentidão para mostar o loading.
-    //       //await new Promise((resolve) => setTimeout(resolve, 2000));
+          // simular uma lentidão para mostar o loading.
+          //await new Promise((resolve) => setTimeout(resolve, 2000));
     
-    //       if (storagedUser && storagedToken) {
-    //         setUser(JSON.parse(storagedUser));
-    //         api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
-    //       }
-    //       setLoading(false);
-    //     }
+          if (storagedUser && storagedToken) {
+            setUsuario(JSON.parse(storagedUser));
+            setLogado(true)
+            api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
+          }
+          setLoading(false);
+        }
     
-    //     loadStorageData();
-    //   });
+        loadStorageData();
+      });
 
     //----------------------------------------------------------------------------------------------//
 
@@ -87,8 +89,11 @@ export const AuthProvider: React.FC = ({children}) =>{
                 console.log(response.data)
                 setUsuario(response.data.user)
                 setLogado(true);
-                
+ 
                 api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
+
+                await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data.user));
+                await AsyncStorage.setItem('@RNAuth:token', response.data.token); 
             }else{
                 alert("Sem dados do sevidor")
             }
@@ -101,7 +106,7 @@ export const AuthProvider: React.FC = ({children}) =>{
     }
     
     async function signOut() {
-        //await AsyncStorage.clear() 
+        await AsyncStorage.clear() 
         setLogado(false)
         //setUser(null);
     }
