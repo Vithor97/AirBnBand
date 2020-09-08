@@ -15,10 +15,12 @@ function NextArrowButton ({ ...rest }) {
 
     return (
         <View style={styles.nextArrowButtonContainer}>
-            <RectButton onPress={goBackScreen}>
-                <Image
-                    source={require('../../resources/Icons/seta_esquerda_laranja.png')}
+            <RectButton onPress={goBackScreen} 
                     style={styles.nextArrowButton}
+                    >
+                <Image
+                    source={require('../../resources/Icons/seta_direita_laranja.png')}
+                    style={styles.nextArrowButtonImage}
                 />
             </RectButton>
         </View>

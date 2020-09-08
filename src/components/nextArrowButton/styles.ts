@@ -16,12 +16,21 @@ const nextArrowButton = StyleSheet.create({
   },
 
   nextArrowButton: {
-    width: 100,
+    width: "100%",
     height: 60,
     borderColor: colors.secundary,
     alignSelf: "center",
     // backgroundColor:colors.secundary
+
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   },
+
+  nextArrowButtonImage: {
+    width: 100,
+    height: 50,
+  }
 })
 
 export default nextArrowButton;
