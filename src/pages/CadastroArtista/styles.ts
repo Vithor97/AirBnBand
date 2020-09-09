@@ -38,9 +38,27 @@ const styles = StyleSheet.create({
 
     contentContainer: {
         width: "85%",
-        marginTop: 20,
-        flex: 1
-    }
+        // width: "100%",
+        // height: "100%",
+        // marginTop: 20,
+        paddingTop: 20,
+
+        backgroundColor: colors.facebookBlue,
+
+        flex: 1,
+        alignSelf: "center",
+        display: "flex"
+    },
+
+    viewPager: {
+        display: "flex",
+        // justifyContent: "center",
+        // alignItems: "center",
+
+        flex: 1,
+        width: "100%",
+        backgroundColor: colors.secundary
+    },
 });
 
 export default styles;

@@ -10,7 +10,7 @@
     "category" : "Categoria",
     "members" : "Membros",
     "postalCode" : "Cep",
-    "street" : "Logradout",
+    "street" : "Logradouro",
     "city" : "Cidade",
     "block" : "Bairro",
     "number" : "Número",

@@ -2,8 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 
 import TextInputBox from '../../components/textInputBox';
-import NextArrowButton from '../../components/nextArrowButton';
-import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 
 import styles from './styles';
 import strings from '../../resources/values/strings.json';
@@ -33,13 +31,6 @@ function Etapa1 () {
                 placeholder={strings.retypePassword}
                 placeholderTextColor= {colors.white}
             />
-
-            <ProgressBallsContainer>
-                <ProgressBallFilled />
-                <ProgressBallEmpty />
-            </ProgressBallsContainer>
-
-            <NextArrowButton/>
         </View>
     )
 }

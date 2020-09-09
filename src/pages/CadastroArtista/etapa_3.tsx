@@ -38,13 +38,6 @@ function Etapa1 () {
                 placeholder={strings.number}
                 placeholderTextColor= {colors.white}
             />
-
-            <ProgressBallsContainer>
-                <ProgressBallFilled />
-                <ProgressBallEmpty />
-            </ProgressBallsContainer>
-
-            <NextArrowButton/>
         </View>
     )
 }

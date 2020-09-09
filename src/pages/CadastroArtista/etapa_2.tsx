@@ -23,13 +23,6 @@ function Etapa1 () {
                 placeholder={strings.telephone}
                 placeholderTextColor= {colors.white}
             />
-
-            <ProgressBallsContainer>
-                <ProgressBallFilled />
-                <ProgressBallEmpty />
-            </ProgressBallsContainer>
-
-            <NextArrowButton/>
         </View>
     )
 }
