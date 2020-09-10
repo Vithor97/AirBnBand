@@ -6,7 +6,8 @@ import styles from './styles';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-function NextArrowButton ({ ...rest }) {
+//Quando recebo props de outros components, no TS eu precio tipar a função
+const NextArrowButton: React.FC<any> = ({ onNext }) => {
     const { goBack } = useNavigation();
 
     function goBackScreen(){
@@ -15,7 +16,7 @@ function NextArrowButton ({ ...rest }) {
 
     return (
         <View style={styles.nextArrowButtonContainer}>
-            <RectButton onPress={goBackScreen} 
+            <RectButton onPress={onNext} 
                     style={styles.nextArrowButton}
                     >
                 <Image

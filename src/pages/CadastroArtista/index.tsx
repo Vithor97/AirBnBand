@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, Image } from 'react-native';
-import ViewPager from '@react-native-community/viewpager';
+import React, { useState, useRef } from 'react';
+import { View, Image, ViewPagerAndroidOnPageScrollEventData, Text } from 'react-native';
+import ViewPager  from '@react-native-community/viewpager';
 
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
@@ -13,13 +13,31 @@ import Etapa3 from './etapa_3';
 
 import styles from './styles';
 import global from '../../styles/global';
+import { RectButton } from 'react-native-gesture-handler';
 
 function CadastroContratante () {
-    // const Etapas = () => {
-    //     return(
-            
-    //     );
-    // }
+
+    //precisei criar a referencia para setar a pagina
+    const viewPager  = useRef<ViewPager | null | HTMLInputElement | any >();
+
+    //Seta as paginas onde estou
+    let [page, setPagee] = useState(0)
+
+    function estadoScroll (e:any) {
+        let valorPage = e.nativeEvent.position 
+        setPagee(valorPage)
+
+        console.log(`numero da pagina: ${valorPage}`)  
+    }
+
+    function btnAvancaViewPager(){
+        if(page>=2) {
+            setPagee(0)
+            viewPager.current.setPage(page)
+        }else{
+            viewPager.current.setPage(page+1)
+        }          
+    }
 
     return (
         <View style={styles.container}>
@@ -37,7 +55,9 @@ function CadastroContratante () {
                 <DivisorBar />
             </View>
             
-            <ViewPager style={styles.viewPager} initialPage={0}
+           
+
+            <ViewPager ref={viewPager} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}
                 // scrollEnabled={true}
                 // onPageScroll={this.onPageScroll}
                 // onPageSelected={this.onPageSelected}
@@ -63,12 +83,31 @@ function CadastroContratante () {
                 </View>
             </ViewPager>
 
+
             <ProgressBallsContainer>
                 <ProgressBallFilled />
                 <ProgressBallEmpty />
             </ProgressBallsContainer>
 
-            <NextArrowButton/>
+            <NextArrowButton onNext={btnAvancaViewPager}/>
+
+            {/* <View>
+                <RectButton onPress={btnAvancaViewPager} >
+                    <Text>oi</Text>
+                </RectButton>
+            </View> */}
+            {/*  */}
+            {/* <View style={styles.nextArrowButtonContainer}>
+                <RectButton onPress={btnAvancaViewPager} 
+                        style={styles.nextArrowButton}
+                        >
+                    <Image
+                        source={require('../../resources/Icons/seta_direita_laranja.png')}
+                        style={styles.nextArrowButtonImage}
+                    />
+                </RectButton>
+            </View> */}
+
         </View>
     );
 }
