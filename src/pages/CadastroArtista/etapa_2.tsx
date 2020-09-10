@@ -11,7 +11,7 @@ import colors from '../../resources/values/colors.json';
 
 function Etapa1 () {
     return (
-        <View style={styles.contentContainer}>
+        <View style={styles.inputsContainer}>
             <TextInputBox
                 placeholder={strings.cpfcnpj}
                 placeholderTextColor= {colors.white}

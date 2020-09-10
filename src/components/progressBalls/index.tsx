@@ -17,10 +17,11 @@ export function ProgressBallEmpty ({ ...rest }) {
     );
 }
 
-export function ProgressBallsContainer ({ ...rest }) {
+export function ProgressBallsContainer ({ children, ...rest }) {
 
     return (
         <View style={styles.progressBallsContainer}>
+            {children}
         </View>
     );
 }

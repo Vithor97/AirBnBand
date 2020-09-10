@@ -37,16 +37,18 @@ const styles = StyleSheet.create({
     },
 
     contentContainer: {
-        width: "85%",
+        width: "100%",
         // width: "100%",
-        // height: "100%",
+        height: "100%",
         // marginTop: 20,
         paddingTop: 20,
 
-        backgroundColor: colors.facebookBlue,
+        // backgroundColor: colors.facebookBlue,
 
-        flex: 1,
+        // flex: 1,
+        // flexWrap: "wrap",
         alignSelf: "center",
+        // justifyContent: "space-evenly",
         display: "flex"
     },
 
@@ -56,39 +58,27 @@ const styles = StyleSheet.create({
         // alignItems: "center",
 
         flex: 1,
+        // minHeight: "45%",
+        // height: "auto",
+        // flexWrap: "wrap",
         width: "100%",
-        backgroundColor: colors.secundary
+        // backgroundColor: colors.secundary
     },
 
-    nextArrowButtonContainer: {
-        width: "70%",
-        height: 60,
-        borderRadius: 30,
-        borderWidth: 2,
-        borderColor: colors.primary,
-        // backgroundColor: colors.black,
+    inputsContainer:{
+        width: "85%",
         alignSelf: "center",
+        // height: "33%",
+        // flex: 1,
+        // backgroundColor: colors.black
+    },
     
-        display: "flex",
-        justifyContent: "center",
-      },
-    
-      nextArrowButton: {
+    flowContainer: {
         width: "100%",
-        height: 60,
-        borderColor: colors.secundary,
-        alignSelf: "center",
-        // backgroundColor:colors.secundary
-    
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      },
-    
-      nextArrowButtonImage: {
-        width: 100,
-        height: 50,
-      }
+        // flex: 1
+        height: "45%",
+        display: "flex"
+    }
 });
 
 export default styles;

@@ -11,7 +11,7 @@ const progressBalls = StyleSheet.create({
     marginBottom: 10,
 
     // borderWidth: 5,
-    borderColor: colors.primary,
+    // borderColor: colors.secundary,
     // backgroundColor: colors.black,
     alignSelf: "center",
 

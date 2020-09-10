@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Image, ViewPagerAndroidOnPageScrollEventData, Text } from 'react-native';
+import { View, Image } from 'react-native';
 import ViewPager  from '@react-native-community/viewpager';
 
 import BackArrow from '../../components/backArrow';
@@ -32,8 +32,11 @@ function CadastroContratante () {
 
     function btnAvancaViewPager(){
         if(page>=2) {
-            setPagee(0)
-            viewPager.current.setPage(page)
+            viewPager.current.setPage(0)
+            // viewPager.current.setPage(page)
+
+            // Implementar a conclusão do cadastro
+
         }else{
             viewPager.current.setPage(page+1)
         }          
@@ -55,59 +58,48 @@ function CadastroContratante () {
                 <DivisorBar />
             </View>
             
-           
+            <View style={styles.contentContainer}>    
+                <ViewPager ref={viewPager} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}
+                    // scrollEnabled={true}
+                    // onPageScroll={this.onPageScroll}
+                    // onPageSelected={this.onPageSelected}
+                    // onPageScrollStateChanged={this.onPageScrollStateChanged}
+                    // pageMargin={10}
+                    // Lib does not support dynamically orientation change
+                    // orientation="horizontal"
+                    // Lib does not support dynamically transitionStyle change
+                    // transitionStyle="scroll"
+                    // showPageIndicator={dotsVisible}
+                    // ref={this.viewPager}~
+                    >
+                    <View key="1">
+                        <Etapa1 />
+                    </View>
 
-            <ViewPager ref={viewPager} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}
-                // scrollEnabled={true}
-                // onPageScroll={this.onPageScroll}
-                // onPageSelected={this.onPageSelected}
-                // onPageScrollStateChanged={this.onPageScrollStateChanged}
-                // pageMargin={10}
-                // Lib does not support dynamically orientation change
-                // orientation="horizontal"
-                // Lib does not support dynamically transitionStyle change
-                // transitionStyle="scroll"
-                // showPageIndicator={dotsVisible}
-                // ref={this.viewPager}~
-                >
-                <View key="1">
-                    <Etapa1 />
+                    <View key="2">        
+                        <Etapa2 />
+                    </View>
+
+                    <View key="3">
+                        <Etapa3 />
+                    </View>
+                </ViewPager>
+
+                <View style={styles.flowContainer}>
+                    <ProgressBallsContainer>
+                        {
+                           
+                        }
+                        <ProgressBallFilled />
+
+                        <ProgressBallEmpty />
+
+                        <ProgressBallEmpty />
+                    </ProgressBallsContainer>
+
+                    <NextArrowButton onNext={btnAvancaViewPager}/>
                 </View>
-
-                <View key="2">        
-                    <Etapa2 />
-                </View>
-
-                <View key="3">
-                    <Etapa3 />
-                </View>
-            </ViewPager>
-
-
-            <ProgressBallsContainer>
-                <ProgressBallFilled />
-                <ProgressBallEmpty />
-            </ProgressBallsContainer>
-
-            <NextArrowButton onNext={btnAvancaViewPager}/>
-
-            {/* <View>
-                <RectButton onPress={btnAvancaViewPager} >
-                    <Text>oi</Text>
-                </RectButton>
-            </View> */}
-            {/*  */}
-            {/* <View style={styles.nextArrowButtonContainer}>
-                <RectButton onPress={btnAvancaViewPager} 
-                        style={styles.nextArrowButton}
-                        >
-                    <Image
-                        source={require('../../resources/Icons/seta_direita_laranja.png')}
-                        style={styles.nextArrowButtonImage}
-                    />
-                </RectButton>
-            </View> */}
-
+            </View>
         </View>
     );
 }
