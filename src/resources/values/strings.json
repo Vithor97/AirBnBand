@@ -6,6 +6,8 @@
     "retypePassword" : "Redigite a senha",
     "cpfcnpj" : "CPF/CNPJ",
     "telephone" : "Telefone",
+    "artisticName" : "Nome artístico",
+    "addImage" : "Adicionar imagem",
     "description" : "Descrição",
     "category" : "Categoria",
     "members" : "Membros",

@@ -1,4 +1,5 @@
 import {StyleSheet } from 'react-native';
+import { color } from 'react-native-reanimated';
 import colors from '../../resources/values/colors.json';
 import fonts from '../../resources/values/fonts.json'
 
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         // width: "100%",
         height: "100%",
         // marginTop: 20,
-        paddingTop: 20,
+        paddingTop: 10,
 
         // backgroundColor: colors.facebookBlue,
 
@@ -76,8 +77,14 @@ const styles = StyleSheet.create({
     flowContainer: {
         width: "100%",
         // flex: 1
-        height: "45%",
+        height: "43%",
         display: "flex"
+    },
+
+    addressText: {
+      fontSize: fonts.titleFontSize,
+      color: colors.primary,
+    //   backgroundColor: colors.black
     }
 });
 

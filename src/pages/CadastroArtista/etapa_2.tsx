@@ -2,8 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import TextInputBox from '../../components/textInputBox';
-import NextArrowButton from '../../components/nextArrowButton';
-import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
+import PhotoInput from '../../components/photoInput';
 
 import styles from './styles';
 import strings from '../../resources/values/strings.json';
@@ -23,6 +22,13 @@ function Etapa1 () {
                 placeholder={strings.telephone}
                 placeholderTextColor= {colors.white}
             />
+
+            <TextInputBox
+                placeholder={strings.artisticName}
+                placeholderTextColor= {colors.white}
+            />
+
+            <PhotoInput />
         </View>
     )
 }

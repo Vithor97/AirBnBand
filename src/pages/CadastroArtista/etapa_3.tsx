@@ -1,9 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import TextInputBox from '../../components/textInputBox';
-import NextArrowButton from '../../components/nextArrowButton';
-import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 
 import styles from './styles';
 import strings from '../../resources/values/strings.json';
@@ -12,6 +10,8 @@ import colors from '../../resources/values/colors.json';
 function Etapa1 () {
     return (
         <View style={styles.inputsContainer}>
+            <Text style={styles.addressText}>Informe seu endereço</Text>
+            
             <TextInputBox
                 placeholder={strings.postalCode}
                 placeholderTextColor= {colors.white}
