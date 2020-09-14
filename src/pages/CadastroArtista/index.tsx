@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, ScrollView } from 'react-native';
 import ViewPager  from '@react-native-community/viewpager';
 
 import BackArrow from '../../components/backArrow';
@@ -18,7 +18,7 @@ import { RectButton } from 'react-native-gesture-handler';
 function CadastroContratante () {
 
     //precisei criar a referencia para setar a pagina
-    const viewPager  = useRef<ViewPager | null | HTMLInputElement | any >();
+    const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
 
     //Seta as paginas onde estou
     let [page, setPagee] = useState(0)
@@ -80,11 +80,13 @@ function CadastroContratante () {
                         <Etapa2 />
                     </View>
 
-                    <View key="3">
-                        <Etapa3 />
-                    </View>
+                    <ScrollView>
+                        <View key="3">
+                            <Etapa3 />
+                        </View>
+                    </ScrollView>
                 </ViewPager>
-
+                
                 <View style={styles.flowContainer}>
                     <ProgressBallsContainer>
                         {
@@ -99,6 +101,7 @@ function CadastroContratante () {
 
                     <NextArrowButton onNext={btnAvancaViewPager}/>
                 </View>
+
             </View>
         </View>
     );
