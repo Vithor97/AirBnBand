@@ -1,21 +1,115 @@
 import React, { useState, useRef } from 'react';
-import { View, Image, ScrollView } from 'react-native';
+import { View, Image, ScrollView, Text } from 'react-native';
 import ViewPager  from '@react-native-community/viewpager';
+
+import strings from '../../resources/values/strings.json';
+import colors from '../../resources/values/colors.json';
 
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
+import TextInputBox from '../../components/textInputBox';
+import PhotoInput from '../../components/photoInput';
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 
-import Etapa1 from './etapa_1';
-import Etapa2 from './etapa_2';
-import Etapa3 from './etapa_3';
+// import Etapa1 from './etapa_1';
+// import Etapa2 from './etapa_2';
+// import Etapa3 from './etapa_3'
 
 import styles from './styles';
 import global from '../../styles/global';
 import { RectButton } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-function CadastroContratante () {
+function CadastroArtista () {
+
+    function Etapa1 () {
+        return (
+            <View style={styles.inputsContainer}>
+                <Text style={styles.addYourData}>{strings.addYourData}</Text>
+    
+                <TextInputBox
+                    placeholder={strings.fullName}
+                    placeholderTextColor= {colors.white}
+                    // value={email}
+                    // onChangeText={(text:string) => setEmail(text)}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.email}
+                    placeholderTextColor= {colors.white}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.password}
+                    placeholderTextColor= {colors.white}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.retypePassword}
+                    placeholderTextColor= {colors.white}
+                />
+            </View>
+        )
+    }
+
+    function Etapa2 () {
+        return (
+            <View style={styles.inputsContainer}>
+                <PhotoInput />
+    
+                <TextInputBox
+                    placeholder={strings.cpfcnpj}
+                    placeholderTextColor= {colors.white}
+                    // value={email}
+                    // onChangeText={(text:string) => setEmail(text)}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.telephone}
+                    placeholderTextColor= {colors.white}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.artisticName}
+                    placeholderTextColor= {colors.white}
+                />
+            </View>
+        )
+    }
+
+    function Etapa3 () {
+        return (
+            <View style={styles.inputsContainer}>
+                <TextInputBox
+                    placeholder={strings.postalCode}
+                    placeholderTextColor= {colors.white}
+                    // value={email}
+                    // onChangeText={(text:string) => setEmail(text)}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.street}
+                    placeholderTextColor= {colors.white}
+                />
+    
+                <TextInputBox
+                    placeholder={strings.city}
+                    placeholderTextColor= {colors.white}
+                />
+                
+                <TextInputBox
+                    placeholder={strings.block}
+                    placeholderTextColor= {colors.white}
+                />
+                
+                <TextInputBox
+                    placeholder={strings.number}
+                    placeholderTextColor= {colors.white}
+                />
+            </View>
+        )
+    }
 
     //precisei criar a referencia para setar a pagina
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
@@ -30,13 +124,24 @@ function CadastroContratante () {
         console.log(`numero da pagina: ${valorPage}`)  
     }
 
+    const {navigate, goBack} = useNavigation();
+
+    // function goBackScreen(){
+    //     return goBack();
+    // }
+
+    function goToHome(){
+        navigate('Signin');
+    }
+
     function btnAvancaViewPager(){
         if(page>=2) {
-            viewPager.current.setPage(0)
+            // viewPager.current.setPage(0)
             // viewPager.current.setPage(page)
 
             // Implementar a conclusão do cadastro
-
+            
+            goToHome();
         }else{
             viewPager.current.setPage(page+1)
         }          
@@ -107,4 +212,4 @@ function CadastroContratante () {
     );
 }
 
-export default CadastroContratante;
+export default CadastroArtista;

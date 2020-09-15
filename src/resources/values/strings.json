@@ -1,5 +1,6 @@
 {
     "app_name" : "AirBnBand",
+    "addYourData" : "Insira seus dados",
     "email" : "Email",
     "password" : "Senha",
     "fullName" : "Nome completo",

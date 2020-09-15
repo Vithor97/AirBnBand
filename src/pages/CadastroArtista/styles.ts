@@ -76,14 +76,15 @@ const styles = StyleSheet.create({
     
     flowContainer: {
         width: "100%",
-        // flex: 1
-        height: "43%",
+        // flex: 1,
+        height: "35%",
         display: "flex"
     },
 
-    addressText: {
-      fontSize: fonts.titleFontSize,
-      color: colors.primary,
+    addYourData: {
+        marginBottom: 10,
+        fontSize: fonts.titleFontSize,
+        color: colors.primary,
     //   backgroundColor: colors.black
     }
 });

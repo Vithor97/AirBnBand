@@ -6,7 +6,6 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import ArtistSignUp from '../pages/CadastroArtista';
 import HirerSignUp from '../pages/CadastroContratante';
-import Landing from '../pages/Landing';
 
 const {Navigator, Screen} = createStackNavigator();
 
