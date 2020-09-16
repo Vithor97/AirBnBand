@@ -86,7 +86,16 @@ const styles = StyleSheet.create({
         fontSize: fonts.titleFontSize,
         color: colors.primary,
     //   backgroundColor: colors.black
-    }
+    },
+    textInput: {
+        height: 50,
+        padding: 10,
+        paddingLeft: 20,
+        borderRadius: 25,
+        backgroundColor: colors.primary,
+        marginBottom: 10,
+        fontSize: fonts.textInputFontSize,
+      },
 });
 
 export default styles;

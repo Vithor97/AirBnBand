@@ -2,6 +2,9 @@ import React, { useState, useRef } from 'react';
 import { View, Image, ScrollView, Text } from 'react-native';
 import ViewPager  from '@react-native-community/viewpager';
 
+import { RectButton, TextInput } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+
 import strings from '../../resources/values/strings.json';
 import colors from '../../resources/values/colors.json';
 
@@ -12,104 +15,14 @@ import PhotoInput from '../../components/photoInput';
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 
-// import Etapa1 from './etapa_1';
-// import Etapa2 from './etapa_2';
-// import Etapa3 from './etapa_3'
-
 import styles from './styles';
 import global from '../../styles/global';
-import { RectButton } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+
+
 
 function CadastroArtista () {
 
-    function Etapa1 () {
-        return (
-            <View style={styles.inputsContainer}>
-                <Text style={styles.addYourData}>{strings.addYourData}</Text>
-    
-                <TextInputBox
-                    placeholder={strings.fullName}
-                    placeholderTextColor= {colors.white}
-                    // value={email}
-                    // onChangeText={(text:string) => setEmail(text)}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.email}
-                    placeholderTextColor= {colors.white}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.password}
-                    placeholderTextColor= {colors.white}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.retypePassword}
-                    placeholderTextColor= {colors.white}
-                />
-            </View>
-        )
-    }
-
-    function Etapa2 () {
-        return (
-            <View style={styles.inputsContainer}>
-                <PhotoInput />
-    
-                <TextInputBox
-                    placeholder={strings.cpfcnpj}
-                    placeholderTextColor= {colors.white}
-                    // value={email}
-                    // onChangeText={(text:string) => setEmail(text)}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.telephone}
-                    placeholderTextColor= {colors.white}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.artisticName}
-                    placeholderTextColor= {colors.white}
-                />
-            </View>
-        )
-    }
-
-    function Etapa3 () {
-        return (
-            <View style={styles.inputsContainer}>
-                <TextInputBox
-                    placeholder={strings.postalCode}
-                    placeholderTextColor= {colors.white}
-                    // value={email}
-                    // onChangeText={(text:string) => setEmail(text)}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.street}
-                    placeholderTextColor= {colors.white}
-                />
-    
-                <TextInputBox
-                    placeholder={strings.city}
-                    placeholderTextColor= {colors.white}
-                />
-                
-                <TextInputBox
-                    placeholder={strings.block}
-                    placeholderTextColor= {colors.white}
-                />
-                
-                <TextInputBox
-                    placeholder={strings.number}
-                    placeholderTextColor= {colors.white}
-                />
-            </View>
-        )
-    }
+    const {navigate, goBack} = useNavigation();
 
     //precisei criar a referencia para setar a pagina
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
@@ -117,21 +30,54 @@ function CadastroArtista () {
     //Seta as paginas onde estou
     let [page, setPagee] = useState(0)
 
-    function estadoScroll (e:any) {
-        let valorPage = e.nativeEvent.position 
-        setPagee(valorPage)
 
-        console.log(`numero da pagina: ${valorPage}`)  
+    //etapa 1
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const [senhaRepete, setSenhaRepete] = useState('')
+
+    //etapa 2
+    const [cnpj, setCnpj] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [nomeArtistico, setNomeArtistico] = useState('')
+
+    //etapa 3
+    const [cep, setCep] = useState('')
+    const [logradoro, setLogradoro] = useState('')
+    const [cidade, setCidade] = useState('')
+    const [bairro, setBairro] = useState('')
+    const [numero, setNumero] = useState('')
+
+
+    function SubmitCadastro(){
+
+        console.log('----------- Etapa 1 -----------')
+        console.log("nome: "+ nome)
+        console.log("email: "+ email)
+        console.log("senha: "+ senha)
+        console.log("senhaRepete: "+ senhaRepete)
+
+
+        console.log('----------- Etapa 2 -----------')
+        console.log("cnpj: "+ cnpj)
+        console.log("telefone: "+ telefone)
+        console.log("nome artista: "+ nomeArtistico)
+
+        console.log('----------- Etapa 3 -----------')
+        console.log("cep: "+ cep)
+        console.log("logradoro: "+ logradoro)
+        console.log("cidade: "+ cidade)
+        console.log("bairro: "+ bairro)
+        console.log("numero: "+ numero)
+        
     }
 
-    const {navigate, goBack} = useNavigation();
+    function estadoScroll (e:any) {
+        let valorPage = e.nativeEvent.position;
+        setPagee(valorPage);
 
-    // function goBackScreen(){
-    //     return goBack();
-    // }
-
-    function goToHome(){
-        navigate('Signin');
+        console.log(`numero da pagina: ${valorPage}`)  ;
     }
 
     function btnAvancaViewPager(){
@@ -141,11 +87,23 @@ function CadastroArtista () {
 
             // Implementar a conclusão do cadastro
             
-            goToHome();
+            SubmitCadastro();
+            //goToHome();
         }else{
             viewPager.current.setPage(page+1)
         }          
     }
+
+    
+
+    // function goBackScreen(){
+    //     return goBack();
+    // }
+
+    function goToHome(){
+        navigate('Signin');
+    }
+
 
     return (
         <View style={styles.container}>
@@ -164,32 +122,127 @@ function CadastroArtista () {
             </View>
             
             <View style={styles.contentContainer}>    
-                <ViewPager ref={viewPager} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}
-                    // scrollEnabled={true}
-                    // onPageScroll={this.onPageScroll}
-                    // onPageSelected={this.onPageSelected}
-                    // onPageScrollStateChanged={this.onPageScrollStateChanged}
-                    // pageMargin={10}
-                    // Lib does not support dynamically orientation change
-                    // orientation="horizontal"
-                    // Lib does not support dynamically transitionStyle change
-                    // transitionStyle="scroll"
-                    // showPageIndicator={dotsVisible}
-                    // ref={this.viewPager}~
-                    >
+                <ViewPager ref={viewPager} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}>
+                <ScrollView>
                     <View key="1">
-                        <Etapa1 />
-                    </View>
-
-                    <View key="2">        
-                        <Etapa2 />
-                    </View>
-
-                    <ScrollView>
-                        <View key="3">
-                            <Etapa3 />
+                        <View style={styles.inputsContainer}>
+                            <Text style={styles.addYourData}>{strings.addYourData}</Text>
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.fullName}
+                                placeholderTextColor= {colors.white}
+                                value={nome}
+                                onChangeText={(text:string) => setNome(text)}
+                            />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.email}
+                                placeholderTextColor= {colors.white}
+                                value={email}
+                                onChangeText={(text:string) => setEmail(text)}
+                            />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.password}
+                                placeholderTextColor= {colors.white}
+                                value={senha}
+                                onChangeText={(text:string) => setSenha(text)}
+                            />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.retypePassword}
+                                placeholderTextColor= {colors.white}
+                                value={senhaRepete}
+                                onChangeText={(text:string) => setSenhaRepete(text)}
+                            />
                         </View>
-                    </ScrollView>
+                    </View>
+                </ScrollView>
+
+                <ScrollView>
+                    <View key="2">        
+                        <View style={styles.inputsContainer}>
+                            <PhotoInput />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.cpfcnpj}
+                                placeholderTextColor= {colors.white}
+                                value={cnpj}
+                                onChangeText={(text:string) => setCnpj(text)}
+                            />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.telephone}
+                                placeholderTextColor= {colors.white}
+                                value={telefone}
+                                onChangeText={(text:string) => setTelefone(text)}
+                            />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.artisticName}
+                                placeholderTextColor= {colors.white}
+                                value={nomeArtistico}
+                                onChangeText={(text:string) => setNomeArtistico(text)}
+                            />
+                        </View>
+                    </View>
+                </ScrollView>
+
+                <ScrollView>
+                    <View key="3">
+                        <View style={styles.inputsContainer}>
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.postalCode}
+                                placeholderTextColor= {colors.white}
+                                keyboardType="numeric"
+                                value={cep}
+                                onChangeText={(text:any) => setCep(text)}
+                                maxLength={10} 
+                            />
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.street}
+                                placeholderTextColor= {colors.white}
+                                value={logradoro}
+                                onChangeText={(text:any) => setLogradoro(text)}
+                            />
+                
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.city}
+                                placeholderTextColor= {colors.white}
+                                value={cidade}
+                                onChangeText={(text:any) => setCidade(text)}
+                            />
+                            
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.block}
+                                placeholderTextColor= {colors.white}
+                                value={bairro}
+                                onChangeText={(text:any) => setBairro(text)}
+                            />
+                            
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder={strings.number}
+                                placeholderTextColor= {colors.white}
+                                value={numero}
+                                onChangeText={(text:any) => setNumero(text)}
+                                keyboardType="numeric"
+                                maxLength={6}
+                            />
+                        </View>
+                    </View>
+                </ScrollView>
                 </ViewPager>
                 
                 <View style={styles.flowContainer}>
