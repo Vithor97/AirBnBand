@@ -15,6 +15,8 @@ import PhotoInput from '../../components/photoInput';
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 
+
+
 import styles from './styles';
 import global from '../../styles/global';
 
@@ -24,12 +26,18 @@ import {
     FormikProps,
     Form,
     Field,
-    FieldProps,
+    FieldProps
   } from 'formik';
 import * as Yup from "yup";
 import ConfirmaBtn from '../../components/confirmaBtn';
+import MensagemErro from '../../components/errorMessage'
 
-
+const verificaErros: React.FC<any> = ({errado}) =>{
+    if(errado){
+        return <Text>{errado}</Text>
+    }
+    return null
+}
 
 function CadastroArtista () {
 
@@ -123,32 +131,19 @@ function CadastroArtista () {
             // viewPager.current.setPage(page)
 
             // Implementar a conclusão do cadastro
-            
             SubmitCadastro();
             //goToHome();
         }else{
-            viewPager.current.setPage(page+1)
-            
+            viewPager.current.setPage(page+1)  
         }          
     }
 
-    function verificaErros(erros: any){
-        if(!erros){
-            console.log("tem erros")
-        }
-        else{
-            console.log("não tem erros")
-        }
-    }
-
-    
-
-    // function goBackScreen(){
-    //     return goBack();
-    // }
-
     function goToHome(){
         navigate('Signin');
+    }
+
+    function mensagemDeErro(e: string){
+        return <MensagemErro errorMensgame ={e}/>
     }
 
 
@@ -209,7 +204,8 @@ function CadastroArtista () {
                                         value={values.nome}
                                         onChangeText={handleChange("nome")}
                                     />
-                                    {(function() {
+                                    {errors.nome && mensagemDeErro(errors.nome)}
+                                    {/* {(function() {
                                         if(errors.nome) { 
                                             setLiberado(false)    
                                             return <Text>{errors.nome}</Text>;
@@ -218,8 +214,7 @@ function CadastroArtista () {
                                             setLiberado(true)
                                         } 
                                         })()
-                                    // errors.nome && <Text>{errors.nome}</Text>
-                                    }
+                                    } */}
                         
                                     <TextInput
                                         style={styles.textInput}
