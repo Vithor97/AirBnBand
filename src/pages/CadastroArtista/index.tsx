@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { View, Image, ScrollView, Text, Button } from 'react-native';
+import { View, Image, ScrollView, Text} from 'react-native';
 import ViewPager  from '@react-native-community/viewpager';
+import {Formik} from 'formik';
+import * as Yup from "yup";
 
-import { RectButton, TextInput } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import strings from '../../resources/values/strings.json';
@@ -10,66 +12,27 @@ import colors from '../../resources/values/colors.json';
 
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
-import TextInputBox from '../../components/textInputBox';
+
 import PhotoInput from '../../components/photoInput';
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
-
-
+import ConfirmaBtn from '../../components/confirmaBtn';
+import MensagemErro from '../../components/errorMessage'
 
 import styles from './styles';
 import global from '../../styles/global';
 
-import {
-    Formik,
-    FormikHelpers,
-    FormikProps,
-    Form,
-    Field,
-    FieldProps
-  } from 'formik';
-import * as Yup from "yup";
-import ConfirmaBtn from '../../components/confirmaBtn';
-import MensagemErro from '../../components/errorMessage'
 
-const verificaErros: React.FC<any> = ({errado}) =>{
-    if(errado){
-        return <Text>{errado}</Text>
-    }
-    return null
-}
 
 function CadastroArtista () {
-
     const {navigate, goBack} = useNavigation();
-
     //precisei criar a referencia para setar a pagina
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
-
     //Seta as paginas onde estou
     let [page, setPagee] = useState(0)
 
     //Seta se tem erro de validação no form
     const [liberado, setLiberado] = useState(true)
-
-
-    //etapa 1
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
-    const [senhaRepete, setSenhaRepete] = useState('')
-
-    //etapa 2
-    const [cnpj, setCnpj] = useState('')
-    const [telefone, setTelefone] = useState('')
-    const [nomeArtistico, setNomeArtistico] = useState('')
-
-    //etapa 3
-    const [cep, setCep] = useState('')
-    const [logradoro, setLogradoro] = useState('')
-    const [cidade, setCidade] = useState('')
-    const [bairro, setBairro] = useState('')
-    const [numero, setNumero] = useState('')
 
     //Validacao de formulario
     const FormSchema = Yup.object().shape({
@@ -90,30 +53,6 @@ function CadastroArtista () {
         nomeArtistico: Yup.string().required("Obrigatório"),
     })
 
-
-    function SubmitCadastro(){
-
-        console.log('----------- Etapa 1 -----------')
-        console.log("nome: "+ nome)
-        console.log("email: "+ email)
-        console.log("senha: "+ senha)
-        console.log("senhaRepete: "+ senhaRepete)
-
-
-        console.log('----------- Etapa 2 -----------')
-        console.log("cnpj: "+ cnpj)
-        console.log("telefone: "+ telefone)
-        console.log("nome artista: "+ nomeArtistico)
-
-        console.log('----------- Etapa 3 -----------')
-        console.log("cep: "+ cep)
-        console.log("logradoro: "+ logradoro)
-        console.log("cidade: "+ cidade)
-        console.log("bairro: "+ bairro)
-        console.log("numero: "+ numero)
-        
-    }
-
     function estadoScroll (e:any) {
         let valorPage = e.nativeEvent.position;
         setPagee(valorPage);
@@ -129,17 +68,12 @@ function CadastroArtista () {
         if(page>=2) {
             // viewPager.current.setPage(0)
             // viewPager.current.setPage(page)
-
             // Implementar a conclusão do cadastro
-            SubmitCadastro();
             //goToHome();
-        }else{
+        }
+        else{
             viewPager.current.setPage(page+1)  
         }          
-    }
-
-    function goToHome(){
-        navigate('Signin');
     }
 
     function mensagemDeErro(e: string){
@@ -164,7 +98,8 @@ function CadastroArtista () {
             </View>
             
             <View style={styles.contentContainer}>
-                <Formik initialValues={{
+                <Formik 
+                initialValues={{
                     nome: "",
                     email: "",
                     senha: "",
@@ -177,17 +112,16 @@ function CadastroArtista () {
                     cidade: "",
                     bairro: "",
                     numero: "",
-                    }}
-                    onSubmit={async(values, actions)=>{
+                }}
+                onSubmit={async(values, actions)=>{
                         console.log(values)
                         await console.log(actions)
                     }
-                    }
-
-                    
-                    validationSchema={FormSchema}        
+                }
+  
+                validationSchema={FormSchema}        
                 >
-                {({values , handleChange, errors, handleSubmit, isValid}) =>{
+                {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
                     //console.log({ values });
                     return(
                         <>
@@ -202,74 +136,40 @@ function CadastroArtista () {
                                         placeholder={strings.fullName}
                                         placeholderTextColor= {colors.white}
                                         value={values.nome}
+                                        onBlur={()=>setFieldTouched('nome', true)}
                                         onChangeText={handleChange("nome")}
                                     />
-                                    {errors.nome && mensagemDeErro(errors.nome)}
-                                    {/* {(function() {
-                                        if(errors.nome) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.nome}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    } */}
+                                    {errors.nome &&  touched.nome ? mensagemDeErro(errors.nome) : null}
                         
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.email}
                                         placeholderTextColor= {colors.white}
                                         value={values.email}
+                                        onBlur={()=>setFieldTouched('email', true)}
                                         onChangeText={handleChange("email")}
                                     />
-                                    {(function() {
-                                        if(errors.email) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.email}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }
-                        
+                                    {errors.email &&  touched.email && mensagemDeErro(errors.email)}
+                         
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.password}
                                         placeholderTextColor= {colors.white}
                                         value={values.senha}
+                                        onBlur={()=>setFieldTouched('senha', true)}
                                         onChangeText={handleChange("senha")}
                                     />
-                                    {(function() {
-                                        if(errors.senha) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.senha}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }
-                                    
-                        
+                                    {errors.senha &&  touched.senha && mensagemDeErro(errors.senha)}
+                                      
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.retypePassword}
                                         placeholderTextColor= {colors.white}
                                         value={values.senhaRepete}
+                                        onBlur={()=>setFieldTouched('senhaRepete', true)}
                                         onChangeText={handleChange("senhaRepete")}
                                     />
-                                    {(function() {
-                                        if(errors.senhaRepete) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.senhaRepete}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }
+                                    {errors.senhaRepete &&  touched.senhaRepete && mensagemDeErro(errors.senhaRepete)}
                                 </View>
                             </View>
                         </ScrollView>
@@ -284,56 +184,30 @@ function CadastroArtista () {
                                         placeholder={strings.cpfcnpj}
                                         placeholderTextColor= {colors.white}
                                         value={values.cnpj}
+                                        onBlur={()=>setFieldTouched('cnpj', true)}
                                         onChangeText={handleChange("cnpj")}
                                     />
-
-                                    {(function() {
-                                        if(errors.cnpj) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.cnpj}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }   
-                        
+                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
+                         
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.telephone}
                                         placeholderTextColor= {colors.white}
                                         value={values.telefone}
+                                        onBlur={()=>setFieldTouched('telefone', true)}
                                         onChangeText={handleChange("telefone")}
                                     />
-                                    {(function() {
-                                        if(errors.telefone) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.telefone}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    } 
-                        
+                                    {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
+                         
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.artisticName}
                                         placeholderTextColor= {colors.white}
                                         value={values.nomeArtistico}
+                                        onBlur={()=>setFieldTouched('nomeArtistico', true)}
                                         onChangeText={handleChange("nomeArtistico")}
                                     />
-
-                                    {(function() {
-                                        if(errors.nomeArtistico) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.nomeArtistico}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    } 
+                                    {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
                                 </View>
                             </View>
                         </ScrollView>
@@ -347,74 +221,41 @@ function CadastroArtista () {
                                         placeholderTextColor= {colors.white}
                                         keyboardType="numeric"
                                         value={values.cep}
+                                        onBlur={()=>setFieldTouched('cep', true)}
                                         onChangeText={handleChange("cep")}
                                         maxLength={10} 
                                     />
-
-                                    {(function() {
-                                        if(errors.cep) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.cep}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }  
-
+                                    {errors.cep &&  touched.cep && mensagemDeErro(errors.cep)}
+                
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.street}
                                         placeholderTextColor= {colors.white}
                                         value={values.logradoro}
+                                        onBlur={()=>setFieldTouched('logradoro', true)}
                                         onChangeText={handleChange("logradoro")}
                                     />
-                                    {(function() {
-                                        if(errors.logradoro) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.logradoro}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    } 
+                                    {errors.logradoro &&  touched.logradoro && mensagemDeErro(errors.logradoro)}
                         
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.city}
                                         placeholderTextColor= {colors.white}
                                         value={values.cidade}
+                                        onBlur={()=>setFieldTouched('cidade', true)}
                                         onChangeText={handleChange("cidade")}
                                     />
-                                    {(function() {
-                                        if(errors.cidade) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.cidade}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    } 
+                                    {errors.cidade &&  touched.cidade && mensagemDeErro(errors.cidade)}
                                     
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.block}
                                         placeholderTextColor= {colors.white}
                                         value={values.bairro}
+                                        onBlur={()=>setFieldTouched('bairro', true)}
                                         onChangeText={handleChange("bairro")}
                                     />
-                                    {(function() {
-                                        if(errors.bairro) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.bairro}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    } 
+                                    {errors.bairro &&  touched.bairro && mensagemDeErro(errors.bairro)}
                                     
                                     <TextInput
                                         style={styles.textInput}
@@ -422,10 +263,12 @@ function CadastroArtista () {
                                         placeholderTextColor= {colors.white}
                                         value={values.numero}
                                         onChangeText={handleChange("numero")}
+                                        onBlur={()=>setFieldTouched('numero', true)}
                                         keyboardType="numeric"
                                         maxLength={6}
                                     />
-                                    {(function() {
+                                    {errors.numero &&  touched.numero && mensagemDeErro(errors.numero)}
+                                    {/* {(function() {
                                         if(errors.numero) { 
                                             setLiberado(false)    
                                             return <Text>{errors.numero}</Text>;
@@ -434,7 +277,7 @@ function CadastroArtista () {
                                             setLiberado(true)
                                         } 
                                         })()
-                                    } 
+                                    }  */}
                                 </View>
                             </View>
                         </ScrollView>
@@ -464,5 +307,4 @@ function CadastroArtista () {
         </View>
     );
 }
-
 export default CadastroArtista;
