@@ -23,5 +23,12 @@
     "register" : "Cadastro",
     "registerQuestion": "Como você deseja se cadastrar?",
     "artist": "Artista",
-    "hirer": "Contratante"
+    "hirer": "Contratante",
+    "errorMessages": {
+        "required": "Campo obrigatório",
+        "minimumLenght": "Tamanho minimo de 4 caracteres",
+        "invalidMail": "Email inválido",
+        "unmatchingPasswords": "Senhas incompatíveis",
+        "onlyNumbers": "Somente números"
+    }
 }

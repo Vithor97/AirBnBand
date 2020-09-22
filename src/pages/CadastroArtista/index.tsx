@@ -12,6 +12,7 @@ import colors from '../../resources/values/colors.json';
 
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
+import TextInputBox from '../../components/textInputBox';
 
 import PhotoInput from '../../components/photoInput';
 import NextArrowButton from '../../components/nextArrowButton';
@@ -53,33 +54,32 @@ function CadastroArtista () {
         }
         console.log(data.uri)
         setAvatar(data)
-
     }
 
     //Validacao de formulario
     const FormSchema = Yup.object().shape({
-        nome: Yup.string().min(4, "Minimun length of 4").required("Required"),
-        email: Yup.string().email("Invalid email").required("Required"),
-        senha: Yup.string().min(4, "Minimun length of 8").required("Required"),
+        nome: Yup.string().min(4, strings.errorMessages.minimumLenght).required(strings.errorMessages.required),
+        email: Yup.string().email(strings.errorMessages.invalidMail).required(strings.errorMessages.required),
+        senha: Yup.string().min(4, strings.errorMessages.minimumLenght).required(strings.errorMessages.required),
         senhaRepete: Yup.string()
-        .oneOf([Yup.ref("senha")], "Senhas devem ser iguais")
-        .min(4, "Minimun length of 4")
-        .required("Required"),
-        cep:Yup.number().required("Obrigatório").typeError("Somente numeros"),
-        logradoro: Yup.string().required("Obrigatório"),
-        cidade: Yup.string().required("Obrigatório"),
-        bairro: Yup.string().required("Obrigatório") ,
-        numero: Yup.string().required("Obrigatório"),
-        cnpj: Yup.string().required("Obrigatório"),
-        telefone: Yup.string().required("Obrigatório") ,
-        nomeArtistico: Yup.string().required("Obrigatório"),
+        .oneOf([Yup.ref(strings.password)], strings.errorMessages.unmatchingPasswords)
+        .min(4, strings.errorMessages.minimumLenght)
+        .required(strings.errorMessages.required),
+        cep:Yup.number().required(strings.errorMessages.required).typeError(strings.errorMessages.required),
+        logradoro: Yup.string().required(strings.errorMessages.required),
+        cidade: Yup.string().required(strings.errorMessages.required),
+        bairro: Yup.string().required(strings.errorMessages.required),
+        numero: Yup.string().required(strings.errorMessages.required),
+        cnpj: Yup.string().required(strings.errorMessages.required),
+        telefone: Yup.string().required(strings.errorMessages.required),
+        nomeArtistico: Yup.string().required(strings.errorMessages.required),
     })
 
     function estadoScroll (e:any) {
         let valorPage = e.nativeEvent.position;
         setPagee(valorPage);
 
-        console.log(`numero da pagina: ${valorPage}`)  ;
+        console.log(`numero da pagina: ${valorPage}`);
     }
 
     function numPag(e:any){
@@ -153,8 +153,17 @@ function CadastroArtista () {
                                 <View style={styles.inputsContainer}>
                                     <Text style={styles.addYourData}>{strings.addYourData}</Text>
                         
+                                    {/* <TextInput
+                                        style={styles.textInput}
+                                        placeholder={strings.fullName}
+                                        placeholderTextColor= {colors.white}
+                                        value={values.nome}
+                                        onBlur={()=>setFieldTouched('nome', true)}
+                                        onChangeText={handleChange("nome")}
+                                    /> */}
+
                                     {errors.nome &&  touched.nome ? mensagemDeErro(errors.nome) : null}
-                                    <TextInput
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.fullName}
                                         placeholderTextColor= {colors.white}
@@ -162,8 +171,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('nome', true)}
                                         onChangeText={handleChange("nome")}
                                     />
-                        
-                                    <TextInput
+
+                                    {errors.email &&  touched.email && mensagemDeErro(errors.email)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.email}
                                         placeholderTextColor= {colors.white}
@@ -171,9 +181,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('email', true)}
                                         onChangeText={handleChange("email")}
                                     />
-                                    {errors.email &&  touched.email && mensagemDeErro(errors.email)}
                          
-                                    <TextInput
+                                    {errors.senha &&  touched.senha && mensagemDeErro(errors.senha)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.password}
                                         placeholderTextColor= {colors.white}
@@ -181,9 +191,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('senha', true)}
                                         onChangeText={handleChange("senha")}
                                     />
-                                    {errors.senha &&  touched.senha && mensagemDeErro(errors.senha)}
                                       
-                                    <TextInput
+                                    {errors.senhaRepete &&  touched.senhaRepete && mensagemDeErro(errors.senhaRepete)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.retypePassword}
                                         placeholderTextColor= {colors.white}
@@ -191,7 +201,6 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('senhaRepete', true)}
                                         onChangeText={handleChange("senhaRepete")}
                                     />
-                                    {errors.senhaRepete &&  touched.senhaRepete && mensagemDeErro(errors.senhaRepete)}
                                 </View>
                             </View>
                         </ScrollView>
@@ -211,6 +220,20 @@ function CadastroArtista () {
                                                     style={backArrow.photoInputImage}></Image>
                                                 }
                                             }()}
+
+                                            {/* <Image
+                                                {function()=>{
+                                                    if(!avatar){
+                                                        source={require('../../resources/Icons/photo_laranja.png')} 
+                                                    }
+                                                    else {
+                                                        source={{uri: avatar.uri}} 
+                                                    }
+                                                }()}
+
+                                                style={backArrow.photoInputImage}
+                                             /> */}
+
                                             {/* <Image
                                                
                                                 // source={{uri: avatar ? avatar.uri : selecionaImagem}}
@@ -220,9 +243,9 @@ function CadastroArtista () {
                                     </View>
 
                                     <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
-
                         
-                                    <TextInput
+                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.cpfcnpj}
                                         placeholderTextColor= {colors.white}
@@ -230,9 +253,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('cnpj', true)}
                                         onChangeText={handleChange("cnpj")}
                                     />
-                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
                          
-                                    <TextInput
+                                    {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.telephone}
                                         placeholderTextColor= {colors.white}
@@ -240,9 +263,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('telefone', true)}
                                         onChangeText={handleChange("telefone")}
                                     />
-                                    {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
                          
-                                    <TextInput
+                                    {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.artisticName}
                                         placeholderTextColor= {colors.white}
@@ -250,7 +273,6 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('nomeArtistico', true)}
                                         onChangeText={handleChange("nomeArtistico")}
                                     />
-                                    {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
                                 </View>
                             </View>
                         </ScrollView>
@@ -258,7 +280,8 @@ function CadastroArtista () {
                         <ScrollView>
                             <View key="3">
                                 <View style={styles.inputsContainer}>
-                                    <TextInput
+                                    {errors.cep &&  touched.cep && mensagemDeErro(errors.cep)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.postalCode}
                                         placeholderTextColor= {colors.white}
@@ -268,9 +291,9 @@ function CadastroArtista () {
                                         onChangeText={handleChange("cep")}
                                         maxLength={10} 
                                     />
-                                    {errors.cep &&  touched.cep && mensagemDeErro(errors.cep)}
                 
-                                    <TextInput
+                                    {errors.logradoro && touched.logradoro && mensagemDeErro(errors.logradoro)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.street}
                                         placeholderTextColor= {colors.white}
@@ -278,9 +301,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('logradoro', true)}
                                         onChangeText={handleChange("logradoro")}
                                     />
-                                    {errors.logradoro &&  touched.logradoro && mensagemDeErro(errors.logradoro)}
                         
-                                    <TextInput
+                                    {errors.cidade &&  touched.cidade && mensagemDeErro(errors.cidade)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.city}
                                         placeholderTextColor= {colors.white}
@@ -288,9 +311,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('cidade', true)}
                                         onChangeText={handleChange("cidade")}
                                     />
-                                    {errors.cidade &&  touched.cidade && mensagemDeErro(errors.cidade)}
                                     
-                                    <TextInput
+                                    {errors.bairro &&  touched.bairro && mensagemDeErro(errors.bairro)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.block}
                                         placeholderTextColor= {colors.white}
@@ -298,9 +321,9 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('bairro', true)}
                                         onChangeText={handleChange("bairro")}
                                     />
-                                    {errors.bairro &&  touched.bairro && mensagemDeErro(errors.bairro)}
                                     
-                                    <TextInput
+                                    {errors.numero &&  touched.numero && mensagemDeErro(errors.numero)}
+                                    <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.number}
                                         placeholderTextColor= {colors.white}
@@ -310,7 +333,6 @@ function CadastroArtista () {
                                         keyboardType="numeric"
                                         maxLength={6}
                                     />
-                                    {errors.numero &&  touched.numero && mensagemDeErro(errors.numero)}
                                     {/* {(function() {
                                         if(errors.numero) { 
                                             setLiberado(false)    
@@ -327,16 +349,50 @@ function CadastroArtista () {
                         </ViewPager>
                         
                         <View style={styles.flowContainer}>
-                            <ProgressBallsContainer>
-                                {
-                                
-                                }
+                            {/* <ProgressBallsContainer>
                                 <ProgressBallFilled />
 
                                 <ProgressBallEmpty />
 
                                 <ProgressBallEmpty />
-                            </ProgressBallsContainer>
+                            </ProgressBallsContainer> */}
+
+                            {function(){
+                                if(page === 0){
+                                    return (
+                                        <ProgressBallsContainer>
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallEmpty />
+
+                                            <ProgressBallEmpty />
+                                        </ProgressBallsContainer>
+                                    )
+                                }
+                                else if(page === 1){
+                                    return (
+                                        <ProgressBallsContainer>
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallEmpty />
+                                        </ProgressBallsContainer>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <ProgressBallsContainer>
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallFilled />
+                                        </ProgressBallsContainer>
+                                    )
+                                }
+                            }()}
+
                             {page == 2 ? <ConfirmaBtn onNext={handleSubmit}/> : <NextArrowButton onNext={btnAvancaViewPager}/> }
                             {/* <NextArrowButton onNext={handleSubmit}/> */}
                         </View>

@@ -1,5 +1,7 @@
 import {StyleSheet } from 'react-native'
+import { ceil } from 'react-native-reanimated';
 import colors from '../../resources/values/colors.json';
+import fonts from '../../resources/values/fonts.json';
 
 const confirmaBtn = StyleSheet.create({  
   confirmaBtnContainer: {
@@ -20,16 +22,19 @@ const confirmaBtn = StyleSheet.create({
     height: 60,
     borderColor: colors.secundary,
     alignSelf: "center",
-    backgroundColor:colors.secundary,
+    // backgroundColor:colors.secundary,
 
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
   },
 
-  confirmaBtnImage: {
-    width: 100,
+  confirmaBtnText: {
     height: 50,
+    fontSize: fonts.titleFontSize,
+    color: colors.primary,
+
+    alignSelf: "center"
   }
 })
 

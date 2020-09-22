@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderRadius: 25,
     backgroundColor: colors.primary,
+    color: colors.white,
     marginBottom: 10,
     fontSize: fonts.textInputFontSize,
   },
