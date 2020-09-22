@@ -62,7 +62,7 @@ function CadastroArtista () {
         email: Yup.string().email(strings.errorMessages.invalidMail).required(strings.errorMessages.required),
         senha: Yup.string().min(4, strings.errorMessages.minimumLenght).required(strings.errorMessages.required),
         senhaRepete: Yup.string()
-        .oneOf([Yup.ref(strings.password)], strings.errorMessages.unmatchingPasswords)
+        .oneOf([Yup.ref("senha")], strings.errorMessages.unmatchingPasswords)
         .min(4, strings.errorMessages.minimumLenght)
         .required(strings.errorMessages.required),
         cep:Yup.number().required(strings.errorMessages.required).typeError(strings.errorMessages.required),
