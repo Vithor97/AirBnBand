@@ -4,7 +4,7 @@ import ViewPager  from '@react-native-community/viewpager';
 import {Formik} from 'formik';
 import * as Yup from "yup";
 
-import { TextInput } from 'react-native-gesture-handler';
+import { BorderlessButton, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import strings from '../../resources/values/strings.json';
@@ -23,6 +23,11 @@ import styles from './styles';
 import global from '../../styles/global';
 
 
+import backArrow from '../../components/photoInput/styles';
+
+import * as ImagePicker from 'expo-image-picker'
+
+
 
 function CadastroArtista () {
     const {navigate, goBack} = useNavigation();
@@ -33,6 +38,23 @@ function CadastroArtista () {
 
     //Seta se tem erro de validação no form
     const [liberado, setLiberado] = useState(true)
+
+    const [avatar, setAvatar] = useState<any>();
+
+    async function imagePickerCall() {
+        
+        const data = await ImagePicker.launchImageLibraryAsync({})
+
+        if( data.cancelled){
+            return
+        }
+        if(!data.uri){
+            return
+        }
+        console.log(data.uri)
+        setAvatar(data)
+
+    }
 
     //Validacao de formulario
     const FormSchema = Yup.object().shape({
@@ -131,6 +153,7 @@ function CadastroArtista () {
                                 <View style={styles.inputsContainer}>
                                     <Text style={styles.addYourData}>{strings.addYourData}</Text>
                         
+                                    {errors.nome &&  touched.nome ? mensagemDeErro(errors.nome) : null}
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.fullName}
@@ -139,7 +162,6 @@ function CadastroArtista () {
                                         onBlur={()=>setFieldTouched('nome', true)}
                                         onChangeText={handleChange("nome")}
                                     />
-                                    {errors.nome &&  touched.nome ? mensagemDeErro(errors.nome) : null}
                         
                                     <TextInput
                                         style={styles.textInput}
@@ -177,7 +199,28 @@ function CadastroArtista () {
                         <ScrollView>
                             <View key="2">        
                                 <View style={styles.inputsContainer}>
-                                    <PhotoInput />
+                                    <View  style={backArrow.photoInputContainer}>
+                                        <BorderlessButton style={backArrow.photoInputButton} onPress={imagePickerCall}>
+                                            {function(){
+                                                if(!avatar){
+                                                    return <Image source={require('../../resources/Icons/photo_laranja.png')} 
+                                                    style={backArrow.photoInputImage}></Image>
+                                                }
+                                                else {
+                                                    return <Image source={{uri: avatar.uri}} 
+                                                    style={backArrow.photoInputImage}></Image>
+                                                }
+                                            }()}
+                                            {/* <Image
+                                               
+                                                // source={{uri: avatar ? avatar.uri : selecionaImagem}}
+                                                style={backArrow.photoInputImage}
+                                            /> */}
+                                        </BorderlessButton>
+                                    </View>
+
+                                    <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
+
                         
                                     <TextInput
                                         style={styles.textInput}
