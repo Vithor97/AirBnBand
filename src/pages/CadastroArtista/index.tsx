@@ -13,7 +13,6 @@ import colors from '../../resources/values/colors.json';
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
 import TextInputBox from '../../components/textInputBox';
-
 import PhotoInput from '../../components/photoInput';
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
@@ -121,27 +120,28 @@ function CadastroArtista () {
             
             <View style={styles.contentContainer}>
                 <Formik 
-                initialValues={{
-                    nome: "",
-                    email: "",
-                    senha: "",
-                    senhaRepete: "",
-                    cnpj: "",
-                    telefone: "",
-                    nomeArtistico: "",
-                    cep: "",
-                    logradoro: "",
-                    cidade: "",
-                    bairro: "",
-                    numero: "",
-                }}
-                onSubmit={async(values, actions)=>{
-                        console.log(values)
-                        await console.log(actions)
+                    initialValues={{
+                        nome: "",
+                        email: "",
+                        senha: "",
+                        senhaRepete: "",
+                        cnpj: "",
+                        telefone: "",
+                        nomeArtistico: "",
+                        cep: "",
+                        logradoro: "",
+                        cidade: "",
+                        bairro: "",
+                        numero: "",
+                    }}
+                    
+                    onSubmit={async(values, actions)=>{
+                            console.log(values)
+                            await console.log(actions)
+                        }
                     }
-                }
-  
-                validationSchema={FormSchema}        
+    
+                    validationSchema={FormSchema}        
                 >
                 {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
                     //console.log({ values });
@@ -213,11 +213,11 @@ function CadastroArtista () {
                                             {function(){
                                                 if(!avatar){
                                                     return <Image source={require('../../resources/Icons/photo_laranja.png')} 
-                                                    style={backArrow.photoInputImage}></Image>
+                                                    style={backArrow.photoInputImageDefault}></Image>
                                                 }
                                                 else {
                                                     return <Image source={{uri: avatar.uri}} 
-                                                    style={backArrow.photoInputImage}></Image>
+                                                    style={backArrow.photoInputImageSelected}></Image>
                                                 }
                                             }()}
 
@@ -241,6 +241,8 @@ function CadastroArtista () {
                                             /> */}
                                         </BorderlessButton>
                                     </View>
+
+                                    {/* <PhotoInput imageUri={avatar.uri}/> */}
 
                                     <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
                         

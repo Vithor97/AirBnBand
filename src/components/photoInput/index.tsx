@@ -6,15 +6,26 @@ import strings from '../../resources/values/strings.json';
 
 import styles from './styles';
 
-function BackArrow () {
+function PhotoInput () {
     return (
         <>
             <View  style={styles.photoInputContainer}>
                 <BorderlessButton style={styles.photoInputButton}>
                     <Image
                         source={require('../../resources/Icons/photo_laranja.png')}
-                        style={styles.photoInputImage}
+                        style={styles.photoInputImageDefault}
                     />
+
+                    {/* {function(){
+                        if(!props.imageUri){
+                            return <Image source={require('../../resources/Icons/photo_laranja.png')} 
+                            style={styles.photoInputImageDefault}></Image>
+                        }
+                        else {
+                            return <Image source={{uri: props.imageUri}} 
+                            style={styles.photoInputImageSelected}></Image>
+                        }
+                    }()} */}
                 </BorderlessButton>
             </View>
             
@@ -23,4 +34,4 @@ function BackArrow () {
     );
 }
 
-export default BackArrow;
+export default PhotoInput;

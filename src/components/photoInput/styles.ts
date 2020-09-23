@@ -30,9 +30,17 @@ const photoInput = StyleSheet.create({
     alignItems: "center"
   },
 
-  photoInputImage: {
+  photoInputImageDefault: {
     width: 80,
     height: 80,
+    // backgroundColor: colors.facebookBlue
+  },
+
+  photoInputImageSelected: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    // backgroundColor: colors.facebookBlue
   },
 
   photoInputText:{
