@@ -83,36 +83,6 @@ export const AuthProvider: React.FC = ({children}) =>{
     async function logar(email: string, senha: string) {
 
         try {
-            const response = await api.post('login', {
-                user: email,
-                password: senha
-            })
-
-            if (response.data){
-       
-                console.log(response.data)
-                setUsuario(response.data.user)
-                setLogado(true);
- 
-                api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
-
-                await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data.user));
-                await AsyncStorage.setItem('@RNAuth:token', response.data.token); 
-            }else{
-                alert("Sem dados do sevidor")
-            }
-            
-            
-    //     } catch (error) {
-    //         alert('errro ao achar usuario')
-    //     }
-    
-    // }
-
-    async function logar(email: string, senha: string) {
-
-        try {
-
             let userr = await base.auth().signInWithEmailAndPassword(email, senha)
             //console.log(userr)
             var valor = userr.user?.email
