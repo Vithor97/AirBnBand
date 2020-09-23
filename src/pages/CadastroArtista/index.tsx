@@ -220,25 +220,6 @@ function CadastroArtista () {
                                                     style={backArrow.photoInputImageSelected}></Image>
                                                 }
                                             }()}
-
-                                            {/* <Image
-                                                {function()=>{
-                                                    if(!avatar){
-                                                        source={require('../../resources/Icons/photo_laranja.png')} 
-                                                    }
-                                                    else {
-                                                        source={{uri: avatar.uri}} 
-                                                    }
-                                                }()}
-
-                                                style={backArrow.photoInputImage}
-                                             /> */}
-
-                                            {/* <Image
-                                               
-                                                // source={{uri: avatar ? avatar.uri : selecionaImagem}}
-                                                style={backArrow.photoInputImage}
-                                            /> */}
                                         </BorderlessButton>
                                     </View>
 
@@ -246,7 +227,7 @@ function CadastroArtista () {
 
                                     <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
                         
-                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
+                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}   
                                     <TextInputBox
                                         style={styles.textInput}
                                         placeholder={strings.cpfcnpj}
@@ -335,30 +316,12 @@ function CadastroArtista () {
                                         keyboardType="numeric"
                                         maxLength={6}
                                     />
-                                    {/* {(function() {
-                                        if(errors.numero) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.numero}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }  */}
                                 </View>
                             </View>
                         </ScrollView>
                         </ViewPager>
                         
                         <View style={styles.flowContainer}>
-                            {/* <ProgressBallsContainer>
-                                <ProgressBallFilled />
-
-                                <ProgressBallEmpty />
-
-                                <ProgressBallEmpty />
-                            </ProgressBallsContainer> */}
-
                             {function(){
                                 if(page === 0){
                                     return (
