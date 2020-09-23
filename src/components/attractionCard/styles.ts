@@ -1,8 +1,8 @@
 import {StyleSheet } from 'react-native'
 import colors from '../../resources/values/colors.json';
 
-const backArrow = StyleSheet.create({  
-  backArrowContainer: {
+const attractionCard = StyleSheet.create({  
+  attractionCardContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -17,7 +17,7 @@ const backArrow = StyleSheet.create({
     justifyContent: "center",
   },
 
-  backArrowButton: {
+  attractionCardButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -35,4 +35,4 @@ const backArrow = StyleSheet.create({
   },
 })
 
-export default backArrow;
+export default attractionCard;

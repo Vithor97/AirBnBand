@@ -3,7 +3,7 @@ import { Image, View } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-import backArrow from './styles';
+import styles from './styles';
 
 function BackArrow () {
     const { goBack } = useNavigation();
@@ -13,11 +13,11 @@ function BackArrow () {
     }
 
     return (
-        <View  style={backArrow.backArrowContainer}>
-            <BorderlessButton style={backArrow.backArrowButton}  onPress={goBackScreen}>
+        <View  style={styles.attractionCardContainer}>
+            <BorderlessButton style={styles.attractionCardButton}  onPress={goBackScreen}>
                 <Image
                     source={require('../../resources/Icons/seta_voltar_laranja.png')}
-                    style={backArrow.backArrow}
+                    style={styles.backArrow}
                 />
             </BorderlessButton>
         </View>

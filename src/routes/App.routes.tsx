@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack'
 
-import Landing from '../pages/Landing';
 import AppTabs from './AppTabs.routes'
 
 const { Navigator, Screen } = createStackNavigator();

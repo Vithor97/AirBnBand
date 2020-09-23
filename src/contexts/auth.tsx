@@ -5,6 +5,7 @@ import api from "../services/api";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "../routes/AuthStack.routes";
 import { AxiosResponse } from "axios";
+import { AsyncStorage } from "react-native";
 
 
 //Firebase
@@ -45,23 +46,24 @@ export const AuthProvider: React.FC = ({children}) =>{
 
     //----------É criado na criação do component e deixa o usuario salvo no AsyncStorage----------//
 
-    // useEffect(() => {
-    //     async function loadStorageData() {
-    //       const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
-    //       const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
+    useEffect(() => {
+        async function loadStorageData() {
+          const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
+          const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
     
-    //       // simular uma lentidão para mostar o loading.
-    //       //await new Promise((resolve) => setTimeout(resolve, 2000));
+          // simular uma lentidão para mostar o loading.
+          //await new Promise((resolve) => setTimeout(resolve, 2000));
     
-    //       if (storagedUser && storagedToken) {
-    //         setUser(JSON.parse(storagedUser));
-    //         api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
-    //       }
-    //       setLoading(false);
-    //     }
+          if (storagedUser && storagedToken) {
+            setUsuario(JSON.parse(storagedUser));
+            setLogado(true)
+            api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
+          }
+          setLoading(false);
+        }
     
-    //     loadStorageData();
-    //   });
+        loadStorageData();
+      });
 
     //----------------------------------------------------------------------------------------------//
 
@@ -78,24 +80,27 @@ export const AuthProvider: React.FC = ({children}) =>{
         // await AsyncStorage.setItem('@RNAuth:token', response.token);
     }
 
-    // async function logar(email: string, senha: string) {
+    async function logar(email: string, senha: string) {
 
-    //     try {
-    //         const response = await api.post('login', {
-    //             user: email,
-    //             password: senha
-    //         })
+        try {
+            const response = await api.post('login', {
+                user: email,
+                password: senha
+            })
 
-    //         if (response.data){
+            if (response.data){
        
-    //             console.log(response.data)
-    //             setUsuario(response.data.user)
-    //             setLogado(true);
-                
-    //             api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
-    //         }else{
-    //             alert("Sem dados do sevidor")
-    //         }
+                console.log(response.data)
+                setUsuario(response.data.user)
+                setLogado(true);
+ 
+                api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
+
+                await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.data.user));
+                await AsyncStorage.setItem('@RNAuth:token', response.data.token); 
+            }else{
+                alert("Sem dados do sevidor")
+            }
             
             
     //     } catch (error) {
@@ -121,22 +126,9 @@ export const AuthProvider: React.FC = ({children}) =>{
     
     }
     
-     function signOut() {
-        //await AsyncStorage.clear() 
-        console.log('----------------------------------------------------------')
-        console.log('------------------Usuario que etsá logado-----------------------')
-        console.log(base.auth().currentUser)
-        try {
-            var sair =  base.auth().signOut().then((valor)=>{
-
-                console.log("sair: " + valor)
-                setLogado(false)
-            })
-            console.log(base.auth().currentUser)
-    
-        } catch (error) {
-            alert('não dá para sair')
-        }
+    async function signOut() {
+        await AsyncStorage.clear() 
+        setLogado(false)
         //setUser(null);
     }
     // Retorno todas as variaveis ou funções para que os outros componentes tenham acesso
