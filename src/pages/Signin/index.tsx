@@ -7,6 +7,7 @@ import strings from '../../resources/values/strings.json';
 import Waves from '../../components/waves/waves';
 import DivisorBar from '../../components/divisorBar';
 import TextInputBox from '../../components/textInputBox';
+import DefaultButton from '../../components/defaultButton';
 
 //importando contexto
 import AuthContext from '../../contexts/auth';
@@ -60,39 +61,6 @@ function Signin () {
             logar(email, senha)
         }
     }
-
-    // function login(){
-    //     if(email === 'vitor' || senha === '123'){
-    //         setSenha('')
-    //         setEmail('')
-    //         navigate('Landing')
-    //     }
-    //     else{
-    //         alert('Senha inválida')
-    //     }
-    // }
-
-    // async function signinn(){
-    //     if(!email || !senha){
-    //         alert('Email ou senha invalidos')
-    //     }
-    //     else{
-    //         try {
-    //             const response = await api.post('login', {
-    //                 user: email,
-    //                 password: senha
-    //             })
-    //             console.log(response.data)
-    //             api.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
-
-    //             navigate('Landing')
-
-    //         } catch (error) {
-    //             alert(error)
-    //         }
-
-    //     }
-    // }
     
     return (
         <View style={styles.container}>
@@ -102,12 +70,12 @@ function Signin () {
                 </Text>
             </View>
             <View style={styles.formContainer}>
-                <TextInput 
+                <TextInputBox
                     placeholder={strings.email}  
                     style={styles.textInput}
                     placeholderTextColor= {colors.white}
                     value={email}
-                    onChangeText={text => setEmail(text)}
+                    onChangeText={(text:string) => setEmail(text)}
                     /> 
 
                 {/* <TextInputBox
@@ -117,18 +85,20 @@ function Signin () {
                     onChangeText={(text:string) => setEmail(text)}
                 /> */}
                 
-                <TextInput 
+                <TextInputBox
                     placeholder= {strings.password}
                     placeholderTextColor= {colors.white} 
                     style={styles.textInput}
                     secureTextEntry={true}
                     value={senha}
-                    onChangeText={text => setSenha(text)} 
+                    onChangeText={(text:string) => setSenha(text)} 
                     />
 
-                <RectButton onPress={passaUsuario} style={styles.submitButton}>
+                {/* <RectButton onPress={passaUsuario} style={styles.submitButton}>
                     <Text style={styles.submitButtonText}> {strings.sign_in} </Text>
-                </RectButton>
+                </RectButton> */}
+
+                <DefaultButton text={strings.sign_in} doIt={passaUsuario} />
 
                 <DivisorBar />
 

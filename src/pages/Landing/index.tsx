@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react'
 import { View, Text, Button } from 'react-native';
 import base from '../../../firebase'
 
+import strings from '../../resources/values/strings.json';
 
 import { YellowBox } from 'react-native';
-
+import AttractionCard from '../../components/attractionCard';
+import DefaultButton from '../../components/defaultButton';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
@@ -96,13 +98,22 @@ function Landing () {
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>AirBnBand 5</Text>
+            <Text style={styles.titulo}>{strings.app_name}</Text>
+
+            <AttractionCard />
+
             <Text>oi, {usuario}</Text>
-            <Button title="Sign Out" onPress={handleSignOut} />
-            {}
-            <Button title="Pega dados" onPress={pegaTipos} />
-            {}
-            <Button title="Pega estado" onPress={pegaEstado} />
+
+            <DefaultButton text={strings.signOut} doIt={handleSignOut}/>
+            {/* <Button title="Sign Out" onPress={handleSignOut} />
+            {} */}
+
+            <DefaultButton text={"Pega dados"} doIt={pegaTipos}/>
+            {/* <Button title="Pega dados" onPress={pegaTipos} />
+            {} */}
+
+            <DefaultButton text={"Pega estado"} doIt={pegaEstado}/>
+            {/* <Button title="Pega estado" onPress={pegaEstado} /> */}
         </View>
     )
 }
