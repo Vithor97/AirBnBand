@@ -56,8 +56,10 @@ function Signin () {
         }
 
         if(email && senha) {
-            setUserr({email: email, senha: senha})
-            logar(email, senha)
+            // console.log(email);
+            // console.log(senha);
+            setUserr({email: email, senha: senha});
+            logar(email, senha);
         }
     }
 
@@ -102,29 +104,22 @@ function Signin () {
                 </Text>
             </View>
             <View style={styles.formContainer}>
-                <TextInput 
+                <TextInputBox
                     placeholder={strings.email}  
                     style={styles.textInput}
                     placeholderTextColor= {colors.white}
                     value={email}
-                    onChangeText={text => setEmail(text)}
-                    /> 
-
-                {/* <TextInputBox
-                    placeholder={strings.email}
-                    placeholderTextColor= {colors.white}
-                    value={email}
                     onChangeText={(text:string) => setEmail(text)}
-                /> */}
+                />
                 
-                <TextInput 
+                <TextInputBox
                     placeholder= {strings.password}
                     placeholderTextColor= {colors.white} 
                     style={styles.textInput}
                     secureTextEntry={true}
                     value={senha}
-                    onChangeText={text => setSenha(text)} 
-                    />
+                    onChangeText={ (text:string) => setSenha(text)}
+                />
 
                 <RectButton onPress={passaUsuario} style={styles.submitButton}>
                     <Text style={styles.submitButtonText}> {strings.sign_in} </Text>
@@ -134,20 +129,16 @@ function Signin () {
 
 
                 <View style={styles.socialMediaBox}>
-                    
                         <Image 
                             source={require('../../resources/Icons/facebook.png')}
                             style={styles.faceBook}
                         />
                     
-                    
                         <Image 
                             source={require('../../resources/Icons/gmail.png')}
                             style={styles.faceBook}
                         />
-                    
                 </View>
-
 
                 <Text style={styles.orText}> {strings.or} </Text>
 
