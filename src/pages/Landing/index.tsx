@@ -10,15 +10,12 @@ import DefaultButton from '../../components/defaultButton';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
-
 import styles from './styles';
 import AuthContext from '../../contexts/auth';
 
 console.ignoredYellowBox = [
     'Setting a timer'
 ]
-
-
 
 function Landing () {
     const [useer, setUseer] = useState<any>([]);
@@ -102,17 +99,17 @@ function Landing () {
 
             <AttractionCard />
 
-            <Text>oi, {usuario}</Text>
+            {/* <Text>oi, {usuario}</Text> */}
 
             <DefaultButton text={strings.signOut} doIt={handleSignOut}/>
             {/* <Button title="Sign Out" onPress={handleSignOut} />
             {} */}
 
-            <DefaultButton text={"Pega dados"} doIt={pegaTipos}/>
+            {/* <DefaultButton text={"Pega dados"} doIt={pegaTipos}/> */}
             {/* <Button title="Pega dados" onPress={pegaTipos} />
             {} */}
 
-            <DefaultButton text={"Pega estado"} doIt={pegaEstado}/>
+            {/* <DefaultButton text={"Pega estado"} doIt={pegaEstado}/> */}
             {/* <Button title="Pega estado" onPress={pegaEstado} /> */}
         </View>
     )

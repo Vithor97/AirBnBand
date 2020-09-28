@@ -63,19 +63,32 @@ const attractionCard = StyleSheet.create({
     height: "100%",
     width: "70%",
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     alignContent: "center",
-    paddingLeft: 5,
+    padding: 5,
 
-    backgroundColor: colors.gmailRed
+    // backgroundColor: colors.gmailRed
   },
 
   attractionNameText: {
-    fontSize: fonts.textInputFontSize
+    fontSize: fonts.attractionCardNameText,
+    fontWeight: "bold",
+
+    // backgroundColor: colors.facebookBlue,
+
+    marginBottom: 5,
   },
 
   attractionTypeText: {
+    fontSize: fonts.attractionCardTypeText,
     
+    marginBottom: 5
+  },
+
+  attractionAnotherText: {
+    fontSize: fonts.attractionCardTypeText,
+
+    alignSelf: "flex-end"
   }
 })
 

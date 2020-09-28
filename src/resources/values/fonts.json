@@ -6,5 +6,7 @@
     "textInputFontSize" : 20,
     "buttonFontSize" : 25,
     "floatingTextFontSize" : 26,
-    "onlyTextButtonFontSize" : 30
+    "onlyTextButtonFontSize" : 30,
+    "attractionCardNameText" : 17,
+    "attractionCardTypeText" : 16
 }

@@ -3,9 +3,11 @@ import { Image, View, Text } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
+import RatedStars from '../ratedStars';
+
 import styles from './styles';
 
-function BackArrow () {
+function AttractionCard () {
     const { goBack } = useNavigation();
 
     function goBackScreen(){
@@ -26,11 +28,17 @@ function BackArrow () {
 
                 <View style={styles.infoContainer}>
                     <Text style={styles.attractionNameText}>Nome da atração</Text>
-                    <Text >Estilo da atração</Text>
+                    <Text style={styles.attractionTypeText}>Estilo da atração</Text>
+                    {function(){
+                        if(true){
+                            // return <Text style={styles.attractionAnotherText}>Estrelas</Text>
+                            return <RatedStars />
+                        }
+                    }()}
                 </View>
             </BorderlessButton>
         </View>
     );
 }
 
-export default BackArrow;
+export default AttractionCard;
