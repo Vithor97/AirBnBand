@@ -5,13 +5,15 @@ import fonts from '../../resources/values/fonts.json';
 
 const attractionCard = StyleSheet.create({  
   attractionCardContainer: {
-    width: "85%",
+    width: "95%",
     height: 100,
     borderRadius: 10,
     borderWidth: 1,
     backgroundColor: colors.background,
-    borderColor: colors.secundary,
+    borderColor: colors.primary,
     alignSelf: "center",
+
+    marginBottom: 10,
 
     display: "flex",
     alignItems: "center",
