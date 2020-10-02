@@ -12,8 +12,6 @@ import DefaultButton from '../../components/defaultButton';
 //importando contexto
 import AuthContext from '../../contexts/auth';
 
-import api from '../../services/api'
-
 import styles from './styles';
 // import logoImg from '../Resources/Icons/calendario.svg';
 import { useNavigation } from '@react-navigation/native';

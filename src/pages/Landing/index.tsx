@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { View, Text, Button, ScrollView } from 'react-native';
-import base from '../../../firebase'
+
+import Api from '../../services/api'
 
 import strings from '../../resources/values/strings.json';
 
 import { YellowBox } from 'react-native';
 import AttractionCard from '../../components/attractionCard';
-import DefaultButton from '../../components/defaultButton';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
@@ -18,41 +18,51 @@ console.ignoredYellowBox = [
 ]
 
 function Landing () {
-    const [useer, setUseer] = useState<any>([]);
+    const [useer, setUseer] = useState([]);
     const { signOut, user, usuario } = useContext(AuthContext);
-
-    const db = base.firestore()
 
     function handleSignOut() {
       signOut();
     }
 
-    function pegaTipos(){
-        const user =  db.collection('users').where("tipo", "==", "artista").get()
-        user.then(values =>{
-            values.docs.forEach(e => {
-                setUseer((searches:any) => [...searches, e.data()])
-            })
+    async function pegaTipos(){
+
+        const a =  await Api.pegaUsuarios();
+        //console.log(a)
+        setUseer(a)
+        
+        await useer.forEach((elemento: any) => {
+            console.log(elemento.email)
         })
+
+        //setUseer([])
+        // const user =  db.collection('users').where("tipo", "==", "artista").get()
+        // user.then(values =>{
+        //     values.docs.forEach(e => {
+        //         setUseer((searches:any) => [...searches, e.data()])
+        //     })
+        // })
     }
 
     function pegaEstado(){
-        console.log(useer)
-        setUseer([])
+        console.log(useer) 
     }
 
-    function pegaDadosFirebase(){
-        let userRef = db.collection('users').doc('hDLVRtGE4iZsrHxG3RRVyjTxD5k1')
-        
-        let getDoc = userRef.collection('endereco').where("estado","==", "SP").get()
+    async function pegaDadosFirebase(){
 
-        getDoc.then(snapshot =>{
-            const values = snapshot.docs.map((val)=>{
-                return val.id
-            })
-            console.log('---------------------------------------')
-            console.log(values)
-        })
+        const values = await Api.pegaEnderecos();
+        console.log(values)
+        // let userRef = db.collection('users').doc('hDLVRtGE4iZsrHxG3RRVyjTxD5k1')
+        
+        // let getDoc = userRef.collection('endereco').where("estado","==", "SP").get()
+
+        // getDoc.then(snapshot =>{
+        //     const values = snapshot.docs.map((val)=>{
+        //         return val.id
+        //     })
+        //     console.log('---------------------------------------')
+        //     console.log(values)
+        // })
     }
     return (
         <View style={styles.container}>
@@ -71,6 +81,12 @@ function Landing () {
             
                 <AttractionCard />
             </ScrollView>
+            {/* <View>
+                <Button title ="oi" onPress={pegaDadosFirebase}/>
+            </View>
+            <View>
+                <Button title ="estado" onPress={pegaEstado}/>
+            </View> */}
         </View>
     )
 }

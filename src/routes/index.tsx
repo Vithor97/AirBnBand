@@ -9,6 +9,7 @@ import base from '../../firebase'
 
 const Routes: React.FC = () => {
   const { signed, loading } = useContext(AuthContext);
+  
 
 
   //const usuarioLogadoFirebase = base.auth().currentUser;

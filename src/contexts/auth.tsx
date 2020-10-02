@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import * as auth from "../services/auth";
 
-import api from "../services/api";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "../routes/AuthStack.routes";
 import { AxiosResponse } from "axios";
@@ -10,6 +9,10 @@ import { AsyncStorage } from "react-native";
 
 //Firebase
 import base from '../../firebase'
+
+//firebase api
+import Api from '../services/api'
+
 
 interface User {
     name: string;
@@ -57,7 +60,7 @@ export const AuthProvider: React.FC = ({children}) =>{
           if (storagedUser && storagedToken) {
             setUsuario(JSON.parse(storagedUser));
             setLogado(true)
-            api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
+            //api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
           }
           setLoading(false);
         }
@@ -74,7 +77,7 @@ export const AuthProvider: React.FC = ({children}) =>{
 
         console.log(response)
     
-        api.defaults.headers.Authorization = `Baerer ${response.token}`;
+        //api.defaults.headers.Authorization = `Baerer ${response.token}`;
     
         // await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user));
         // await AsyncStorage.setItem('@RNAuth:token', response.token);
@@ -83,7 +86,8 @@ export const AuthProvider: React.FC = ({children}) =>{
     async function logar(email: string, senha: string) {
 
         try {
-            let userr = await base.auth().signInWithEmailAndPassword(email, senha)
+            let userr = await Api.loginWithEmailAndPassword(email, senha)
+            //let userr = await base.auth().signInWithEmailAndPassword(email, senha)
             //console.log(userr)
             var valor = userr.user?.email
             setUsuario(valor)
