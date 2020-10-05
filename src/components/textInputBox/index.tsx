@@ -8,7 +8,7 @@ function Signin ({ ...rest }) {
     return (
         <TextInput 
         { ...rest }
-        style={styles.textInput}
+        
         placeholderTextColor= {colors.white}
         />
     )

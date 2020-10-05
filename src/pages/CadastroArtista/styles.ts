@@ -96,6 +96,22 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontSize: fonts.textInputFontSize,
       },
+      dropdownList: {
+        borderRadius: 25,
+        backgroundColor: colors.primary,
+        marginBottom: 10,
+        fontSize: fonts.textInputFontSize,
+      },
+      bio:{
+        height: 180,
+        padding: 10,
+        textAlignVertical: 'top',
+        paddingLeft: 20,
+        borderRadius: 25,
+        backgroundColor: colors.primary,
+        marginBottom: 10,
+        fontSize: fonts.textInputFontSize,
+      }
 });
 
 export default styles;

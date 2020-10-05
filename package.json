@@ -31,7 +31,8 @@
     "react-native-star-rating": "^1.1.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.11.7",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "@react-native-community/picker": "1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

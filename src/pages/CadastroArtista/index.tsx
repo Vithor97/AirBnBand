@@ -22,6 +22,8 @@ import MensagemErro from '../../components/errorMessage'
 import styles from './styles';
 import global from '../../styles/global';
 
+import {Picker} from '@react-native-community/picker';
+
 
 import backArrow from '../../components/photoInput/styles';
 
@@ -30,6 +32,14 @@ import * as ImagePicker from 'expo-image-picker'
 
 
 function CadastroArtista () {
+
+    const Estilos = [
+        {id: 0, nome: "Escolha Estilo Musical", value:""},
+        {id: 1, nome: "Forró", value:"forro"},
+        {id: 2, nome: "Rock", value:"rock"},        
+    ]
+    
+
     const {navigate, goBack} = useNavigation();
     //precisei criar a referencia para setar a pagina
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
@@ -40,6 +50,8 @@ function CadastroArtista () {
     const [liberado, setLiberado] = useState(true)
 
     const [avatar, setAvatar] = useState<any>();
+
+    const [estiloMusical, setEstiloMusical] = useState<string | number>("");
 
     async function imagePickerCall() {
         
@@ -64,14 +76,13 @@ function CadastroArtista () {
         .oneOf([Yup.ref("senha")], strings.errorMessages.unmatchingPasswords)
         .min(4, strings.errorMessages.minimumLenght)
         .required(strings.errorMessages.required),
-        cep:Yup.number().required(strings.errorMessages.required).typeError(strings.errorMessages.required),
-        logradoro: Yup.string().required(strings.errorMessages.required),
-        cidade: Yup.string().required(strings.errorMessages.required),
-        bairro: Yup.string().required(strings.errorMessages.required),
-        numero: Yup.string().required(strings.errorMessages.required),
+        instagram: Yup.string().required(strings.errorMessages.required),
+        bio: Yup.string().required(strings.errorMessages.required).max(25, "Maximo 50 caracteres"),
         cnpj: Yup.string().required(strings.errorMessages.required),
         telefone: Yup.string().required(strings.errorMessages.required),
         nomeArtistico: Yup.string().required(strings.errorMessages.required),
+        estiloMusical: Yup.string().required(strings.errorMessages.required),
+        qtdIntegrantes: Yup.string().required("Quantidades de membros").min(1, "Deve ter pelo menos um membro")
     })
 
     function estadoScroll (e:any) {
@@ -128,16 +139,15 @@ function CadastroArtista () {
                         cnpj: "",
                         telefone: "",
                         nomeArtistico: "",
-                        cep: "",
-                        logradoro: "",
-                        cidade: "",
-                        bairro: "",
-                        numero: "",
+                        estiloMusical: "",
+                        qtdIntegrantes: "",
+                        instagram: "",
+                        bio: "",
                     }}
                     
                     onSubmit={async(values, actions)=>{
                             console.log(values)
-                            await console.log(actions)
+                            //await console.log(actions.setErrors)
                         }
                     }
     
@@ -223,8 +233,6 @@ function CadastroArtista () {
                                         </BorderlessButton>
                                     </View>
 
-                                    {/* <PhotoInput imageUri={avatar.uri}/> */}
-
                                     <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
                         
                                     {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}   
@@ -259,63 +267,72 @@ function CadastroArtista () {
                                 </View>
                             </View>
                         </ScrollView>
-
+                        
                         <ScrollView>
                             <View key="3">
                                 <View style={styles.inputsContainer}>
-                                    {errors.cep &&  touched.cep && mensagemDeErro(errors.cep)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.postalCode}
-                                        placeholderTextColor= {colors.white}
-                                        keyboardType="numeric"
-                                        value={values.cep}
-                                        onBlur={()=>setFieldTouched('cep', true)}
-                                        onChangeText={handleChange("cep")}
-                                        maxLength={10} 
-                                    />
-                
-                                    {errors.logradoro && touched.logradoro && mensagemDeErro(errors.logradoro)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.street}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.logradoro}
-                                        onBlur={()=>setFieldTouched('logradoro', true)}
-                                        onChangeText={handleChange("logradoro")}
-                                    />
+                                    
+                                    {errors.estiloMusical &&  touched.estiloMusical && mensagemDeErro(errors.estiloMusical)}
+                                    <Text>Estilo musical: </Text>
+                                    <Picker
+                                        selectedValue={estiloMusical}
+                                        style={styles.dropdownList}
+                                        onValueChange={(itemValue, itemIndex) =>{
+                                            setEstiloMusical(itemValue)
+                                            
+                                            Estilos.forEach(e =>{
+                                                if(e.id === itemIndex){
+                                                    values.estiloMusical = e.value
+                                                    setFieldTouched("estiloMusical", true)
+                                                }
+                                            })
+                                            
+                                            console.log(values.estiloMusical)
+                                            }
+                                        }
+                                        mode="dropdown">
+                                        {Estilos.map((valor, key)=>(
+                                            <Picker.Item  key={key} label={valor.nome} value={valor.value} />
+                                        ))}  
+                                
+                                
+                                    </Picker> 
+                                    
+                 
                         
-                                    {errors.cidade &&  touched.cidade && mensagemDeErro(errors.cidade)}
+                                    {errors.instagram &&  touched.instagram && mensagemDeErro(errors.instagram)}
                                     <TextInputBox
                                         style={styles.textInput}
-                                        placeholder={strings.city}
+                                        placeholder={strings.instagram}
                                         placeholderTextColor= {colors.white}
-                                        value={values.cidade}
-                                        onBlur={()=>setFieldTouched('cidade', true)}
-                                        onChangeText={handleChange("cidade")}
+                                        value={values.instagram}
+                                        onBlur={()=>setFieldTouched('instagram', true)}
+                                        onChangeText={handleChange("instagram")}
                                     />
                                     
-                                    {errors.bairro &&  touched.bairro && mensagemDeErro(errors.bairro)}
+                                    {errors.qtdIntegrantes  &&  touched.qtdIntegrantes && mensagemDeErro(errors.qtdIntegrantes)}
                                     <TextInputBox
                                         style={styles.textInput}
-                                        placeholder={strings.block}
+                                        placeholder={"Quantidade de pessoas"}
                                         placeholderTextColor= {colors.white}
-                                        value={values.bairro}
-                                        onBlur={()=>setFieldTouched('bairro', true)}
-                                        onChangeText={handleChange("bairro")}
-                                    />
-                                    
-                                    {errors.numero &&  touched.numero && mensagemDeErro(errors.numero)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.number}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.numero}
-                                        onChangeText={handleChange("numero")}
-                                        onBlur={()=>setFieldTouched('numero', true)}
+                                        value={values.qtdIntegrantes}
                                         keyboardType="numeric"
-                                        maxLength={6}
+                                        onBlur={()=>setFieldTouched('qtdIntegrantes', true)}
+                                        maxLength={2}
+                                        onChangeText={handleChange("qtdIntegrantes")}
+                                        
                                     />
+                                    
+                                    {errors.bio &&  touched.bio && mensagemDeErro(errors.bio)}
+                                    <TextInputBox
+                                        style={styles.bio}
+                                        placeholder="Bio"
+                                        placeholderTextColor= {colors.white}
+                                        value={values.bio}
+                                        multiline={true}
+                                        onChangeText={handleChange("bio")}
+                                        onBlur={()=>setFieldTouched('bio', true)}
+                                    /> 
                                 </View>
                             </View>
                         </ScrollView>

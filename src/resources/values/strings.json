@@ -15,6 +15,7 @@
     "postalCode" : "Cep",
     "street" : "Logradouro",
     "city" : "Cidade",
+    "instagram" : "Instagram",
     "block" : "Bairro",
     "number" : "Número",
     "sign_in" : "Entrar",
