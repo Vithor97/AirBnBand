@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
         color: colors.primary,
     //   backgroundColor: colors.black
     },
+
     textInput: {
         height: 50,
         padding: 10,
@@ -96,13 +97,22 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontSize: fonts.textInputFontSize,
       },
-      dropdownList: {
-        borderRadius: 25,
+
+    dropDownListContainer: {
+        height: 50,
         backgroundColor: colors.primary,
+        borderRadius: 25,
+        paddingLeft: 10,
+
         marginBottom: 10,
+    },
+
+    dropdownList: {
+        color: colors.white,
         fontSize: fonts.textInputFontSize,
-      },
-      bio:{
+    },
+    
+    bio:{
         height: 180,
         padding: 10,
         textAlignVertical: 'top',
@@ -111,7 +121,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         marginBottom: 10,
         fontSize: fonts.textInputFontSize,
-      }
+    }
 });
 
 export default styles;

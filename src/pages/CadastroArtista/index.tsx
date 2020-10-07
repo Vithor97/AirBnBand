@@ -274,32 +274,30 @@ function CadastroArtista () {
                                     
                                     {errors.estiloMusical &&  touched.estiloMusical && mensagemDeErro(errors.estiloMusical)}
                                     <Text>Estilo musical: </Text>
-                                    <Picker
-                                        selectedValue={estiloMusical}
-                                        style={styles.dropdownList}
-                                        onValueChange={(itemValue, itemIndex) =>{
-                                            setEstiloMusical(itemValue)
-                                            
-                                            Estilos.forEach(e =>{
-                                                if(e.id === itemIndex){
-                                                    values.estiloMusical = e.value
-                                                    setFieldTouched("estiloMusical", true)
+                                    <View style={styles.dropDownListContainer}>
+                                        <Picker
+                                            selectedValue={estiloMusical}
+                                            style={styles.dropdownList}
+                                            onValueChange={(itemValue, itemIndex) =>{
+                                                setEstiloMusical(itemValue)
+                                                
+                                                Estilos.forEach(e =>{
+                                                    if(e.id === itemIndex){
+                                                        values.estiloMusical = e.value
+                                                        setFieldTouched("estiloMusical", true)
+                                                    }
+                                                })
+                                                
+                                                console.log(values.estiloMusical)
                                                 }
-                                            })
-                                            
-                                            console.log(values.estiloMusical)
                                             }
-                                        }
-                                        mode="dropdown">
-                                        {Estilos.map((valor, key)=>(
-                                            <Picker.Item  key={key} label={valor.nome} value={valor.value} />
-                                        ))}  
-                                
-                                
-                                    </Picker> 
+                                            mode="dropdown">
+                                            {Estilos.map((valor, key)=>(
+                                                <Picker.Item  key={key} label={valor.nome} value={valor.value} />
+                                            ))}
+                                        </Picker> 
+                                    </View>
                                     
-                 
-                        
                                     {errors.instagram &&  touched.instagram && mensagemDeErro(errors.instagram)}
                                     <TextInputBox
                                         style={styles.textInput}
@@ -319,8 +317,7 @@ function CadastroArtista () {
                                         keyboardType="numeric"
                                         onBlur={()=>setFieldTouched('qtdIntegrantes', true)}
                                         maxLength={2}
-                                        onChangeText={handleChange("qtdIntegrantes")}
-                                        
+                                        onChangeText={handleChange("qtdIntegrantes")}    
                                     />
                                     
                                     {errors.bio &&  touched.bio && mensagemDeErro(errors.bio)}
