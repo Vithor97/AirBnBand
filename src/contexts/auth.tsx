@@ -6,10 +6,6 @@ import AuthStack from "../routes/AuthStack.routes";
 import { AxiosResponse } from "axios";
 import { AsyncStorage } from "react-native";
 
-
-//Firebase
-import base from '../../firebase'
-
 //firebase api
 import Api from '../services/api'
 
@@ -32,6 +28,7 @@ interface AuthContextData {
     logar(email: string, senha:string): Promise<void>;
     signOut(): void;
     loading: boolean;
+    tipoUsuario: boolean
 }
 
 //Estou criando o contexto que vai disponibilizar dados para outros componentes
@@ -46,6 +43,9 @@ export const AuthProvider: React.FC = ({children}) =>{
 
     //verifica se usuario está logado ou não
     const [logado, setLogado] = useState(false)
+
+    //usuario true = contratante - false = artista
+    const [tipoUsuario, setTipoUsuario] = useState(true)
 
     //----------É criado na criação do component e deixa o usuario salvo no AsyncStorage----------//
 
@@ -107,7 +107,7 @@ export const AuthProvider: React.FC = ({children}) =>{
     }
     // Retorno todas as variaveis ou funções para que os outros componentes tenham acesso
     return (
-        <AuthContext.Provider value={{ signed: logado, user, signIn, signOut, loading, logar, usuario }}>
+        <AuthContext.Provider value={{ signed: logado, user, signIn, signOut, loading, logar, usuario, tipoUsuario }}>
           {children}
         </AuthContext.Provider>
       );

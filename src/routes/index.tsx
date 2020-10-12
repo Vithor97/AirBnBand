@@ -5,12 +5,11 @@ import AuthStack from './AuthStack.routes';
 import AuthContext from "../contexts/auth";
 import AppRoute from "./App.routes";
 
-import base from '../../firebase'
 
 const Routes: React.FC = () => {
-  const { signed, loading } = useContext(AuthContext);
+  const { signed, loading, tipoUsuario } = useContext(AuthContext);
   
-
+  
 
   //const usuarioLogadoFirebase = base.auth().currentUser;
   
