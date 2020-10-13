@@ -45,7 +45,7 @@ export const AuthProvider: React.FC = ({children}) =>{
     const [logado, setLogado] = useState(false)
 
     //usuario true = contratante - false = artista
-    const [tipoUsuario, setTipoUsuario] = useState(true)
+    const [tipoUsuario, setTipoUsuario] = useState(false)
 
     //----------É criado na criação do component e deixa o usuario salvo no AsyncStorage----------//
 

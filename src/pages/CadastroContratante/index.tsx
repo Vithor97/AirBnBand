@@ -271,16 +271,42 @@ function CadastroContratante () {
                         </ViewPager>
                         
                         <View style={styles.flowContainer}>
-                            <ProgressBallsContainer>
-                                {
-                                
+                            {function(){
+                                if(page === 0){
+                                    return (
+                                        <ProgressBallsContainer>
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallEmpty />
+
+                                            <ProgressBallEmpty />
+                                        </ProgressBallsContainer>
+                                    )
                                 }
-                                <ProgressBallFilled />
+                                else if(page === 1){
+                                    return (
+                                        <ProgressBallsContainer>
+                                            <ProgressBallFilled />
 
-                                <ProgressBallEmpty />
+                                            <ProgressBallFilled />
 
-                                <ProgressBallEmpty />
-                            </ProgressBallsContainer>
+                                            <ProgressBallEmpty />
+                                        </ProgressBallsContainer>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <ProgressBallsContainer>
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallFilled />
+
+                                            <ProgressBallFilled />
+                                        </ProgressBallsContainer>
+                                    )
+                                }
+                            }()}
+
                             {page == 2 ? <ConfirmaBtn onNext={handleSubmit}/> : <NextArrowButton onNext={btnAvancaViewPager}/> }
                             {/* <NextArrowButton onNext={handleSubmit}/> */}
                         </View>
