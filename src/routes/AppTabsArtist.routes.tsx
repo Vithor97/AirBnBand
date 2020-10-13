@@ -8,6 +8,8 @@ import colors from '../resources/values/colors.json';
 import Configuracao from '../pages/Configuracao';
 import HomeArtista from '../pages/HomeArtista';
 
+import HomeStackScreenArtist from './Artista/HomeStackScreenArtist.routes'
+
 const { Navigator, Screen } = createBottomTabNavigator();
 
 Icon.loadFont();
@@ -29,7 +31,7 @@ function AppTabsArtista(){
             inactiveTintColor: colors.black,
 
         }}>
-            <Screen name="HomeArtista" component={HomeArtista}/>
+            <Screen name="HomeArtistaStack" component={HomeStackScreenArtist}/>
             <Screen name="Configuracao" component={Configuracao}/>
         </Navigator>
 

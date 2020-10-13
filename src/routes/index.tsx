@@ -12,7 +12,7 @@ const Routes: React.FC = () => {
   
 
   //const usuarioLogadoFirebase = base.auth().currentUser;
-  
+  const userLogado = true
 
   
   // return usuarioLogadoFirebase ? <AppRoute/> : <AuthStack/>;
