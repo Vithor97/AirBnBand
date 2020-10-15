@@ -31,35 +31,36 @@ function HomeArtista () {
 
     return (
         <View style={styles.container}>
-        <View style={styles.header}>
-            <Text style={styles.textHeader}>Olá Fulano</Text>
-        </View>
-        <View style={styles.footer}>
-            <Image 
-                style={styles.avatar}
-                source={{uri: "https://media.istockphoto.com/vectors/man-avatar-profile-male-face-icon-vector-illustration-vector-id1142192538"}}
-            />
-            <View style={styles.infos}>
-                <Text style={styles.NameBand}>Nome da Banda</Text>
-                <Text style={styles.musicalStule}>Estilo musical</Text>
+            <View style={styles.header}>
+                <Text style={styles.textHeader}>Olá Fulano</Text>
             </View>
-            <Text style={styles.bio}>
-                Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
-                ...............
-                Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
-                ...............
-                Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
-                ...............
-            </Text>
 
-            <TouchableHighlight onPress={handleToDetails} style={{backgroundColor: "#FD9A0B"}}>
-                <Text>Botão que vai para tela de detalhes</Text>
-            </TouchableHighlight>
-            
+            <View style={styles.footer}>
+                <Image 
+                    style={styles.avatar}
+                    source={{uri: "https://media.istockphoto.com/vectors/man-avatar-profile-male-face-icon-vector-illustration-vector-id1142192538"}}
+                />
 
+                <View style={styles.infos}>
+                    <Text style={styles.bandNameStyle}>Nome da Banda</Text>
 
+                    <Text style={styles.musicalStyleStyle}>Estilo musical</Text>
+                </View>
+
+                <Text style={styles.bio}>
+                    Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
+                    ...............
+                    Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
+                    ...............
+                    Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
+                    ...............
+                </Text>
+
+                <TouchableHighlight onPress={handleToDetails} style={{backgroundColor: "#FD9A0B"}}>
+                    <Text>Botão que vai para tela de detalhes</Text>
+                </TouchableHighlight>
+            </View>
         </View>
-    </View>
     )
 }
 
