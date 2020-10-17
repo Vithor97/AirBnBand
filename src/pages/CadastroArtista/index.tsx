@@ -1,21 +1,20 @@
 import React, { useState, useRef } from 'react';
-import { View, Image, ScrollView, Text, SafeAreaView ,FlatList, YellowBox} from 'react-native';
+import { View, Image, ScrollView, Text, SafeAreaView , YellowBox} from 'react-native';
+
 import ViewPager  from '@react-native-community/viewpager';
 import {Formik} from 'formik';
 import * as Yup from "yup";
 
-
-
-import { BorderlessButton, TextInput } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-
 import strings from '../../resources/values/strings.json';
 import colors from '../../resources/values/colors.json';
+
+import { BorderlessButton } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
 import TextInputBox from '../../components/textInputBox';
-import PhotoInput from '../../components/photoInput';
+
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 import ConfirmaBtn from '../../components/confirmaBtn';
@@ -39,11 +38,7 @@ console.ignoredYellowBox = [
     'VirtualizedLists'
 ]
 
-
-
 function CadastroArtista () {
-
-    
 
     const items = [{
         id: '92iijs7yta',
@@ -74,29 +69,22 @@ function CadastroArtista () {
         name: 'BR'
         }
     ];
-    const teste  = useRef<MultiSelect | null | HTMLInputElement | any>();
-
-    const [selectedItems , setSelectedItems ] = useState([])
-    const [multiSelect , setMultiSelect] = useState();
-
     const Estilos = [
         {id: 0, nome: "Escolha Estilo Musical", value:""},
         {id: 1, nome: "Forró", value:"forro"},
         {id: 2, nome: "Rock", value:"rock"},        
     ]
+    const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
+    const teste  = useRef<MultiSelect | null | HTMLInputElement | any>();
 
-    function gostosa (itemSelecionado: any[]){
-        console.log("itemSelecionado")
-    }
+    const [selectedItems , setSelectedItems ] = useState([])
     
     function onSelectedItemsChange (selectedItem: any) {
         setSelectedItems(selectedItem)
     };
     
-
     const {navigate, goBack} = useNavigation();
     //precisei criar a referencia para setar a pagina
-    const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
     //Seta as paginas onde estou
     let [page, setPagee] = useState(0)
 
@@ -108,9 +96,8 @@ function CadastroArtista () {
     const [estiloMusical, setEstiloMusical] = useState<string | number>("");
 
     async function imagePickerCall() {
-        
+       
         const data = await ImagePicker.launchImageLibraryAsync({})
-
         if( data.cancelled){
             return
         }
@@ -168,341 +155,328 @@ function CadastroArtista () {
     }
 
 
-    return (
-
-        <View style={styles.container}>
-            
-            <View style={global.headerContainer}>
-                <View style={styles.backArrowContainer}>
-                    <BackArrow />
-                </View>
-
-                <View style={styles.hirerIconContainer}>
-                    <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.hirerIcon} />
-                </View>
-            </View>
-
-            <View style={styles.divisorContainer}>
-                <DivisorBar />
-            </View>
-            
-            <View style={styles.contentContainer}>
-                <Formik 
-                    initialValues={{
-                        nome: "",
-                        email: "",
-                        senha: "",
-                        senhaRepete: "",
-                        cnpj: "",
-                        telefone: "",
-                        nomeArtistico: "",
-                        estiloMusical: "",
-                        qtdIntegrantes: "",
-                        instagram: "",
-                        bio: "",
-                    }}
-                    
-                    onSubmit={async(values, actions)=>{
-                            console.log(values)
-                            //await console.log(actions.setErrors)
-                        }
-                    }
-    
-                    validationSchema={FormSchema}        
-                >
-                {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
-                    //console.log({ values });
-                    return(
-                        <>
-                        <ViewPager ref={viewPager} scrollEnabled={true} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}>
-                        <ScrollView>
-                            <View key="1">
-                                <View style={styles.inputsContainer}>
-                                    <Text style={styles.addYourData}>{strings.addYourData}</Text>
-                        
-                                    {/* <TextInput
-                                        style={styles.textInput}
-                                        placeholder={strings.fullName}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.nome}
-                                        onBlur={()=>setFieldTouched('nome', true)}
-                                        onChangeText={handleChange("nome")}
-                                    /> */}
-
-                                    {errors.nome &&  touched.nome ? mensagemDeErro(errors.nome) : null}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.fullName}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.nome}
-                                        onBlur={()=>setFieldTouched('nome', true)}
-                                        onChangeText={handleChange("nome")}
-                                    />
-
-                                    {errors.email &&  touched.email && mensagemDeErro(errors.email)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.email}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.email}
-                                        onBlur={()=>setFieldTouched('email', true)}
-                                        onChangeText={handleChange("email")}
-                                    />
-                         
-                                    {errors.senha &&  touched.senha && mensagemDeErro(errors.senha)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.password}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.senha}
-                                        onBlur={()=>setFieldTouched('senha', true)}
-                                        onChangeText={handleChange("senha")}
-                                    />
-                                      
-                                    {errors.senhaRepete &&  touched.senhaRepete && mensagemDeErro(errors.senhaRepete)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.retypePassword}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.senhaRepete}
-                                        onBlur={()=>setFieldTouched('senhaRepete', true)}
-                                        onChangeText={handleChange("senhaRepete")}
-                                    />
-                                </View>
-                            </View>
-                        </ScrollView>
-
-                        <ScrollView>
-                            <View key="2">        
-                                <View style={styles.inputsContainer}>
-                                    <View  style={backArrow.photoInputContainer}>
-                                        <BorderlessButton style={backArrow.photoInputButton} onPress={imagePickerCall}>
-                                            {function(){
-                                                if(!avatar){
-                                                    return <Image source={require('../../resources/Icons/photo_laranja.png')} 
-                                                    style={backArrow.photoInputImageDefault}></Image>
-                                                }
-                                                else {
-                                                    return <Image source={{uri: avatar.uri}} 
-                                                    style={backArrow.photoInputImageSelected}></Image>
-                                                }
-                                            }()}
-                                        </BorderlessButton>
-                                    </View>
-
-                                    <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
-                        
-                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}   
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.cpfcnpj}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.cnpj}
-                                        onBlur={()=>setFieldTouched('cnpj', true)}
-                                        onChangeText={handleChange("cnpj")}
-                                    />
-                         
-                                    {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.telephone}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.telefone}
-                                        onBlur={()=>setFieldTouched('telefone', true)}
-                                        onChangeText={handleChange("telefone")}
-                                    />
-                         
-                                    {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.artisticName}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.nomeArtistico}
-                                        onBlur={()=>setFieldTouched('nomeArtistico', true)}
-                                        onChangeText={handleChange("nomeArtistico")}
-                                    />
-                                </View>
-                            </View>
-                        </ScrollView>
-                        
-                        <ScrollView>
-                            <View key="3">
-                                <View style={styles.inputsContainer}>
-
-                                    
-                                    {errors.estiloMusical &&  touched.estiloMusical && mensagemDeErro(errors.estiloMusical)}
-                                    <Text>Estilo musical: </Text>
-                                    <View style={styles.dropDownListContainer}>
-                                        <Picker
-                                            selectedValue={estiloMusical}
-                                            style={styles.dropdownList}
-                                            onValueChange={(itemValue, itemIndex) =>{
-                                                setEstiloMusical(itemValue)
-                                                
-                                                Estilos.forEach(e =>{
-                                                    if(e.id === itemIndex){
-                                                        values.estiloMusical = e.value
-                                                        setFieldTouched("estiloMusical", true)
-                                                    }
-                                                })
-                                                
-                                                console.log(values.estiloMusical)
-                                                }
-                                            }
-                                            mode="dropdown">
-                                            {Estilos.map((valor, key)=>(
-                                                <Picker.Item  key={key} label={valor.nome} value={valor.value} />
-                                            ))}
-                                        </Picker> 
-                                    </View>
-                                    
-                                    {errors.instagram &&  touched.instagram && mensagemDeErro(errors.instagram)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={strings.instagram}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.instagram}
-                                        onBlur={()=>setFieldTouched('instagram', true)}
-                                        onChangeText={handleChange("instagram")}
-                                    />
-                                    
-                                    {errors.qtdIntegrantes  &&  touched.qtdIntegrantes && mensagemDeErro(errors.qtdIntegrantes)}
-                                    <TextInputBox
-                                        style={styles.textInput}
-                                        placeholder={"Quantidade de pessoas"}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.qtdIntegrantes}
-                                        keyboardType="numeric"
-                                        onBlur={()=>setFieldTouched('qtdIntegrantes', true)}
-                                        maxLength={2}
-                                        onChangeText={handleChange("qtdIntegrantes")}    
-                                    />
-                                    
-                                    {errors.bio &&  touched.bio && mensagemDeErro(errors.bio)}
-                                    <TextInputBox
-                                        style={styles.bio}
-                                        placeholder="Bio"
-                                        placeholderTextColor= {colors.white}
-                                        value={values.bio}
-                                        multiline={true}
-                                        onChangeText={handleChange("bio")}
-                                        onBlur={()=>setFieldTouched('bio', true)}
-                                    /> 
-                                </View>
-                            </View>
-
-                        </ScrollView>
-                        
-                        <SafeAreaView  style={{flex: 1}}>
-                        <ScrollView>
-                            <View key="4">
-                                <View style={styles.inputsContainer}>
-                                <Text style={{margin: 10}}>Regiões de atuações: </Text>
-                                    <View style={{ flex: 1 }}>
-                                    <MultiSelect
-                                        onAddItem={gostosa}
-                                        hideTags
-                                        items={items}
-                                        uniqueKey="name"
-                                        //ref={(component) => { console.log("component") }}
-                                        onSelectedItemsChange={onSelectedItemsChange}
-                                        ref={teste}
-                                        selectedItems={selectedItems}
-                                        selectText="Pick Items"
-                                        searchInputPlaceholderText="Search Items..."
-                                        onChangeInput={ (text)=> console.log(text)}
-                                        //altFontFamily="ProximaNova-Light"
-                                        tagRemoveIconColor="#CCC"
-                                        tagBorderColor="#CCC"
-                                        tagTextColor="#CCC"
-                                        selectedItemTextColor="#CCC"
-                                        selectedItemIconColor="#CCC"
-                                        itemTextColor="#000"
-                                        displayKey="name"
-                                        searchInputStyle={{ color: '#CCC' }}
-                                        submitButtonColor="#CCC"
-                                        submitButtonText="Submit"
-                                        />
-                                        <View>
-                                        {/* {selectedItems} */}
-                                            <Text>{selectedItems}</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                            </View>
-                        </ScrollView>
-
-                        </SafeAreaView>
-
-                        </ViewPager>
-                        
-                        <View style={styles.flowContainer}>
-                            {function(){
-                                if(page === 0){
-                                    return (
-                                        <ProgressBallsContainer>
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallEmpty />
-
-                                            <ProgressBallEmpty />
-                                            <ProgressBallEmpty />
-                                        </ProgressBallsContainer>
-                                    )
-                                }
-                                else if(page === 1){
-                                    return (
-                                        <ProgressBallsContainer>
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallEmpty />
-                                            <ProgressBallEmpty />
-                                        </ProgressBallsContainer>
-                                    )
-                                }
-                                else if(page === 2){
-                                    return (
-                                        <ProgressBallsContainer>
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallEmpty />
-                                            
-                                        </ProgressBallsContainer>
-                                    )
-                                }
-                                
-                                else {
-                                    return (
-                                        <ProgressBallsContainer>
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallFilled />
-
-                                            <ProgressBallFilled />
-                                            
-                                            <ProgressBallFilled />
-                                        </ProgressBallsContainer>
-                                    )
-                                }
-                            }()}
-
-                            {page == 3 ? <ConfirmaBtn onNext={handleSubmit}/> : <NextArrowButton onNext={btnAvancaViewPager}/> }
-                            {/* <NextArrowButton onNext={handleSubmit}/> */}
-                        </View>
-                    </>
-                    )
-                }
-                }                    
-                </Formik>   
-
-            </View>
+return (
+<View style={styles.container}>         
+    <View style={global.headerContainer}>
+        <View style={styles.backArrowContainer}>
+            <BackArrow />
         </View>
-    );
+
+        <View style={styles.hirerIconContainer}>
+            <Image source={require('../../resources/Icons/microfone_laranja.png')} style={styles.hirerIcon} />
+        </View>
+    </View>
+
+    <View style={styles.divisorContainer}>
+        <DivisorBar />
+    </View>
+    
+    <View style={styles.contentContainer}>
+        <Formik 
+            initialValues={{
+                nome: "",
+                email: "",
+                senha: "",
+                senhaRepete: "",
+                cnpj: "",
+                telefone: "",
+                nomeArtistico: "",
+                estiloMusical: "",
+                qtdIntegrantes: "",
+                instagram: "",
+                bio: "",
+            }}
+            
+            onSubmit={async(values, actions)=>{
+                    console.log(values)
+                    //await console.log(actions.setErrors)
+                }
+            }
+
+            validationSchema={FormSchema}        
+        >
+        {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
+            //console.log({ values });
+        return(
+            <>
+            <ViewPager ref={viewPager} scrollEnabled={true} onPageSelected={estadoScroll} style={styles.viewPager} initialPage={page}>
+            <ScrollView>
+                <View key="1">
+                    <View style={styles.inputsContainer}>
+                        <Text style={styles.addYourData}>{strings.addYourData}</Text>
+                        {errors.nome &&  touched.nome ? mensagemDeErro(errors.nome) : null}
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.fullName}
+                            placeholderTextColor= {colors.white}
+                            value={values.nome}
+                            onBlur={()=>setFieldTouched('nome', true)}
+                            onChangeText={handleChange("nome")}
+                        />
+
+                        {errors.email &&  touched.email && mensagemDeErro(errors.email)}
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.email}
+                            placeholderTextColor= {colors.white}
+                            value={values.email}
+                            onBlur={()=>setFieldTouched('email', true)}
+                            onChangeText={handleChange("email")}
+                        />
+                
+                        {errors.senha &&  touched.senha && mensagemDeErro(errors.senha)}
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.password}
+                            placeholderTextColor= {colors.white}
+                            value={values.senha}
+                            onBlur={()=>setFieldTouched('senha', true)}
+                            onChangeText={handleChange("senha")}
+                        />
+                            
+                        {errors.senhaRepete &&  touched.senhaRepete && mensagemDeErro(errors.senhaRepete)}
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.retypePassword}
+                            placeholderTextColor= {colors.white}
+                            value={values.senhaRepete}
+                            onBlur={()=>setFieldTouched('senhaRepete', true)}
+                            onChangeText={handleChange("senhaRepete")}
+                        />
+                    </View>
+                </View>
+            </ScrollView>
+
+            <ScrollView>
+                <View key="2">        
+                    <View style={styles.inputsContainer}>
+                        <View  style={backArrow.photoInputContainer}>
+                            <BorderlessButton style={backArrow.photoInputButton} onPress={imagePickerCall}>
+                                {function(){
+                                    if(!avatar){
+                                        return <Image source={require('../../resources/Icons/photo_laranja.png')} 
+                                        style={backArrow.photoInputImageDefault}></Image>
+                                    }
+                                    else {
+                                        return <Image source={{uri: avatar.uri}} 
+                                        style={backArrow.photoInputImageSelected}></Image>
+                                    }
+                                }()}
+                            </BorderlessButton>
+                        </View>
+
+                        <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
+            
+                        {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}   
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.cpfcnpj}
+                            placeholderTextColor= {colors.white}
+                            value={values.cnpj}
+                            onBlur={()=>setFieldTouched('cnpj', true)}
+                            onChangeText={handleChange("cnpj")}
+                        />
+                
+                        {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.telephone}
+                            placeholderTextColor= {colors.white}
+                            value={values.telefone}
+                            onBlur={()=>setFieldTouched('telefone', true)}
+                            onChangeText={handleChange("telefone")}
+                        />
+                
+                        {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.artisticName}
+                            placeholderTextColor= {colors.white}
+                            value={values.nomeArtistico}
+                            onBlur={()=>setFieldTouched('nomeArtistico', true)}
+                            onChangeText={handleChange("nomeArtistico")}
+                        />
+                    </View>
+                </View>
+            </ScrollView>
+            
+            <SafeAreaView  style={{flex: 1}}>
+            <ScrollView>
+                <View key="3">
+                    <Text style={{marginBottom: 10, marginLeft: 10, fontSize: 16, fontWeight:"bold"}}>Quais regiões tem disponibilidade de atuar?</Text>
+                    <Text style={{margin: 10}}>Regiões de atuações: </Text>
+                    <View style={styles.inputsContainer}>
+                        <View style={{ flex: 0 }}>
+                        <ScrollView>
+
+                        <MultiSelect
+                            items={items}
+                            uniqueKey="name"
+                            //ref={(component) => { console.log("component") }}
+                            onSelectedItemsChange={onSelectedItemsChange}
+                            ref={teste}  
+                            selectedItems={selectedItems}
+                            selectText="Estados"
+                            searchInputPlaceholderText="Search Items..."
+                            onChangeInput={ (text)=> console.log(text)}
+                            //altFontFamily="ProximaNova-Light"
+                            tagRemoveIconColor="#E10101"
+                            tagBorderColor="#FD9A0B"
+                            tagTextColor="#FD9A0B"
+                            selectedItemTextColor="#09E101"
+                            selectedItemIconColor="#FD9A0B"
+                            itemTextColor="#000"
+                            displayKey="name"
+                            searchInputStyle={{ color: '#CCC' }}
+                            submitButtonColor="#CCC"
+                            submitButtonText="Submit"
+                            />
+                            <View>
+                            {/* {selectedItems} */}
+                                <Text>{selectedItems}</Text>
+                            </View>
+                        </ScrollView>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
+
+            </SafeAreaView>
+            <ScrollView>
+                <View key="4">
+                    <View style={styles.inputsContainer}>
+
+                        
+                        {errors.estiloMusical &&  touched.estiloMusical && mensagemDeErro(errors.estiloMusical)}
+                        <Text>Estilo musical: </Text>
+                        <View style={styles.dropDownListContainer}>
+                            <Picker
+                                selectedValue={estiloMusical}
+                                style={styles.dropdownList}
+                                onValueChange={(itemValue, itemIndex) =>{
+                                    setEstiloMusical(itemValue)
+                                    
+                                    Estilos.forEach(e =>{
+                                        if(e.id === itemIndex){
+                                            values.estiloMusical = e.value
+                                            setFieldTouched("estiloMusical", true)
+                                        }
+                                    })
+                                    
+                                    console.log(values.estiloMusical)
+                                    }
+                                }
+                                mode="dropdown">
+                                {Estilos.map((valor, key)=>(
+                                    <Picker.Item  key={key} label={valor.nome} value={valor.value} />
+                                ))}
+                            </Picker> 
+                        </View>
+                        
+                        {errors.instagram &&  touched.instagram && mensagemDeErro(errors.instagram)}
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.instagram}
+                            placeholderTextColor= {colors.white}
+                            value={values.instagram}
+                            onBlur={()=>setFieldTouched('instagram', true)}
+                            onChangeText={handleChange("instagram")}
+                        />
+                        
+                        {errors.qtdIntegrantes  &&  touched.qtdIntegrantes && mensagemDeErro(errors.qtdIntegrantes)}
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={"Quantidade de pessoas"}
+                            placeholderTextColor= {colors.white}
+                            value={values.qtdIntegrantes}
+                            keyboardType="numeric"
+                            onBlur={()=>setFieldTouched('qtdIntegrantes', true)}
+                            maxLength={2}
+                            onChangeText={handleChange("qtdIntegrantes")}    
+                        />
+                        
+                        {errors.bio &&  touched.bio && mensagemDeErro(errors.bio)}
+                        <TextInputBox
+                            style={styles.bio}
+                            placeholder="Bio"
+                            placeholderTextColor= {colors.white}
+                            value={values.bio}
+                            multiline={true}
+                            onChangeText={handleChange("bio")}
+                            onBlur={()=>setFieldTouched('bio', true)}
+                        /> 
+                    </View>
+                </View>
+
+            </ScrollView>
+
+            </ViewPager>
+            
+            <View style={styles.flowContainer}>
+                {function(){
+                    if(page === 0){
+                        return (
+                            <ProgressBallsContainer>
+                                <ProgressBallFilled />
+
+                                <ProgressBallEmpty />
+
+                                <ProgressBallEmpty />
+                                <ProgressBallEmpty />
+                            </ProgressBallsContainer>
+                        )
+                    }
+                    else if(page === 1){
+                        return (
+                            <ProgressBallsContainer>
+                                <ProgressBallFilled />
+
+                                <ProgressBallFilled />
+
+                                <ProgressBallEmpty />
+                                <ProgressBallEmpty />
+                            </ProgressBallsContainer>
+                        )
+                    }
+                    else if(page === 2){
+                        return (
+                            <ProgressBallsContainer>
+                                <ProgressBallFilled />
+
+                                <ProgressBallFilled />
+
+                                <ProgressBallFilled />
+
+                                <ProgressBallEmpty />
+                                
+                            </ProgressBallsContainer>
+                        )
+                    }
+                    
+                    else {
+                        return (
+                            <ProgressBallsContainer>
+                                <ProgressBallFilled />
+
+                                <ProgressBallFilled />
+
+                                <ProgressBallFilled />
+                                
+                                <ProgressBallFilled />
+                            </ProgressBallsContainer>
+                        )
+                    }
+                }()}
+                {page == 3 ? <ConfirmaBtn onNext={handleSubmit}/> : <NextArrowButton onNext={btnAvancaViewPager}/> }
+            </View>
+        </>
+        )
+    }
+    }                    
+    </Formik>   
+
+    </View>
+</View>
+);
 }
 export default CadastroArtista;
