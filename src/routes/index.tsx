@@ -16,7 +16,7 @@ const Routes: React.FC = () => {
 
   
   // return usuarioLogadoFirebase ? <AppRoute/> : <AuthStack/>;
-  return signed ? <AppRoute/> : <AuthStack/>;
+  return userLogado ? <AppRoute/> : <AuthStack/>;
   
 
 };
