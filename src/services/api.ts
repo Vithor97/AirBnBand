@@ -2,6 +2,7 @@ import firebaseApp from '../../firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { auth } from 'firebase';
+import { DatePickerIOS } from 'react-native';
 
 const db = firebaseApp.firestore();
 
@@ -52,53 +53,28 @@ export default {
     cadastraArtista: async (dados: any) =>{
         console.log("---- Dentro da função cadastraArtista ----");
         console.log(dados);
-
-        if(dados.avatar){
-            return firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha).then(data =>{
-                return db.collection('users').doc(data.user?.uid).set({
-                    bio: dados.bio,
-                    nome: dados.nome,
-                    cnpj: dados.cnpj,
-                    email: dados.email,
-                    contatoVisivel: dados.contatoVisivel,
-                    estiloMusical: dados.estiloMusical,
-                    instagram: dados.instagram,
-                    nomeArtistico: dados.nomeArtistico,
-                    qtdIntegrantes: dados.qtdIntegrantes,
-                    selectEstados: dados.selectEstados,
-                    telefone: dados.telefone,
-                    avatar: dados.avatar
-                })
-                .catch(e => console.log(e))
-            }).catch(e=> {
-                return e
-            });
-        }
-
-        else{
-            return firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha).then(data =>{
-                return db.collection('users').doc(data.user?.uid).set({
-                    bio: dados.bio,
-                    nome: dados.nome,
-                    cnpj: dados.cnpj,
-                    email: dados.email,
-                    contatoVisivel: dados.contatoVisivel,
-                    estiloMusical: dados.estiloMusical,
-                    instagram: dados.instagram,
-                    nomeArtistico: dados.nomeArtistico,
-                    qtdIntegrantes: dados.qtdIntegrantes,
-                    selectEstados: dados.selectEstados,
-                    telefone: dados.telefone,
-                    avatar: null
-                })
-                .catch(e => console.log(e))
-            }).catch(e=> {
-                return e
-            });
-        }
+        return firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha).then(data =>{
+            return db.collection('users').doc(data.user?.uid).set({
+                bio: dados.bio,
+                nome: dados.nome,
+                cnpj: dados.cnpj,
+                email: dados.email,
+                contatoVisivel: dados.contatoVisivel,
+                estiloMusical: dados.estiloMusical,
+                instagram: dados.instagram,
+                nomeArtistico: dados.nomeArtistico,
+                qtdIntegrantes: dados.qtdIntegrantes,
+                selectEstados: dados.selectEstados,
+                telefone: dados.telefone,
+                avatar: dados.avatar ? dados.avatar : null
+            })
+            .catch(e => console.log(e))
+        }).catch(e=> {
+            return e
+        });
     },
 
-    cadastraContratante: async (dados: any) =>{
+    cadastraContratante: async (dados: any) =>{ 
         console.log("---- Dentro da função cadastraContratante ----");
         console.log(dados);
 
