@@ -121,6 +121,16 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         marginBottom: 10,
         fontSize: fonts.textInputFontSize,
+    },
+    checkBoxView: {
+        flexDirection: 'row',
+        marginBottom: 20,
+    },
+    textCheckbox: {
+        color: colors.primary,
+        textAlign: 'center',
+        alignSelf: 'center',
+        fontSize: 16
     }
 });
 

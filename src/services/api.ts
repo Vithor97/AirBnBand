@@ -46,6 +46,10 @@ export default {
 
     
         return arrays
+    },
+    cadastraArtista: async (dados: any) =>{
+        console.log("Dentro da função cadastraArtista")
+        console.log(dados)
     }
 
     

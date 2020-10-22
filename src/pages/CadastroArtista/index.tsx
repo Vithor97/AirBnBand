@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { View, Image, ScrollView, Text, SafeAreaView , YellowBox} from 'react-native';
 
+import CheckBox from '@react-native-community/checkbox';
+
 import ViewPager  from '@react-native-community/viewpager';
 import {Formik} from 'formik';
 import * as Yup from "yup";
@@ -14,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import BackArrow from '../../components/backArrow';
 import DivisorBar from '../../components/divisorBar';
 import TextInputBox from '../../components/textInputBox';
-
+import backArrow from '../../components/photoInput/styles';
 import NextArrowButton from '../../components/nextArrowButton';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
 import ConfirmaBtn from '../../components/confirmaBtn';
@@ -24,13 +26,10 @@ import styles from './styles';
 import global from '../../styles/global';
 
 import {Picker} from '@react-native-community/picker';
-
 import MultiSelect from 'react-native-multiple-select';
-
-
-import backArrow from '../../components/photoInput/styles';
-
 import * as ImagePicker from 'expo-image-picker'
+
+import api from '../../services/api'
 
 YellowBox.ignoreWarnings(['VirtualizedLists']);
 
@@ -94,6 +93,9 @@ function CadastroArtista () {
     const [avatar, setAvatar] = useState<any>();
 
     const [estiloMusical, setEstiloMusical] = useState<string | number>("");
+
+    //Checkbox para verificar se o cara quer o numero visivel
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
     async function imagePickerCall() {
        
@@ -188,7 +190,17 @@ return (
             }}
             
             onSubmit={async(values, actions)=>{
-                    console.log(values)
+                    let valor: any = {}
+                    valor = values;
+                    //adiciona o item select Item no Array
+                    valor.selectEstados = selectedItems;
+                    valor.contatoVisivel = toggleCheckBox;
+                    if(avatar){
+                        valor.avatar = avatar.uri;
+                    }
+
+                     await api.cadastraArtista(valor)
+                    //console.log(valor);
                     //await console.log(actions.setErrors)
                 }
             }
@@ -276,6 +288,16 @@ return (
                             onBlur={()=>setFieldTouched('cnpj', true)}
                             onChangeText={handleChange("cnpj")}
                         />
+                                
+                        {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
+                        <TextInputBox
+                            style={styles.textInput}
+                            placeholder={strings.artisticName}
+                            placeholderTextColor= {colors.white}
+                            value={values.nomeArtistico}
+                            onBlur={()=>setFieldTouched('nomeArtistico', true)}
+                            onChangeText={handleChange("nomeArtistico")}
+                        />
                 
                         {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
                         <TextInputBox
@@ -286,16 +308,19 @@ return (
                             onBlur={()=>setFieldTouched('telefone', true)}
                             onChangeText={handleChange("telefone")}
                         />
-                
-                        {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
-                        <TextInputBox
-                            style={styles.textInput}
-                            placeholder={strings.artisticName}
-                            placeholderTextColor= {colors.white}
-                            value={values.nomeArtistico}
-                            onBlur={()=>setFieldTouched('nomeArtistico', true)}
-                            onChangeText={handleChange("nomeArtistico")}
-                        />
+                        <View style={styles.checkBoxView}>
+                            <CheckBox
+                                disabled={false}
+                                value={toggleCheckBox}
+                                tintColors={{true: '#FCCE00'}}
+                                onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                            />
+                            <Text style={styles.textCheckbox}>contato visivel para contratantes?</Text>
+                        </View>
+
+
+                        
+        
                     </View>
                 </View>
             </ScrollView>
@@ -303,7 +328,7 @@ return (
             <SafeAreaView  style={{flex: 1}}>
             <ScrollView>
                 <View key="3">
-                    <Text style={{marginBottom: 10, marginLeft: 10, fontSize: 16, fontWeight:"bold"}}>Quais regiões tem disponibilidade de atuar?</Text>
+                    <Text style={{marginBottom: 10, marginLeft: 10, fontSize: 16, fontWeight:"bold", color: '#FD9A0B'}}>Quais regiões tem disponibilidade de atuar?</Text>
                     <Text style={{margin: 10}}>Regiões de atuações: </Text>
                     <View style={styles.inputsContainer}>
                         <View style={{ flex: 0 }}>
