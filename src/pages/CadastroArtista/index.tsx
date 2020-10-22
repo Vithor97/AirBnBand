@@ -89,6 +89,7 @@ function CadastroArtista () {
 
     //Seta se tem erro de validação no form
     const [liberado, setLiberado] = useState(true)
+    const tipoUsuario = "Artista";
 
     const [avatar, setAvatar] = useState<any>();
 
@@ -195,11 +196,14 @@ return (
                     //adiciona o item select Item no Array
                     valor.selectEstados = selectedItems;
                     valor.contatoVisivel = toggleCheckBox;
+                    valor.tipoUsuario = tipoUsuario;
                     if(avatar){
                         valor.avatar = avatar.uri;
                     }
-
-                     await api.cadastraArtista(valor)
+                    
+                
+                    let result: any = await api.cadastraArtista(valor)
+                    alert(result)
                     //console.log(valor);
                     //await console.log(actions.setErrors)
                 }
