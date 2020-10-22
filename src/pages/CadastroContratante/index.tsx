@@ -16,6 +16,8 @@ import NextArrowButton from '../../components/nextArrowButton';
 import MensagemErro from '../../components/errorMessage'
 import PhotoInput from '../../components/photoInput';
 
+import api from '../../services/api';
+
 import styles from './styles';
 import global from '../../styles/global';
 
@@ -86,28 +88,47 @@ function CadastroContratante () {
 
             <View style={styles.contentContainer}>
                 <Formik 
-                initialValues={{
-                    nome: "",
-                    email: "",
-                    senha: "",
-                    senhaRepete: "",
-                    cnpj: "",
-                    telefone: "",
-                    nomeArtistico: "",
-                    cep: "",
-                    logradoro: "",
-                    cidade: "",
-                    bairro: "",
-                    numero: "",
-                }}
-                onSubmit={async(values, actions)=>{
-                        console.log(values)
-                        await console.log(actions)
-                    }
-                }
-  
-                validationSchema={FormSchema}        
+                    initialValues={{
+                        nome: "",
+                        email: "",
+                        senha: "",
+                        senhaRepete: "",
+                        cnpj: "",
+                        telefone: "",
+                        nomeArtistico: "",
+                        cep: "",
+                        logradoro: "",
+                        cidade: "",
+                        bairro: "",
+                        numero: "",
+                    }}
+
+                    // onSubmit={async(values, actions)=>{
+                    //         console.log(values)
+                    //         await console.log(actions)
+                    //     }
+                    // }
+
+                    onSubmit={async(values, actions)=>{
+                        let valor: any = {}
+                        valor = values;
+                        //adiciona o item select Item no Array
+                        // valor.selectEstados = selectedItems;
+                        // valor.contatoVisivel = toggleCheckBox;
+                        // valor.tipoUsuario = tipoUsuario;
+                        // if(avatar){
+                        //     valor.avatar = avatar.uri;
+                        // }
+                        
+                        let result: any = await api.cadastraContratante(valor);
+                        // alert(result);
+                        //console.log(valor);
+                        //await console.log(actions.setErrors);
+                    }}
+    
+                    validationSchema={FormSchema}        
                 >
+
                 {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
                     //console.log({ values });
                     return(
@@ -136,6 +157,7 @@ function CadastroContratante () {
                                         onBlur={()=>setFieldTouched('email', true)}
                                         onChangeText={handleChange("email")}
                                     />
+                                    
                                     {errors.email &&  touched.email && mensagemDeErro(errors.email)}
                          
                                     <TextInput
@@ -312,10 +334,9 @@ function CadastroContratante () {
                         </View>
                     </>
                     )
-                }
-                }                    
-                </Formik>   
+                }}
 
+                </Formik>   
             </View>
         </View>
     );

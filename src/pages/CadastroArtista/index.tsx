@@ -29,7 +29,7 @@ import {Picker} from '@react-native-community/picker';
 import MultiSelect from 'react-native-multiple-select';
 import * as ImagePicker from 'expo-image-picker'
 
-import api from '../../services/api'
+import api from '../../services/api';
 
 YellowBox.ignoreWarnings(['VirtualizedLists']);
 
@@ -191,26 +191,26 @@ return (
             }}
             
             onSubmit={async(values, actions)=>{
-                    let valor: any = {}
-                    valor = values;
-                    //adiciona o item select Item no Array
-                    valor.selectEstados = selectedItems;
-                    valor.contatoVisivel = toggleCheckBox;
-                    valor.tipoUsuario = tipoUsuario;
-                    if(avatar){
-                        valor.avatar = avatar.uri;
-                    }
-                    
-                
-                    let result: any = await api.cadastraArtista(valor)
-                    alert(result)
-                    //console.log(valor);
-                    //await console.log(actions.setErrors)
+                let valor: any = {}
+                valor = values;
+                //adiciona o item select Item no Array
+                valor.selectEstados = selectedItems;
+                valor.contatoVisivel = toggleCheckBox;
+                valor.tipoUsuario = tipoUsuario;
+                if(avatar){
+                    valor.avatar = avatar.uri;
                 }
-            }
+                
+            
+                let result: any = await api.cadastraArtista(valor);
+                // alert(result);
+                //console.log(valor);
+                //await console.log(actions.setErrors);
+            }}
 
             validationSchema={FormSchema}        
         >
+            
         {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
             //console.log({ values });
         return(
