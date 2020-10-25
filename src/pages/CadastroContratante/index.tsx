@@ -15,15 +15,20 @@ import ConfirmaBtn from '../../components/confirmaBtn';
 import NextArrowButton from '../../components/nextArrowButton';
 import MensagemErro from '../../components/errorMessage'
 import PhotoInput from '../../components/photoInput';
+import DefaultButton from '../../components/defaultButton'
 
 import api from '../../services/api';
 
 import styles from './styles';
 import global from '../../styles/global';
+import Axios from 'axios';
+import { HeaderTitle } from '@react-navigation/stack';
+import { Alert } from 'react-native';
 
 function CadastroContratante () {
 
     let [page, setPagee] = useState(0)
+    let [isFoundCep, setFoundCep] = useState(true)
 
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
     //Validacao de formulario
@@ -38,14 +43,35 @@ function CadastroContratante () {
         cep:Yup.number().required("Obrigatório").typeError("Somente numeros"),
         logradoro: Yup.string().required("Obrigatório"),
         cidade: Yup.string().required("Obrigatório"),
+        uf: Yup.string().required("Obrigatório"),
         bairro: Yup.string().required("Obrigatório") ,
         numero: Yup.string().required("Obrigatório"),
         cnpj: Yup.string().required("Obrigatório"),
         telefone: Yup.string().required("Obrigatório") ,
-        nomeArtistico: Yup.string().required("Obrigatório"),
+        nomeEstabelecimento: Yup.string().required("Obrigatório"),
     })
 
-    
+    async function buscarEndereco(cep:any, setFieldValue:any){
+        const axios = Axios.create()
+        const url = `https://viacep.com.br/ws/${cep}/json/`
+        if(!cep){
+            Alert.alert("Erro ao buscar CEP", "Campo vazio!")
+        }
+        else{
+            try{
+                const data = await axios.get(url)
+                setFieldValue('cidade', data.data['localidade'])
+                setFieldValue('logradoro', data.data['logradouro'])
+                setFieldValue('bairro', data.data['bairro'])
+                setFieldValue('uf', data.data['uf'])
+            }
+            catch(err){
+                Alert.alert("Erro ao buscar CEP", "Endereço não encontrado!")
+                console.log(err)
+            }
+        }
+    }
+
     function btnAvancaViewPager(){
         if(page>=2) {
             // viewPager.current.setPage(0)
@@ -95,14 +121,15 @@ function CadastroContratante () {
                         senhaRepete: "",
                         cnpj: "",
                         telefone: "",
-                        nomeArtistico: "",
+                        nomeEstabelecimento: "",
                         cep: "",
                         logradoro: "",
                         cidade: "",
                         bairro: "",
                         numero: "",
+                        uf: ""
                     }}
-
+                    
                     // onSubmit={async(values, actions)=>{
                     //         console.log(values)
                     //         await console.log(actions)
@@ -129,7 +156,7 @@ function CadastroContratante () {
                     validationSchema={FormSchema}        
                 >
 
-                {({values , handleChange, errors, handleSubmit, touched, setFieldTouched}) =>{
+                {({values , handleChange, errors, handleSubmit, touched, setFieldTouched, setFieldValue}) =>{
                     //console.log({ values });
                     return(
                         <>
@@ -187,17 +214,16 @@ function CadastroContratante () {
                             <View key="2">        
                                 <View style={styles.inputsContainer}>
                                     <PhotoInput />
-                        
+                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
                                     <TextInput
                                         style={styles.textInput}
-                                        placeholder={strings.cpfcnpj}
+                                        placeholder={strings.cnpj}
                                         placeholderTextColor= {colors.white}
                                         value={values.cnpj}
                                         onBlur={()=>setFieldTouched('cnpj', true)}
                                         onChangeText={handleChange("cnpj")}
                                     />
-                                    {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
-                         
+                                    {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)}                                     
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.telephone}
@@ -206,17 +232,15 @@ function CadastroContratante () {
                                         onBlur={()=>setFieldTouched('telefone', true)}
                                         onChangeText={handleChange("telefone")}
                                     />
-                                    {errors.telefone &&  touched.telefone && mensagemDeErro(errors.telefone)} 
-                         
+                                    {errors.nomeEstabelecimento &&  touched.nomeEstabelecimento && mensagemDeErro(errors.nomeEstabelecimento)}                          
                                     <TextInput
                                         style={styles.textInput}
-                                        placeholder={strings.artisticName}
+                                        placeholder={strings.nomeEstabelecimento}
                                         placeholderTextColor= {colors.white}
-                                        value={values.nomeArtistico}
-                                        onBlur={()=>setFieldTouched('nomeArtistico', true)}
-                                        onChangeText={handleChange("nomeArtistico")}
+                                        value={values.nomeEstabelecimento}
+                                        onBlur={()=>setFieldTouched('nomeEstabelecimento', true)}
+                                        onChangeText={handleChange("nomeEstabelecimento")}
                                     />
-                                    {errors.nomeArtistico &&  touched.nomeArtistico && mensagemDeErro(errors.nomeArtistico)} 
                                 </View>
                             </View>
                         </ScrollView>
@@ -224,6 +248,8 @@ function CadastroContratante () {
                         <ScrollView>
                             <View key="3">
                                 <View style={styles.inputsContainer}>
+
+                                    {errors.cep &&  touched.cep && mensagemDeErro(errors.cep)}
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.postalCode}
@@ -234,18 +260,20 @@ function CadastroContratante () {
                                         onChangeText={handleChange("cep")}
                                         maxLength={10} 
                                     />
-                                    {errors.cep &&  touched.cep && mensagemDeErro(errors.cep)}
-                
+                                    <DefaultButton text="Buscar endereço" doIt={async () => buscarEndereco(values.cep, setFieldValue)}/> 
+                                    
+                                    {errors.uf &&  touched.uf && mensagemDeErro(errors.uf)}
                                     <TextInput
                                         style={styles.textInput}
-                                        placeholder={strings.street}
+                                        placeholder= "UF"
                                         placeholderTextColor= {colors.white}
-                                        value={values.logradoro}
-                                        onBlur={()=>setFieldTouched('logradoro', true)}
-                                        onChangeText={handleChange("logradoro")}
+                                        value={values.uf}
+                                        onChangeText={handleChange("uf")}
+                                        onBlur={()=>setFieldTouched('uf', true)}
+                                        maxLength={2}
                                     />
-                                    {errors.logradoro &&  touched.logradoro && mensagemDeErro(errors.logradoro)}
-                        
+
+                                    {errors.cidade &&  touched.cidade && mensagemDeErro(errors.cidade)}
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.city}
@@ -254,8 +282,8 @@ function CadastroContratante () {
                                         onBlur={()=>setFieldTouched('cidade', true)}
                                         onChangeText={handleChange("cidade")}
                                     />
-                                    {errors.cidade &&  touched.cidade && mensagemDeErro(errors.cidade)}
                                     
+                                    {errors.bairro &&  touched.bairro && mensagemDeErro(errors.bairro)}  
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.block}
@@ -264,8 +292,18 @@ function CadastroContratante () {
                                         onBlur={()=>setFieldTouched('bairro', true)}
                                         onChangeText={handleChange("bairro")}
                                     />
-                                    {errors.bairro &&  touched.bairro && mensagemDeErro(errors.bairro)}
+                                                                      
+                                    {errors.logradoro &&  touched.logradoro && mensagemDeErro(errors.logradoro)}
+                                    <TextInput
+                                        style={styles.textInput}
+                                        placeholder={strings.street}
+                                        placeholderTextColor= {colors.white}
+                                        value={values.logradoro}
+                                        onBlur={()=>setFieldTouched('logradoro', true)}
+                                        onChangeText={handleChange("logradoro")}
+                                    />
                                     
+                                    {errors.numero &&  touched.numero && mensagemDeErro(errors.numero)}
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.number}
@@ -276,17 +314,6 @@ function CadastroContratante () {
                                         keyboardType="numeric"
                                         maxLength={6}
                                     />
-                                    {errors.numero &&  touched.numero && mensagemDeErro(errors.numero)}
-                                    {/* {(function() {
-                                        if(errors.numero) { 
-                                            setLiberado(false)    
-                                            return <Text>{errors.numero}</Text>;
-                                        }
-                                        else{
-                                            setLiberado(true)
-                                        } 
-                                        })()
-                                    }  */}
                                 </View>
                             </View>
                         </ScrollView>

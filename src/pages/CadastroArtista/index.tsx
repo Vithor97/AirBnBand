@@ -50,13 +50,13 @@ function CadastroArtista () {
         name: 'BA'
       }, {
         id: 'nahs75a5sg',
-        name: 'MG'
+        name: ' MG'
       }, {
         id: '667atsas',
         name: 'RS'
       }, {
         id: 'hsyasajs',
-        name: 'MT'
+        name: ' MT'
       }, {
         id: 'djsjudksjd',
         name: 'KR'
@@ -286,7 +286,7 @@ return (
                         {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}   
                         <TextInputBox
                             style={styles.textInput}
-                            placeholder={strings.cpfcnpj}
+                            placeholder={strings.cnpj}
                             placeholderTextColor= {colors.white}
                             value={values.cnpj}
                             onBlur={()=>setFieldTouched('cnpj', true)}
