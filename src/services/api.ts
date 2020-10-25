@@ -1,7 +1,7 @@
 import firebaseApp from '../../firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
-import { auth } from 'firebase';
+import { auth, database } from 'firebase';
 import { DatePickerIOS } from 'react-native';
 
 const db = firebaseApp.firestore();
@@ -51,10 +51,9 @@ export default {
     },
 
     cadastraArtista: async (dados: any) =>{
-        console.log("---- Dentro da função cadastraArtista ----");
-        console.log(dados);
-        return firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha).then(data =>{
-            return db.collection('users').doc(data.user?.uid).set({
+        let hasSaved: any  = false
+        const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
+        await db.collection('users').doc(result.user?.uid).set({
                 bio: dados.bio,
                 nome: dados.nome,
                 cnpj: dados.cnpj,
@@ -66,60 +65,45 @@ export default {
                 qtdIntegrantes: dados.qtdIntegrantes,
                 selectEstados: dados.selectEstados,
                 telefone: dados.telefone,
-                avatar: dados.avatar ? dados.avatar : null
+                tipoUsuario : dados.tipoUsuario
+                //avatar: dados.avatar ? dados.avatar : ""
+            }).then(function() {
+                hasSaved = true 
+                console.log("Document successfully written!");
+                console.log("HAS SAVED: " + hasSaved)
             })
-            .catch(e => console.log(e))
-        }).catch(e=> {
-            return e
-        });
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+            return hasSaved
     },
 
     cadastraContratante: async (dados: any) =>{ 
-        console.log("---- Dentro da função cadastraContratante ----");
-        console.log(dados);
-
-        if(dados.avatar){
-            return firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha).then(data =>{
-                return db.collection('users').doc(data.user?.uid).set({
-                    bio: dados.bio,
-                    nome: dados.nome,
-                    cnpj: dados.cnpj,
-                    email: dados.email,
-                    contatoVisivel: dados.contatoVisivel,
-                    estiloMusical: dados.estiloMusical,
-                    instagram: dados.instagram,
-                    nomeArtistico: dados.nomeArtistico,
-                    qtdIntegrantes: dados.qtdIntegrantes,
-                    selectEstados: dados.selectEstados,
-                    telefone: dados.telefone,
-                    avatar: dados.avatar
-                })
-                .catch(e => console.log(e))
-            }).catch(e=> {
-                return e
-            });
-        }
-
-        else{
-            return firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha).then(data =>{
-                return db.collection('users').doc(data.user?.uid).set({
-                    bio: dados.bio,
-                    nome: dados.nome,
-                    cnpj: dados.cnpj,
-                    email: dados.email,
-                    contatoVisivel: dados.contatoVisivel,
-                    estiloMusical: dados.estiloMusical,
-                    instagram: dados.instagram,
-                    nomeArtistico: dados.nomeArtistico,
-                    qtdIntegrantes: dados.qtdIntegrantes,
-                    selectEstados: dados.selectEstados,
-                    telefone: dados.telefone,
-                    avatar: null
-                })
-                .catch(e => console.log(e))
-            }).catch(e=> {
-                return e
-            });
-        }
+        let hasSaved: any  = false
+        const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
+        await db.collection('users').doc(result.user?.uid).set({
+                nome: dados.nome,
+                email: dados.email,
+                cep: dados.cep,
+                logradoro: dados.logradoro,
+                cidade: dados.cidade,
+                uf: dados.uf,
+                bairro:  dados.bairro,
+                numero: dados.numero,
+                cnpj: dados.cnpj,
+                telefone: dados.telefone,
+                nomeEstabelecimento: dados.nomeEstabelecimento,
+                tipoUsuario : dados.tipoUsuario
+               // avatar: dados.avatar ? dados.avatar : ""
+        }).then(function() {
+            hasSaved = true 
+            console.log("Document successfully written!");
+            console.log("HAS SAVED: " + hasSaved)
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+        
+        return hasSaved
     }
 }

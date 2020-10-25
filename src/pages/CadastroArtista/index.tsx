@@ -203,7 +203,7 @@ return (
                 
             
                 let result: any = await api.cadastraArtista(valor);
-                // alert(result);
+                alert(result);
                 //console.log(valor);
                 //await console.log(actions.setErrors);
             }}

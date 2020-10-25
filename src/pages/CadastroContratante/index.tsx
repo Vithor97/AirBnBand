@@ -26,7 +26,8 @@ import { HeaderTitle } from '@react-navigation/stack';
 import { Alert } from 'react-native';
 
 function CadastroContratante () {
-
+    
+    const tipoUsuario = "Contratante";
     let [page, setPagee] = useState(0)
     let [isFoundCep, setFoundCep] = useState(true)
 
@@ -139,17 +140,16 @@ function CadastroContratante () {
                     onSubmit={async(values, actions)=>{
                         let valor: any = {}
                         valor = values;
-                        //adiciona o item select Item no Array
-                        // valor.selectEstados = selectedItems;
-                        // valor.contatoVisivel = toggleCheckBox;
-                        // valor.tipoUsuario = tipoUsuario;
+                        valor.tipoUsuario = tipoUsuario;
+                      //  console.log(valor)
+                        
                         // if(avatar){
                         //     valor.avatar = avatar.uri;
                         // }
                         
-                        let result: any = await api.cadastraContratante(valor);
-                        // alert(result);
-                        //console.log(valor);
+                        const docRef = await api.cadastraContratante(valor)
+                        alert(docRef);
+                        //console.log(docRef);
                         //await console.log(actions.setErrors);
                     }}
     
