@@ -8,6 +8,7 @@ import colors from '../resources/values/colors.json';
 import Pesquisa from '../pages/Pesquisa';
 import Configuracao from '../pages/Configuracao';
 import Landing from '../pages/Landing';
+import DetailsProfile from '../pages/DetailsProfile';
 
 import DetailsProfileContratante from '../pages/DetailsProfileContratante';
 
@@ -40,6 +41,8 @@ function AppTabs(){
             <Screen name="Home" component={Landing}/>
             <Screen name="Pesquisa" component={Pesquisa}/>
             <Screen name="Perfil" component={ProfileContratante}/>
+            <Screen name="DetralhesPerfil" component={DetailsProfile}/>
+
             {/* <Screen name="Configuracao" component={Configuracao}/> */}
         </Navigator>
 

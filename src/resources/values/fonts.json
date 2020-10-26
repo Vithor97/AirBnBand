@@ -8,5 +8,7 @@
     "floatingTextFontSize" : 26,
     "onlyTextButtonFontSize" : 30,
     "attractionCardNameText" : 17,
-    "attractionCardTypeText" : 16
+    "attractionCardTypeText" : 16,
+    "artistInfoNameSize" : 26,
+    "artistGeneralInfoTextSize" : 18
 }

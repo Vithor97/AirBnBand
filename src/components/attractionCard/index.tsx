@@ -8,15 +8,19 @@ import RatedStars from '../ratedStars';
 import styles from './styles';
 
 function AttractionCard () {
-    const { goBack } = useNavigation();
+    const { goBack,navigate } = useNavigation();
 
     function goBackScreen(){
         return goBack();
     }
 
+    function goToProfileDetails(){
+        navigate('DetralhesPerfil');
+    }
+
     return (
         <View  style={styles.attractionCardContainer}>
-            <BorderlessButton style={styles.attractionCardButton}  onPress={goBackScreen}>
+            <BorderlessButton style={styles.attractionCardButton}  onPress={goToProfileDetails}>
                 <View style={styles.imageContainer}>
                     <View style={styles.atractionImageBallFormContainer}>
                         <Image
