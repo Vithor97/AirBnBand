@@ -107,6 +107,8 @@ function CadastroArtista () {
         if(!data.uri){
             return
         }
+        const dadosFotos = data.uri;
+        console.log(dadosFotos.substring(dadosFotos.lastIndexOf('/') + 1))
         console.log(data.uri)
         setAvatar(data)
     }

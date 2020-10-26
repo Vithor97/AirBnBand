@@ -1,12 +1,12 @@
 import firebaseApp from '../../firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
-import { auth, database } from 'firebase';
-import { DatePickerIOS } from 'react-native';
+import 'firebase/storage'
+
 
 const db = firebaseApp.firestore();
 
-export default {
+const api = {
     loginWithEmailAndPassword: async (email: string, senha: string) =>{
         const result = await firebaseApp.auth().signInWithEmailAndPassword(email, senha);
 
@@ -65,9 +65,12 @@ export default {
                 qtdIntegrantes: dados.qtdIntegrantes,
                 selectEstados: dados.selectEstados,
                 telefone: dados.telefone,
-                tipoUsuario : dados.tipoUsuario
-                //avatar: dados.avatar ? dados.avatar : ""
+                tipoUsuario : dados.tipoUsuario,
+                avatar: dados.avatar ? dados.avatar : ""
             }).then(function() {
+                api.uploadImage(dados.avatar).then(()=>{
+                    console.log('imagem foi inserida no storage com sucesso')
+                })
                 hasSaved = true 
                 console.log("Document successfully written!");
                 console.log("HAS SAVED: " + hasSaved)
@@ -105,5 +108,21 @@ export default {
         });
         
         return hasSaved
+    },
+
+    uploadImage: async (uri: any) => {
+        const response = await fetch(uri)
+        const blob = await response.blob()
+
+        const dadosFotos = uri;
+
+        const imageName = dadosFotos.substring(dadosFotos.lastIndexOf('/') + 1)
+
+        var ref = firebaseApp.storage().ref().child('images/' + imageName)
+
+        return ref.put(blob);
+
     }
 }
+
+export default api
