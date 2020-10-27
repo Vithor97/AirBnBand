@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   nameContainer:{
-    // width: '70%',
+    width: '100%',
     // height: 40,
     // backgroundColor: colors.gmailRed,
     display: "flex",
@@ -53,7 +53,20 @@ const styles = StyleSheet.create({
   },
 
   artistName: {
-    fontSize: fonts.artistInfoNameSize
+    fontSize: fonts.artistInfoNameSize,
+
+    color: colors.primary,
+    // color: colors.black,
+    // color: colors.white,
+    textShadowColor: colors.black,
+    // textShadowColor: colors.primary,
+    textShadowRadius: 0.5,
+    // textShadowOffset: {
+    //   width: 0.1,
+    //   height: 0.1
+    // },
+
+    textTransform: "uppercase"
   },
 
   nameAvatarContainer: {
@@ -86,7 +99,7 @@ const styles = StyleSheet.create({
 
   contentText: {
     fontSize: fonts.artistGeneralInfoTextSize,
-    // marginBottom: 2
+    // marginBottom: 2,
   },
 
   contentLabelContainer: {
@@ -94,13 +107,56 @@ const styles = StyleSheet.create({
   },
 
   estadosContainer: {
+    // maxWidth: 100,
+    width: "100%",
     flexDirection: "row",
+    flexWrap: "wrap",
+    marginBottom: 10,
+
+    // backgroundColor: colors.facebookBlue
   },
 
-  instagramWhatsAppContainer: {
-    flexDirection: "row",
-    alignSelf: "center"
+  estadoContainer: {
+    width: 50,
+
+    borderRadius: 15,
+    borderColor: colors.black,
+    borderWidth: 0.1,
+
+    fontSize: fonts.artistGeneralInfoTextSize,
+    backgroundColor: colors.primary,
+    marginRight: 5,
+    marginBottom: 5,
+    textAlign: "center",
+    
+    // color: colors.primary,
+    // color: colors.black,
+    color: colors.white,
+    textShadowColor: colors.black,
+    // textShadowColor: colors.primary,
+    textShadowRadius: 0.2,
+    // textShadowOffset: {
+    //   width: 1,
+    //   height: 1
+    // },
   },
+
+  socialMediaContainer: {
+    flexDirection: "row",
+    // alignSelf: "center",
+    // backgroundColor: colors.black,
+    alignItems: "center",
+    // justifyContent: "center"
+
+    marginBottom: 10
+  },
+
+  socialMediaIcon: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 5
+  }
 })
 
 export default styles;

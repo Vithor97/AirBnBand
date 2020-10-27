@@ -24,7 +24,7 @@ function DetailsProfile(){
             
                         <View  style={styles.avatarContainer}>
                             <Image
-                                source={require('../../resources/Icons/photo_laranja.png')}
+                                source={require('../../resources/Icons/microfone_laranja.png')}
                                 style={styles.avatarImage}
                             />
                         </View>
@@ -55,19 +55,49 @@ function DetailsProfile(){
                         <Text style={styles.contentText}>Quantidade de integrantes: 7</Text>
                     </View>
         
-                    <Text style={styles.contentText}>Estados:</Text>
+                    <Text style={styles.contentText}>Estados onde atua:</Text>
 
-                    <View style={styles.estadosContainer}>                    
-                        <Text style={styles.contentText}>SP</Text>
+                    <View style={styles.estadosContainer}>
+                        <Text style={styles.estadoContainer}>SP</Text>
                         
-                        <Text style={styles.contentText}>RJ</Text>
+                        <Text style={styles.estadoContainer}>RJ</Text>
 
-                        <Text style={styles.contentText}>MG</Text>
+                        <Text style={styles.estadoContainer}>MG</Text>
+                        
+                        <Text style={styles.estadoContainer}>SP</Text>
+                        
+                        <Text style={styles.estadoContainer}>RJ</Text>
+
+                        <Text style={styles.estadoContainer}>MG</Text>
+                        
+                        <Text style={styles.estadoContainer}>SP</Text>
+                        
+                        <Text style={styles.estadoContainer}>RJ</Text>
+
+                        <Text style={styles.estadoContainer}>MG</Text>
+                        
+                        <Text style={styles.estadoContainer}>SP</Text>
+                        
+                        <Text style={styles.estadoContainer}>RJ</Text>
+
+                        <Text style={styles.estadoContainer}>MG</Text>
                     </View>
                     
-                    <View style={styles.instagramWhatsAppContainer}>
+                    <View style={styles.socialMediaContainer}>
+                        <Image 
+                            source={require('../../resources/Icons/instagram.png')}
+                            style={styles.socialMediaIcon}
+                        />
+
                         <Text style={styles.contentText}>Instagram:</Text>
-            
+                    </View>
+
+                    <View style={styles.socialMediaContainer}>
+                        <Image 
+                            source={require('../../resources/Icons/whatsapp.png')}
+                            style={styles.socialMediaIcon}
+                        />
+
                         <Text style={styles.contentText}>WhatsApp:</Text>
                     </View>
                 </View>
