@@ -97,13 +97,22 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.facebookBlue
   },
 
+  contentLabelContainer: {
+    marginBottom: 10,
+    flexDirection: "row",
+    // backgroundColor: colors.red,
+    flexWrap: "wrap"
+  },
+
+  contentLabel: {
+    fontSize: fonts.artistGeneralInfoTextSize,
+    fontWeight: "bold"
+    // marginBottom: 2,
+  },
+  
   contentText: {
     fontSize: fonts.artistGeneralInfoTextSize,
     // marginBottom: 2,
-  },
-
-  contentLabelContainer: {
-    marginBottom: 10,
   },
 
   estadosContainer: {

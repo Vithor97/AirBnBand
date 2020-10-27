@@ -31,11 +31,12 @@ function DetailsProfile(){
                     </View>
 
                     <View style={styles.contentLabelContainer}>
-                        <Text style={styles.contentText}>Estilo musical: Pisadinha</Text>
+                        <Text style={styles.contentLabel}>Estilo musical: </Text>
+                        <Text style={styles.contentText}>Pisadinha</Text>
                     </View>
 
                     <View style={styles.contentLabelContainer}>
-                        <Text style={styles.contentText}>Bio:</Text>
+                        <Text style={styles.contentLabel}>Bio:</Text>
 
                         <Text style={styles.contentText}>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, officia dolorum, est quis impedit et at atque,
@@ -44,7 +45,7 @@ function DetailsProfile(){
                     </View>
                     
                     <View style={styles.contentLabelContainer}>
-                        <Text style={styles.contentText}>Email para contato:</Text>
+                        <Text style={styles.contentLabel}>Email para contato:</Text>
 
                         <Text style={styles.contentText}>
                             contato.adelson.betoneira@mail.com
@@ -52,10 +53,11 @@ function DetailsProfile(){
                     </View>
                     
                     <View style={styles.contentLabelContainer}>
-                        <Text style={styles.contentText}>Quantidade de integrantes: 7</Text>
+                        <Text style={styles.contentLabel}>Quantidade de integrantes: </Text>
+                        <Text style={styles.contentText}>7</Text>
                     </View>
         
-                    <Text style={styles.contentText}>Estados onde atua:</Text>
+                    <Text style={styles.contentLabel}>Estados onde atua:</Text>
 
                     <View style={styles.estadosContainer}>
                         <Text style={styles.estadoContainer}>SP</Text>
