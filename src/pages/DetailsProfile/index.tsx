@@ -57,32 +57,34 @@ function DetailsProfile(){
                         <Text style={styles.contentText}>7</Text>
                     </View>
         
-                    <Text style={styles.contentLabel}>Estados onde atua:</Text>
+                    <View style={styles.contentLabelContainer}>
+                        <Text style={styles.contentLabel}>Estados onde atua:</Text>
 
-                    <View style={styles.estadosContainer}>
-                        <Text style={styles.estadoContainer}>SP</Text>
-                        
-                        <Text style={styles.estadoContainer}>RJ</Text>
+                        <View style={styles.estadosContainer}>
+                            <Text style={styles.estadoContainer}>SP</Text>
+                            
+                            <Text style={styles.estadoContainer}>RJ</Text>
 
-                        <Text style={styles.estadoContainer}>MG</Text>
-                        
-                        <Text style={styles.estadoContainer}>SP</Text>
-                        
-                        <Text style={styles.estadoContainer}>RJ</Text>
+                            <Text style={styles.estadoContainer}>MG</Text>
+                            
+                            <Text style={styles.estadoContainer}>SP</Text>
+                            
+                            <Text style={styles.estadoContainer}>RJ</Text>
 
-                        <Text style={styles.estadoContainer}>MG</Text>
-                        
-                        <Text style={styles.estadoContainer}>SP</Text>
-                        
-                        <Text style={styles.estadoContainer}>RJ</Text>
+                            <Text style={styles.estadoContainer}>MG</Text>
+                            
+                            <Text style={styles.estadoContainer}>SP</Text>
+                            
+                            <Text style={styles.estadoContainer}>RJ</Text>
 
-                        <Text style={styles.estadoContainer}>MG</Text>
-                        
-                        <Text style={styles.estadoContainer}>SP</Text>
-                        
-                        <Text style={styles.estadoContainer}>RJ</Text>
+                            <Text style={styles.estadoContainer}>MG</Text>
+                            
+                            <Text style={styles.estadoContainer}>SP</Text>
+                            
+                            <Text style={styles.estadoContainer}>RJ</Text>
 
-                        <Text style={styles.estadoContainer}>MG</Text>
+                            <Text style={styles.estadoContainer}>MG</Text>
+                        </View>
                     </View>
                     
                     <View style={styles.socialMediaContainer}>

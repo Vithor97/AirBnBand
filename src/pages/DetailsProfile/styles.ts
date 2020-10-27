@@ -101,7 +101,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
     // backgroundColor: colors.red,
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+
+    borderColor: colors.primary,
+    borderRadius: 10,
+    borderWidth: 2,
+
+    padding: 5
   },
 
   contentLabel: {
@@ -121,6 +127,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: 10,
+
+    // borderColor: colors.primary,
+    // borderRadius: 10,
+    // borderWidth: 2,
+
+    // padding: 5
 
     // backgroundColor: colors.facebookBlue
   },
