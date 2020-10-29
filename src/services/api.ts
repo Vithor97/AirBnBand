@@ -2,6 +2,7 @@ import firebaseApp from '../../firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
+import { array } from 'yup';
 
 
 const db = firebaseApp.firestore();
@@ -29,7 +30,7 @@ const api = {
     pegaUsuarios: async () => {
         let arrays: any = []
 
-        await db.collection('users').where("tipoUsuario", "==", "contratante").get()
+        await db.collection('users').where("tipoUsuario", "==", "Artista").get()
         .then(snapshot =>{
             //console.log(snapshot)
             if (snapshot.empty) {
@@ -50,10 +51,24 @@ const api = {
         return arrays
     },
 
+    pegaArtistas: (setDados:any) => {
+        return db.collection("users").where("tipoUsuario", "==", "Artista")
+        .onSnapshot(function(querySnapshot) {
+            let arrays: any = []
+            querySnapshot.forEach(function(doc) {
+                arrays.push(doc.data());
+                //console.log(doc.data())
+            });
+            setDados(arrays)
+        });
+    },
+
     cadastraArtista: async (dados: any) =>{
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
-        await db.collection('users').doc(result.user?.uid).set({
+        const uid = result.user?.uid
+        await db.collection('users').doc(uid).set({
+                id: uid,
                 bio: dados.bio,
                 nome: dados.nome,
                 cnpj: dados.cnpj,

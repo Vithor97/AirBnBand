@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, Button, ScrollView } from 'react-native';
 
 import Api from '../../services/api'
@@ -12,6 +12,7 @@ YellowBox.ignoreWarnings(['Setting a timer']);
 
 import styles from './styles';
 import AuthContext from '../../contexts/auth';
+import api from '../../services/api';
 
 console.ignoredYellowBox = [
     'Setting a timer'
@@ -20,7 +21,14 @@ console.ignoredYellowBox = [
 function Landing () {
     const [useer, setUseer] = useState([]);
     const { signOut, user, usuario } = useContext(AuthContext);
+    const [dados, setDados] = useState([])
 
+    useEffect(() => {
+        setDados([])
+        let chama = Api.pegaArtistas(setDados)
+        return chama
+    }, [])
+    
     function handleSignOut() {
       signOut();
     }
@@ -30,7 +38,7 @@ function Landing () {
         const a =  await Api.pegaUsuarios();
         //console.log(a)
         setUseer(a)
-        
+       
         await useer.forEach((elemento: any) => {
             console.log(elemento.email)
         })
@@ -67,19 +75,13 @@ function Landing () {
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>{strings.app_name}</Text>
-
+            {console.log(dados)}
             <ScrollView style={styles.attractionCardsContainer}>
-                <AttractionCard />
-            
-                <AttractionCard />
-            
-                <AttractionCard />
-
-                <AttractionCard />
-            
-                <AttractionCard />
-            
-                <AttractionCard />
+                {
+                    dados.map((m:any) => {
+                        return <AttractionCard key={m.id} dados = {m}/>
+                    })
+                }
             </ScrollView>
             {/* <View>
                 <Button title ="oi" onPress={pegaDadosFirebase}/>

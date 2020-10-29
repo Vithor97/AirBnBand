@@ -7,7 +7,23 @@ import RatedStars from '../ratedStars';
 
 import styles from './styles';
 
-function AttractionCard () {
+interface Artista{
+    bio: string,
+    nome: string,
+    cnpj: string,
+    email: string,
+    contatoVisivel: string,
+    estiloMusical: string,
+    instagram: string,
+    nomeArtistico: string,
+    qtdIntegrantes: string,
+    selectEstados: string,
+    telefone: string,
+    tipoUsuario : string,
+    avatar: string
+}
+
+const AttractionCard : React.FC<any> = ({dados}) => {
     const { goBack,navigate } = useNavigation();
 
     function goBackScreen(){
@@ -15,7 +31,7 @@ function AttractionCard () {
     }
 
     function goToProfileDetails(){
-        navigate('DetralhesPerfil');
+        navigate('DetralhesPerfil', dados);
     }
 
     return (
@@ -31,7 +47,7 @@ function AttractionCard () {
                 </View>
 
                 <View style={styles.infoContainer}>
-                    <Text style={styles.attractionNameText}>Nome da atração</Text>
+                <Text style={styles.attractionNameText}>{dados.nome}</Text>
                     <Text style={styles.attractionTypeText}>Estilo da atração</Text>
                     {function(){
                         if(true){

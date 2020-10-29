@@ -1,11 +1,28 @@
 import React from 'react'
-import { View, Text, Image, ScrollView } from 'react-native'
+import { View, Text, Image, ScrollView, DrawerLayoutAndroidBase } from 'react-native'
 
 import BackArrow from '../../components/backArrow';
 
 import styles from './styles';
 
-function DetailsProfile(){
+const DetailsProfile : React.FC<any> = ({route, navigation}) => {
+    
+    const 
+    { 
+        nome, 
+        bio, 
+        cnpj, 
+        email, 
+        contatoVisivel,
+        estiloMusical,
+        instagram,
+        nomeArtistico,
+        qtdIntegrantes,
+        selectEstados,
+        telefone,
+        tipoUsuario,
+        avatar    
+    } = route.params;
 
     return (
         <View style={styles.container}>
@@ -19,7 +36,7 @@ function DetailsProfile(){
                 <View style={styles.contentContainer}>
                     <View style={styles.nameAvatarContainer}>
                         <View style={styles.nameContainer}>
-                            <Text style={styles.artistName}>Adelson Betoneira</Text>
+                            <Text style={styles.artistName}>{nome}</Text>
                         </View>
             
                         <View  style={styles.avatarContainer}>
@@ -32,15 +49,14 @@ function DetailsProfile(){
 
                     <View style={styles.contentLabelContainer}>
                         <Text style={styles.contentLabel}>Estilo musical: </Text>
-                        <Text style={styles.contentText}>Pisadinha</Text>
+                        <Text style={styles.contentText}>{estiloMusical}</Text>
                     </View>
 
                     <View style={styles.contentLabelContainer}>
                         <Text style={styles.contentLabel}>Bio:</Text>
 
                         <Text style={styles.contentText}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, officia dolorum, est quis impedit et at atque,
-                            repellat illum voluptatum nisi sunt omnis velit? Quae ad quos et velit corrupti.
+                                {bio}
                         </Text>
                     </View>
                     
@@ -48,42 +64,24 @@ function DetailsProfile(){
                         <Text style={styles.contentLabel}>Email para contato:</Text>
 
                         <Text style={styles.contentText}>
-                            contato.adelson.betoneira@mail.com
+                            {email}
                         </Text>
                     </View>
                     
                     <View style={styles.contentLabelContainer}>
                         <Text style={styles.contentLabel}>Quantidade de integrantes: </Text>
-                        <Text style={styles.contentText}>7</Text>
+                        <Text style={styles.contentText}>{qtdIntegrantes}</Text>
                     </View>
         
                     <View style={styles.contentLabelContainer}>
                         <Text style={styles.contentLabel}>Estados onde atua:</Text>
 
                         <View style={styles.estadosContainer}>
-                            <Text style={styles.estadoContainer}>SP</Text>
-                            
-                            <Text style={styles.estadoContainer}>RJ</Text>
-
-                            <Text style={styles.estadoContainer}>MG</Text>
-                            
-                            <Text style={styles.estadoContainer}>SP</Text>
-                            
-                            <Text style={styles.estadoContainer}>RJ</Text>
-
-                            <Text style={styles.estadoContainer}>MG</Text>
-                            
-                            <Text style={styles.estadoContainer}>SP</Text>
-                            
-                            <Text style={styles.estadoContainer}>RJ</Text>
-
-                            <Text style={styles.estadoContainer}>MG</Text>
-                            
-                            <Text style={styles.estadoContainer}>SP</Text>
-                            
-                            <Text style={styles.estadoContainer}>RJ</Text>
-
-                            <Text style={styles.estadoContainer}>MG</Text>
+                            {
+                                selectEstados.map((m:any) => {
+                                    return <Text key={m} style={styles.estadoContainer}>{m}</Text>
+                                })
+                            }
                         </View>
                     </View>
                     
