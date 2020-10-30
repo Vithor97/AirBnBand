@@ -14,6 +14,8 @@ import DetailsProfileContratante from '../pages/DetailsProfileContratante';
 
 import ProfileContratante from './Contratante/ProfileStackScreenContratante.routes'
 
+import HomeStackScreenContratante from './Contratante/HomeStackScreenContratante.routes'
+
 const { Navigator, Screen } = createBottomTabNavigator();
 
 Icon.loadFont();
@@ -38,10 +40,10 @@ function AppTabs(){
             // activeBackgroundColor: colors.primary,
             // showLabel: false,
         }}>
-            <Screen name="Home" component={Landing}/>
+            <Screen name="Home" component={HomeStackScreenContratante}/>
             <Screen name="Pesquisa" component={Pesquisa}/>
             <Screen name="Perfil" component={ProfileContratante}/>
-            <Screen name="DetralhesPerfil" component={DetailsProfile}/>
+            {/* <Screen name="DetralhesPerfil" component={DetailsProfile}/> */}
 
             {/* <Screen name="Configuracao" component={Configuracao}/> */}
         </Navigator>

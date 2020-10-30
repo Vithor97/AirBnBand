@@ -48,7 +48,7 @@ const AttractionCard : React.FC<any> = ({dados}) => {
 
                 <View style={styles.infoContainer}>
                 <Text style={styles.attractionNameText}>{dados.nome}</Text>
-                    <Text style={styles.attractionTypeText}>Estilo da atração</Text>
+                    <Text style={styles.attractionTypeText}>{dados.estiloMusical}</Text>
                     {function(){
                         if(true){
                             // return <Text style={styles.attractionAnotherText}>Estrelas</Text>

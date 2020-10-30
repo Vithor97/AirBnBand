@@ -1,9 +1,12 @@
 import React from 'react'
-import { View, Text, Image, ScrollView, DrawerLayoutAndroidBase } from 'react-native'
+import { View, Text, Image, ScrollView, Linking, TouchableHighlight } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 
 import BackArrow from '../../components/backArrow';
 
 import styles from './styles';
+
+import whatsappIcon from '../../resources/Icons/whatsapp2.png'
 
 const DetailsProfile : React.FC<any> = ({route, navigation}) => {
     
@@ -23,6 +26,12 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
         tipoUsuario,
         avatar    
     } = route.params;
+
+
+    
+    function handleLinkToWhatsapp(){
+        Linking.openURL(`whatsapp://send?phone=${telefone}`)
+    }
 
     return (
         <View style={styles.container}>
@@ -84,6 +93,11 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                             }
                         </View>
                     </View>
+
+                    <RectButton onPress={handleLinkToWhatsapp} style={styles.contactButton}>
+                        <Image source={whatsappIcon}/>
+                        <Text style={styles.contactButtonText}>Entrar em contato</Text>
+                    </RectButton>
                     
                     <View style={styles.socialMediaContainer}>
                         <Image 
@@ -94,14 +108,8 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                         <Text style={styles.contentText}>Instagram:</Text>
                     </View>
 
-                    <View style={styles.socialMediaContainer}>
-                        <Image 
-                            source={require('../../resources/Icons/whatsapp.png')}
-                            style={styles.socialMediaIcon}
-                        />
-
-                        <Text style={styles.contentText}>WhatsApp:</Text>
-                    </View>
+          
+        
                 </View>
             </ScrollView>
         </View>

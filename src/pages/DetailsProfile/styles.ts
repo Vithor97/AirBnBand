@@ -177,7 +177,22 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 15,
     marginRight: 5
-  }
+  },
+  contactButton: {
+    backgroundColor: '#04d361',
+    flex: 1,
+    height: 56,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8
+},
+contactButtonText: {
+  color: '#FFF',
+  fontSize: 16,
+  marginLeft: 16
+},
 })
 
 export default styles;

@@ -9,8 +9,8 @@ const {Navigator, Screen} = createStackNavigator();
 function ProfileStackScreenContratante(){
     return (
             <Navigator screenOptions={{headerShown: true}}>
-                <Screen name="DetailsProfileContratante" component={DetailsProfileContratante}/>
-                <Screen name="Configuracao" component={Configuracao}/>
+                <Screen options={{title: 'Perfil do usuário'}} name="DetailsProfileContratante" component={DetailsProfileContratante}/>
+                <Screen options={{title: 'Editar Dados'}} name="Configuracao" component={Configuracao}/>
             </Navigator>
     )
 }

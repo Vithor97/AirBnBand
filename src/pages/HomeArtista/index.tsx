@@ -20,9 +20,10 @@ console.ignoredYellowBox = [
 
 
 function HomeArtista () {
-    const [useer, setUseer] = useState([]);
-    const { signOut, user, usuario } = useContext(AuthContext);
+    const { usuario } = useContext(AuthContext);
     const {navigate} = useNavigation()
+
+    const dadosUsuario: any = usuario
 
     function handleToDetails () {
         navigate('DetailsProfile')
@@ -32,7 +33,7 @@ function HomeArtista () {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.textHeader}>Olá Fulano</Text>
+                <Text style={styles.textHeader}>Olá, {dadosUsuario.nome}</Text>
             </View>
 
             <View style={styles.footer}>
@@ -42,23 +43,18 @@ function HomeArtista () {
                 />
 
                 <View style={styles.infos}>
-                    <Text style={styles.bandNameStyle}>Nome da Banda</Text>
+                    <Text style={styles.bandNameStyle}>{dadosUsuario.nomeArtistico}</Text>
 
-                    <Text style={styles.musicalStyleStyle}>Estilo musical</Text>
+                    <Text style={styles.musicalStyleStyle}>{dadosUsuario.estiloMusical}</Text>
                 </View>
 
                 <Text style={styles.bio}>
-                    Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
-                    ...............
-                    Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
-                    ...............
-                    Somo uma banda de rock que atua desde 1800 e tocamos em varios bares
-                    ...............
+                    {dadosUsuario.bio}
                 </Text>
-
+{/* 
                 <TouchableHighlight onPress={handleToDetails} style={{backgroundColor: "#FD9A0B"}}>
                     <Text>Botão que vai para tela de detalhes</Text>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
             </View>
         </View>
     )

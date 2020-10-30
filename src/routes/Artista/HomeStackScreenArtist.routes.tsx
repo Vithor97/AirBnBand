@@ -8,7 +8,7 @@ const {Navigator, Screen} = createStackNavigator();
 
 function HomeStackScreenArtist(){
     return (
-            <Navigator screenOptions={{headerShown: true}}>
+            <Navigator screenOptions={{headerShown: false}}>
                 <Screen name="HomeArtista" component={HomeArtista}/>
                 <Screen name="DetailsProfile" component={DetailsProfile}/>
             </Navigator>
