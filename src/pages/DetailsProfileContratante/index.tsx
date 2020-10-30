@@ -14,7 +14,9 @@ import styles from './styles';
 function DetailsProfileContratante(){
 
     const { navigate } = useNavigation();
-    const { signOut } = useContext(AuthContext);
+    const { signOut, usuario } = useContext(AuthContext);
+
+    const dadosUsuario: any = usuario
 
     function vaiParaEditProfile(){
         navigate('Configuracao');
@@ -34,8 +36,8 @@ function DetailsProfileContratante(){
                     />
 
                     <View style={styles.perfilInfoContainer}>
-                        <Text style={[styles.perfilName]}>Vitor</Text>
-                        <Text style={styles.perfilCaption}>Band</Text>
+                        <Text style={[styles.perfilName]}>{dadosUsuario.nome}</Text>
+                        <Text style={styles.perfilCaption}>{dadosUsuario.nomeEstabelecimento}</Text>
                     </View>
                 </View>
             </View>
@@ -43,15 +45,15 @@ function DetailsProfileContratante(){
             <View style={styles.userInfoSection}>
                 <View style={styles.infoRow}>
                     <Icon name="map-marker-radius" size={20} style={styles.infoIconContainer}/>
-                    <Text style={styles.iconText}>Rua pompeira, 58 - Osasco - SP</Text>
+                    <Text style={styles.iconText}>{dadosUsuario.logradoro}, {dadosUsuario.numero} - {dadosUsuario.cidade} - {dadosUsuario.uf}</Text>
                 </View>
                 <View style={styles.infoRow}>
                     <Icon name="phone" size={20} style={styles.infoIconContainer}/>
-                    <Text style={styles.iconText}>+55 11 3658-9245</Text>
+                    <Text style={styles.iconText}>+55 {dadosUsuario.telefone}</Text>
                 </View>
                 <View style={styles.infoRow}>
                     <Icon name="email" size={20} style={styles.infoIconContainer}/>
-                    <Text style={styles.iconText}>barDoze@email.com</Text>
+                    <Text style={styles.iconText}>{dadosUsuario.email}</Text>
                 </View>
             </View>
 

@@ -33,9 +33,6 @@ function Signin () {
     //contexto
     const { signed, signIn, user, logar } = useContext(AuthContext);
 
-    // console.log("Logado::: " +signed);
-    // console.log("user::: " +user);
-
     async function handleSign() {
         signIn()
     }
@@ -45,8 +42,7 @@ function Signin () {
     }
     
     async function passaUsuario(){
-        // console.log(`Valor do email ${email}`)
-        // console.log(`Valor da senha ${senha}`)
+
         if(!email){
             alert('Campo email vazio')
         }
@@ -56,7 +52,7 @@ function Signin () {
 
         if(email && senha) {
             setUserr({email: email, senha: senha})
-            logar(email, senha)
+            await logar(email, senha)
         }
     }
     

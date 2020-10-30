@@ -7,7 +7,7 @@ import AppRoute from "./App.routes";
 
 
 const Routes: React.FC = () => {
-  const { signed, loading, tipoUsuario } = useContext(AuthContext);
+  const { signed, loading } = useContext(AuthContext);
   
   
 

@@ -13,9 +13,11 @@ function AppRoute(){
     const { tipoUsuario } = useContext(AuthContext)
 
     return (
+        
         <Navigator screenOptions={{headerShown: false}}>
+            {console.log(tipoUsuario)}
             {
-            tipoUsuario ? 
+            tipoUsuario == "Contratante" ? 
             <Screen name="Tabs" component={AppTabs}/> : 
             <Screen name="Tabs" component={AppTabsArtista}/> 
             }

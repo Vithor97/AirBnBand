@@ -11,7 +11,7 @@ const api = {
     loginWithEmailAndPassword: async (email: string, senha: string) =>{
         const result = await firebaseApp.auth().signInWithEmailAndPassword(email, senha);
 
-        console.log(result);
+        //console.log(result);
 
         return result;
     },
@@ -136,7 +136,21 @@ const api = {
         var ref = firebaseApp.storage().ref().child('images/' + imageName)
 
         return ref.put(blob);
+    },
+    pegaUsuario: async (uid: any) => {
 
+        try {
+            let result = await db.collection('users').doc(uid).get()
+         
+            if(!result.exists){
+                return null
+            }
+            else{
+                return result.data()
+            }
+        } catch (error) {
+            console.log('error' + error)
+        }
     }
 }
 

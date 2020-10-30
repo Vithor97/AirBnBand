@@ -28,7 +28,7 @@ interface AuthContextData {
     logar(email: string, senha:string): Promise<void>;
     signOut(): void;
     loading: boolean;
-    tipoUsuario: boolean
+    tipoUsuario: string 
 }
 
 //Estou criando o contexto que vai disponibilizar dados para outros componentes
@@ -45,28 +45,28 @@ export const AuthProvider: React.FC = ({children}) =>{
     const [logado, setLogado] = useState(false)
 
     //usuario true = contratante - false = artista
-    const [tipoUsuario, setTipoUsuario] = useState(true)
+    const [tipoUsuario, setTipoUsuario] = useState("")
 
     //----------É criado na criação do component e deixa o usuario salvo no AsyncStorage----------//
 
-    useEffect(() => {
-        async function loadStorageData() {
-          const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
-          const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
+    // useEffect(() => {
+    //     async function loadStorageData() {
+    //       const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
+    //       const storagedToken = await AsyncStorage.getItem('@RNAuth:token');
     
-          // simular uma lentidão para mostar o loading.
-          //await new Promise((resolve) => setTimeout(resolve, 2000));
+    //       // simular uma lentidão para mostar o loading.
+    //       //await new Promise((resolve) => setTimeout(resolve, 2000));
     
-          if (storagedUser && storagedToken) {
-            setUsuario(JSON.parse(storagedUser));
-            setLogado(true)
-            //api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
-          }
-          setLoading(false);
-        }
+    //       if (storagedUser && storagedToken) {
+    //         setUsuario(JSON.parse(storagedUser));
+    //         setLogado(true)
+    //         //api.defaults.headers.Authorization = `Baerer ${storagedToken}`;
+    //       }
+    //       setLoading(false);
+    //     }
     
-        loadStorageData();
-      });
+    //     loadStorageData();
+    //   });
 
     //----------------------------------------------------------------------------------------------//
 
@@ -89,8 +89,18 @@ export const AuthProvider: React.FC = ({children}) =>{
             let userr = await Api.loginWithEmailAndPassword(email, senha)
             //let userr = await base.auth().signInWithEmailAndPassword(email, senha)
             //console.log(userr)
+            let dadosUser: any
             var valor = userr.user?.email
-            setUsuario(valor)
+            var uid = userr.user?.uid
+
+            //procura usuario pelo documento
+            let usuarioNoBanco = await Api.pegaUsuario(uid)
+            dadosUser = usuarioNoBanco
+            setTipoUsuario(dadosUser.tipoUsuario)
+            // console.log('na função logar')
+            // console.log(dadosUser)
+
+            setUsuario(dadosUser)
             setLogado(true)
             //console.log(base.auth().currentUser)
             
