@@ -99,7 +99,9 @@ const api = {
     cadastraContratante: async (dados: any) =>{ 
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
+        const uid = result.user?.uid
         await db.collection('users').doc(result.user?.uid).set({
+                id: uid,
                 nome: dados.nome,
                 email: dados.email,
                 cep: dados.cep,
@@ -150,6 +152,22 @@ const api = {
             }
         } catch (error) {
             console.log('error' + error)
+        }
+    },
+    atualizaUsuario: async (dados: any, setUsuario: any) =>{
+        console.log('Metodo atualizaUsuario')
+        try {
+            await db.collection('users').doc(dados.id).update(dados)
+            let resultadoUser = await api.pegaUsuario(dados.id)
+            //console.log(resultadoUser)
+
+            if (resultadoUser){
+                setUsuario(resultadoUser)
+                return  true
+            }
+        
+        } catch (error) {
+            console.log(error)
         }
     }
 }

@@ -75,7 +75,7 @@ function Landing () {
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>{strings.app_name}</Text>
-            {console.log(dados)}
+            {/* {console.log(dados)} */}
             <ScrollView style={styles.attractionCardsContainer}>
                 {
                     dados.map((m:any) => {

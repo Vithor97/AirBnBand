@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18,
     fontWeight: 'bold',
-    alignSelf: "center"
+    alignSelf: "center",
+    marginBottom: 10
   },
 
   commandButton: {
@@ -133,13 +134,18 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FF0000',
     paddingBottom: 5,
   },
-
   textInput : {
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
     color: '#05375a', 
   },
+  textTypeTitle: {
+    left: '40%', fontSize: 15, fontWeight: 'bold'
+  },
+  textInputTitle: {
+    fontWeight: 'bold'
+  }
 })
 
 export default styles;

@@ -28,7 +28,9 @@ interface AuthContextData {
     logar(email: string, senha:string): Promise<void>;
     signOut(): void;
     loading: boolean;
-    tipoUsuario: string 
+    tipoUsuario: string,
+    setUsuario: any
+
 }
 
 //Estou criando o contexto que vai disponibilizar dados para outros componentes
@@ -96,6 +98,7 @@ export const AuthProvider: React.FC = ({children}) =>{
             //procura usuario pelo documento
             let usuarioNoBanco = await Api.pegaUsuario(uid)
             dadosUser = usuarioNoBanco
+            console.log(dadosUser)
             setTipoUsuario(dadosUser.tipoUsuario)
             // console.log('na função logar')
             // console.log(dadosUser)
@@ -117,7 +120,7 @@ export const AuthProvider: React.FC = ({children}) =>{
     }
     // Retorno todas as variaveis ou funções para que os outros componentes tenham acesso
     return (
-        <AuthContext.Provider value={{ signed: logado, user, signIn, signOut, loading, logar, usuario, tipoUsuario }}>
+        <AuthContext.Provider value={{ signed: logado, user, signIn, signOut, loading, logar, usuario, setUsuario,  tipoUsuario }}>
           {children}
         </AuthContext.Provider>
       );
