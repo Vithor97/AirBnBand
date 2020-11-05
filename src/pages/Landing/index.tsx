@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Button, ScrollView } from 'react-native';
+import { View, TextInput, Image, Button, ScrollView } from 'react-native';
 
 import Api from '../../services/api'
 
@@ -74,7 +74,17 @@ function Landing () {
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>{strings.app_name}</Text>
+            <View style={styles.searchBarContainer}>
+                <View style={styles.searchBar}>
+                    <TextInput style={styles.searchBarTextInput}/>
+                </View>
+
+                <View style={styles.searchIconContainer}>
+                    <Image style={styles.searchIcon} source={require("../../resources/Icons/lupa_laranja.png")}/>
+                </View>
+            </View>
+
+            {/* <Text style={styles.titulo}>{strings.app_name}</Text> */}
             {/* {console.log(dados)} */}
             <ScrollView style={styles.attractionCardsContainer}>
                 {
