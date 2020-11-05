@@ -9,6 +9,7 @@ import Configuracao from '../pages/Configuracao';
 import HomeArtista from '../pages/HomeArtista';
 
 import HomeStackScreenArtist from './Artista/HomeStackScreenArtist.routes'
+import ConfigArtista from './Artista/ProfileStackScreenArtista.routes'
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -32,7 +33,7 @@ function AppTabsArtista(){
 
         }}>
             <Screen name="HomeArtistaStack" component={HomeStackScreenArtist}/>
-            <Screen name="Configuracao" component={Configuracao}/>
+            <Screen name="ConfigArtista" component={ConfigArtista}/>
         </Navigator>
 
     )

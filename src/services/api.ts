@@ -169,7 +169,24 @@ const api = {
         } catch (error) {
             console.log(error)
         }
-    }
+    },
+    atualizaUsuarioArtista: async (dados: any, setUsuario: any) =>{
+        console.log('Metodo atualizaUsuario Artista')
+        try {
+            await db.collection('users').doc(dados.id).update(dados)
+            let resultadoUser = await api.pegaUsuario(dados.id)
+            //console.log(resultadoUser)
+
+            if (resultadoUser){
+                setUsuario(resultadoUser)
+                return  true
+            }
+        
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
 }
 
 export default api
