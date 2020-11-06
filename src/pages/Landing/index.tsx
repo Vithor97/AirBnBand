@@ -1,55 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, TextInput, Image, Button, ScrollView } from 'react-native';
-
-import Api from '../../services/api'
-
-import strings from '../../resources/values/strings.json';
-
-import { YellowBox } from 'react-native';
+import { View, TextInput, Text, Image, Button, ScrollView } from 'react-native';
+import {BorderlessButton } from 'react-native-gesture-handler';
 import AttractionCard from '../../components/attractionCard';
-
-YellowBox.ignoreWarnings(['Setting a timer']);
 
 import styles from './styles';
 import AuthContext from '../../contexts/auth';
-import api from '../../services/api';
+import Api from '../../services/api'
+
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 console.ignoredYellowBox = [
     'Setting a timer'
-]
+];
 
 function Landing () {
     const [useer, setUseer] = useState([]);
     const { signOut, user, usuario } = useContext(AuthContext);
-    const [dados, setDados] = useState([])
+    const [dados, setDados] = useState([]);
+    const [ sugestoes, setSugestoes ] = useState( [] );
 
-    useEffect(() => {
-        setDados([])
-        let chama = Api.pegaArtistas(setDados)
-        return chama
-    }, [])
-    
     function handleSignOut() {
-      signOut();
+        signOut();
     }
 
+    useEffect(() => {
+        setDados([]);
+
+        let chama = Api.pegaArtistas(setDados);
+
+        return chama;
+    }, [])
+
     async function pegaTipos(){
-
-        const a =  await Api.pegaUsuarios();
-        //console.log(a)
-        setUseer(a)
+        setUseer( await Api.pegaUsuarios() )
        
-        await useer.forEach((elemento: any) => {
-            console.log(elemento.email)
-        })
-
-        //setUseer([])
-        // const user =  db.collection('users').where("tipo", "==", "artista").get()
-        // user.then(values =>{
-        //     values.docs.forEach(e => {
-        //         setUseer((searches:any) => [...searches, e.data()])
-        //     })
-        // })
+        await useer.forEach((elemento: any) => { console.log(elemento.email) })
     }
 
     function pegaEstado(){
@@ -57,35 +43,72 @@ function Landing () {
     }
 
     async function pegaDadosFirebase(){
-
-        const values = await Api.pegaEnderecos();
-        console.log(values)
-        // let userRef = db.collection('users').doc('hDLVRtGE4iZsrHxG3RRVyjTxD5k1')
-        
-        // let getDoc = userRef.collection('endereco').where("estado","==", "SP").get()
-
-        // getDoc.then(snapshot =>{
-        //     const values = snapshot.docs.map((val)=>{
-        //         return val.id
-        //     })
-        //     console.log('---------------------------------------')
-        //     console.log(values)
-        // })
+        console.log( await Api.pegaEnderecos() );
     }
+
+    const handleSugestoes = async ( nome: String ) => {
+        setSugestoes( [] );
+
+        setSugestoes( await Api.pegaUsuarios() );
+
+        // sugestoesUpdate();
+
+        // return Api.pegaSugestoesArtistas( setSugestoes, nome );
+    }
+
+    const sugestoesUpdate = () => {
+        alert("Atualizou");
+    }
+
     return (
         <View style={styles.container}>
-            <View style={styles.searchBarContainer}>
-                <View style={styles.searchBar}>
-                    <TextInput style={styles.searchBarTextInput}/>
+            <View style={styles.searchContainer}>
+                <View style={styles.searchBarContainer}>
+                    <View style={styles.searchBar}>
+                        <TextInput style={styles.searchBarTextInput} placeholder="Buscar" onChangeText={ ( nome ) => handleSugestoes( nome ) }/>
+                    </View>
+
+                    <BorderlessButton style={styles.searchIconContainer}>
+                        <Image style={styles.searchIcon} source={require("../../resources/Icons/lupa_laranja.png")}/>
+                    </BorderlessButton>
                 </View>
 
-                <View style={styles.searchIconContainer}>
-                    <Image style={styles.searchIcon} source={require("../../resources/Icons/lupa_laranja.png")}/>
-                </View>
+                <ScrollView style={styles.suggestionsContainer}>
+                    <View style={styles.separationBar}/>
+
+                    {sugestoes.forEach( ( item:any ) => {
+                        <BorderlessButton style={styles.suggestionCard} onPress={ () => alert(item.id) }>
+                            <View  style={styles.suggestionIconContainer}>
+                                {/* <Image style={styles.suggestionIcon} source={
+                                    () => {
+                                        if( item.avatar ){
+                                            { uri: item.avatar } 
+                                        }
+                                        else{
+                                            require("../../resources/Icons/microfone_laranja.png")
+                                        }
+                                    }
+                                }/> */}
+                            </View>
+
+                            <View style={styles.suggestionNameContainer}>
+                                <Text style={styles.suggestionName}> { item.name } </Text>
+                            </View>
+                        </BorderlessButton>
+                    } )}
+
+                    {/* <BorderlessButton style={styles.suggestionCard}>
+                        <View  style={styles.suggestionIconContainer}>
+                            <Image style={styles.suggestionIcon} source={require("../../resources/Icons/microfone_laranja.png")}/>
+                        </View>
+
+                        <View style={styles.suggestionNameContainer}>
+                            <Text style={styles.suggestionName}> Nome Artista </Text>
+                        </View>
+                    </BorderlessButton> */}
+                </ScrollView>
             </View>
-
-            {/* <Text style={styles.titulo}>{strings.app_name}</Text> */}
-            {/* {console.log(dados)} */}
+            
             <ScrollView style={styles.attractionCardsContainer}>
                 {
                     dados.map((m:any) => {
@@ -93,12 +116,6 @@ function Landing () {
                     })
                 }
             </ScrollView>
-            {/* <View>
-                <Button title ="oi" onPress={pegaDadosFirebase}/>
-            </View>
-            <View>
-                <Button title ="estado" onPress={pegaEstado}/>
-            </View> */}
         </View>
     )
 }

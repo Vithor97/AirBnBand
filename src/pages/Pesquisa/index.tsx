@@ -19,14 +19,12 @@ function Pesquisa(){
                     </BorderlessButton>
                 </View>
 
-                <ScrollView style={styles.suggestionsContainer}>
+                {/* <ScrollView style={styles.suggestionsContainer}>
                     <View style={styles.separationBar}/>
 
                     <BorderlessButton style={styles.suggestionCard}>
                         <View  style={styles.suggestionIconContainer}>
-                            {/* <View style={styles.suggestionIcon}> */}
                             <Image style={styles.suggestionIcon} source={require("../../resources/Icons/microfone_laranja.png")}/>
-                            {/* </View> */}
                         </View>
 
                         <View style={styles.suggestionNameContainer}>
@@ -36,9 +34,7 @@ function Pesquisa(){
 
                     <BorderlessButton style={styles.suggestionCard}>
                         <View  style={styles.suggestionIconContainer}>
-                            {/* <View style={styles.suggestionIcon}> */}
                             <Image style={styles.suggestionIcon} source={require("../../resources/Icons/microfone_laranja.png")}/>
-                            {/* </View> */}
                         </View>
 
                         <View style={styles.suggestionNameContainer}>
@@ -48,24 +44,23 @@ function Pesquisa(){
 
                     <BorderlessButton style={styles.suggestionCard}>
                         <View  style={styles.suggestionIconContainer}>
-                            {/* <View style={styles.suggestionIcon}> */}
                             <Image style={styles.suggestionIcon} source={require("../../resources/Icons/microfone_laranja.png")}/>
-                            {/* </View> */}
                         </View>
 
                         <View style={styles.suggestionNameContainer}>
                             <Text style={styles.suggestionName}> Nome Artista </Text>
                         </View>
                     </BorderlessButton>
-
-                    {/* <View style={styles.sugestionCard}></View>
-                    <View style={styles.sugestionCard}></View>
-                    <View style={styles.sugestionCard}></View>
-                    <View style={styles.sugestionCard}></View>
-                    <View style={styles.sugestionCard}></View>
-                    <View style={styles.sugestionCard}></View> */}
-                </ScrollView>
+                </ScrollView> */}
             </View>
+
+            <View style={styles.filtersContainer}>
+                <Text style={styles.filterBox}>Filtrar por:</Text>
+
+                <Text style={styles.filterBox}>Ordenar por:</Text>
+            </View>
+
+            <ScrollView style={styles.resultsContainer}></ScrollView>
         </View>
     )
 }

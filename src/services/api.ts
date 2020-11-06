@@ -63,6 +63,21 @@ const api = {
         });
     },
 
+    // pegaSugestoesArtistas: ( setSugestoes: any, nome: String ) => {
+    //     return db.collection("users").where("tipoUsuario", "==", "Artista").where("**", "", "")
+    //         .onSnapshot( querySnapshot => {
+    //             let arrays: any = [];
+
+    //             querySnapshot.forEach( doc => {
+    //                 arrays.push( doc.data() );
+
+    //                 console.log(doc.data());
+    //             });
+
+    //         setSugestoes(arrays);
+    //     });
+    // },
+
     cadastraArtista: async (dados: any) =>{
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)

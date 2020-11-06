@@ -7,14 +7,18 @@ const styles = StyleSheet.create({
     container: {
       width: '100%',
       height: '100%',
-      paddingTop: 30,
+      paddingTop: 100,
   
       display: "flex",
       alignItems: 'center',
-      justifyContent: 'center',
+      // justifyContent: 'center',
     },
 
     searchContainer:{
+      marginTop: 30,
+
+      position: "absolute",
+      zIndex: 999,
       width: '90%',
       backgroundColor: colors.background,
       borderRadius: 25,
@@ -129,6 +133,39 @@ const styles = StyleSheet.create({
 
     suggestionName: {
       fontSize: fonts.textInputFontSize
+    },
+
+    filtersContainer: {
+      width: "90%",
+      // height: 50,
+      // backgroundColor: colors.red,
+      marginBottom: 15,
+
+      flexDirection: "row",
+      justifyContent: "space-around",
+    },
+
+    filterBox: {
+      width: 120,
+      height: 30,
+      borderRadius: 10,
+      borderColor: colors.primary,
+      borderWidth: 2,
+      // backgroundColor: colors.red,
+      textAlignVertical: "center",
+      textAlign: "center"
+    },
+
+    orderBox: {
+      width: 100,
+      height: 50,
+      backgroundColor: colors.red,
+    },
+
+    resultsContainer: {
+      width: "90%",
+      // height: 50,
+      backgroundColor: colors.facebookBlue
     }
 })
 
