@@ -32,6 +32,21 @@ function Landing () {
         return chama;
     }, [])
 
+    function procuraUsuario (texto: any) {
+        setSugestoes(dados)
+        let arrr = dados
+        //console.log(sugestoes)
+        if(texto!==""){
+            let arr = arrr.filter((i: any) =>{
+                return i.nomeArtistico.includes(texto)
+                //i.nome.includes(texto)
+            })
+            setDados(arr)
+        }
+        else{
+            Api.pegaArtistas(setDados)
+        }
+    }
     async function pegaTipos(){
         setUseer( await Api.pegaUsuarios() )
        
@@ -65,7 +80,7 @@ function Landing () {
             <View style={styles.searchContainer}>
                 <View style={styles.searchBarContainer}>
                     <View style={styles.searchBar}>
-                        <TextInput style={styles.searchBarTextInput} placeholder="Buscar" onChangeText={ ( nome ) => handleSugestoes( nome ) }/>
+                        <TextInput style={styles.searchBarTextInput} placeholder="Buscar" onChangeText={ ( text ) => procuraUsuario( text ) }/>
                     </View>
 
                     <BorderlessButton style={styles.searchIconContainer}>
@@ -73,40 +88,6 @@ function Landing () {
                     </BorderlessButton>
                 </View>
 
-                <ScrollView style={styles.suggestionsContainer}>
-                    <View style={styles.separationBar}/>
-
-                    {sugestoes.forEach( ( item:any ) => {
-                        <BorderlessButton style={styles.suggestionCard} onPress={ () => alert(item.id) }>
-                            <View  style={styles.suggestionIconContainer}>
-                                {/* <Image style={styles.suggestionIcon} source={
-                                    () => {
-                                        if( item.avatar ){
-                                            { uri: item.avatar } 
-                                        }
-                                        else{
-                                            require("../../resources/Icons/microfone_laranja.png")
-                                        }
-                                    }
-                                }/> */}
-                            </View>
-
-                            <View style={styles.suggestionNameContainer}>
-                                <Text style={styles.suggestionName}> { item.name } </Text>
-                            </View>
-                        </BorderlessButton>
-                    } )}
-
-                    {/* <BorderlessButton style={styles.suggestionCard}>
-                        <View  style={styles.suggestionIconContainer}>
-                            <Image style={styles.suggestionIcon} source={require("../../resources/Icons/microfone_laranja.png")}/>
-                        </View>
-
-                        <View style={styles.suggestionNameContainer}>
-                            <Text style={styles.suggestionName}> Nome Artista </Text>
-                        </View>
-                    </BorderlessButton> */}
-                </ScrollView>
             </View>
             
             <ScrollView style={styles.attractionCardsContainer}>
