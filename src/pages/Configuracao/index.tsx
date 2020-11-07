@@ -66,7 +66,8 @@ function Configuracao(){
                             cidade: dadosUsuario.cidade as string,
                             bairro: dadosUsuario.bairro as string,
                             numero: dadosUsuario.numero as string,
-                            uf: dadosUsuario.uf as string
+                            uf: dadosUsuario.uf as string,   
+                            avatar: dadosUsuario.avatar as string
                         }}
                         
                         onSubmit={async(values)=>{
@@ -92,7 +93,7 @@ function Configuracao(){
                                     {/* <View style={styles.profileImageContainer}> */}
                                         <ImageBackground 
                                             imageStyle={{borderRadius: 15}}
-                                            source={{uri: "https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_1920x1200.jpg"}}
+                                            source={{uri: dadosUsuario.avatar }}
                                             style={styles.profileImage}>
                                             <View style={styles.imageSelectIconContainer}>
                                                 <Icon 

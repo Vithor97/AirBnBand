@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Image, View, Text } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -27,14 +27,16 @@ interface Artista{
 
 const AttractionCard : React.FC<any> = ({dados}) => {
 
-    /*
+    const [imageURL, setImageURL] = useState()
+    
     useEffect(() => {
         definirImagem(dados.avatar);
-    }, []) */
+    }, []) 
 
-    function definirImagem(url:any){
-        const img = api.getImage(url)
-        console.log(img)
+    async function definirImagem(url:any){
+        const img = await api.getImage(url)
+        setImageURL(img)
+        return img
     }
 
     const { goBack,navigate } = useNavigation();
@@ -44,6 +46,7 @@ const AttractionCard : React.FC<any> = ({dados}) => {
     }
 
     function goToProfileDetails(){
+        dados.avatar = imageURL
         navigate('DetralhesPerfil', dados);
     }
 
@@ -53,9 +56,9 @@ const AttractionCard : React.FC<any> = ({dados}) => {
                 <View style={styles.imageContainer}>
                     <View style={styles.atractionImageBallFormContainer}>
                         <Image
-                            source={require('../../resources/Icons/photo_laranja.png')}
+                            source={{uri: imageURL}}
                             style={styles.atractionImage}
-                        />
+                        />  
                     </View>
                 </View>
 
@@ -65,7 +68,7 @@ const AttractionCard : React.FC<any> = ({dados}) => {
                     {function(){
                         if(true){
                             // return <Text style={styles.attractionAnotherText}>Estrelas</Text>
-                            return <RatedStars />
+                            return <RatedStars/>
                         }
                     }()}
                 </View>

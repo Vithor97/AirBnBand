@@ -128,9 +128,13 @@ const api = {
                 cnpj: dados.cnpj,
                 telefone: dados.telefone,
                 nomeEstabelecimento: dados.nomeEstabelecimento,
-                tipoUsuario : dados.tipoUsuario
-               // avatar: dados.avatar ? dados.avatar : ""
+                tipoUsuario : dados.tipoUsuario,
+                avatar: dados.avatar ? dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1) : ""
         }).then(function() {
+            api.uploadImage(dados.avatar)
+            .then(()=>{
+                console.log('imagem foi inserida no storage com sucesso')
+            })
             hasSaved = true 
             console.log("Document successfully written!");
             console.log("HAS SAVED: " + hasSaved)
@@ -142,8 +146,9 @@ const api = {
         return hasSaved
     },
 
-    getImage:(path:any) => {
-        firebaseApp.storage().refFromURL(path).getDownloadURL().then((url) => {
+    getImage: (path:any) => {
+        console.log(path)
+        return firebaseApp.storage().refFromURL("gs://airbnband-256a5.appspot.com/images/" + path).getDownloadURL().then((url) => {
             return url
         })
     },

@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import { View, Image, ScrollView, Text} from 'react-native';
 import ViewPager  from '@react-native-community/viewpager';
 import {Formik} from 'formik';
-import { TextInput } from 'react-native-gesture-handler';
+import { BorderlessButton, TextInput } from 'react-native-gesture-handler';
 import { ProgressBallsContainer, ProgressBallFilled, ProgressBallEmpty } from '../../components/progressBalls';
-import * as Yup from "yup";
-
 import BackArrow from '../../components/backArrow';
+import backArrow from '../../components/photoInput/styles';
+
+import * as Yup from "yup";
 import DivisorBar from '../../components/divisorBar';
 
 import strings from '../../resources/values/strings.json';
@@ -24,9 +25,26 @@ import global from '../../styles/global';
 import Axios from 'axios';
 import { HeaderTitle } from '@react-navigation/stack';
 import { Alert } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 function CadastroContratante () {
     
+    
+    async function imagePickerCall() {   
+        const data = await ImagePicker.launchImageLibraryAsync({})
+        if( data.cancelled){
+            return
+        }
+        if(!data.uri){
+            return
+        }
+        const dadosFotos = data.uri;
+        console.log(dadosFotos.substring(dadosFotos.lastIndexOf('/') + 1))
+        console.log(data.uri)
+        setAvatar(data)
+    }
+
+    const [avatar, setAvatar] = useState<any>();
     const tipoUsuario = "Contratante";
     let [page, setPagee] = useState(0)
     let [isFoundCep, setFoundCep] = useState(true)
@@ -130,23 +148,15 @@ function CadastroContratante () {
                         numero: "",
                         uf: ""
                     }}
-                    
-                    // onSubmit={async(values, actions)=>{
-                    //         console.log(values)
-                    //         await console.log(actions)
-                    //     }
-                    // }
 
                     onSubmit={async(values, actions)=>{
                         let valor: any = {}
                         valor = values;
                         valor.tipoUsuario = tipoUsuario;
                       //  console.log(valor)
-                        
-                        // if(avatar){
-                        //     valor.avatar = avatar.uri;
-                        // }
-                        
+                        if(avatar){
+                             valor.avatar = avatar.uri;
+                         }
                         const docRef = await api.cadastraContratante(valor)
                         alert(docRef);
                         //console.log(docRef);
@@ -212,8 +222,22 @@ function CadastroContratante () {
 
                         <ScrollView>
                             <View key="2">        
-                                <View style={styles.inputsContainer}>
-                                    <PhotoInput />
+                                <View style={styles.inputsContainer}>    
+                                    <View  style={backArrow.photoInputContainer}>
+                                        <BorderlessButton style={backArrow.photoInputButton} onPress={imagePickerCall}>
+                                            {function(){
+                                                if(!avatar){
+                                                    return <Image source={require('../../resources/Icons/photo_laranja.png')} 
+                                                    style={backArrow.photoInputImageDefault}></Image>
+                                                }
+                                                else {
+                                                    return <Image source={{uri: avatar.uri}} 
+                                                    style={backArrow.photoInputImageSelected}></Image>
+                                                }
+                                            }()}
+                                        </BorderlessButton>
+                                    </View>
+                                    <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
                                     {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
                                     <TextInput
                                         style={styles.textInput}

@@ -8,6 +8,7 @@ import { AsyncStorage } from "react-native";
 
 //firebase api
 import Api from '../services/api'
+import api from "../services/api";
 
 
 interface User {
@@ -94,10 +95,12 @@ export const AuthProvider: React.FC = ({children}) =>{
             let dadosUser: any
             var valor = userr.user?.email
             var uid = userr.user?.uid
-
             //procura usuario pelo documento
             let usuarioNoBanco = await Api.pegaUsuario(uid)
             dadosUser = usuarioNoBanco
+            const url = await Api.getImage(dadosUser.avatar)
+            console.log(url)
+            dadosUser.avatar = url
             console.log(dadosUser)
             setTipoUsuario(dadosUser.tipoUsuario)
             // console.log('na função logar')
