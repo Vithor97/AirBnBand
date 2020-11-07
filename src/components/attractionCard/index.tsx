@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Image, View, Text } from 'react-native';
 import {BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import RatedStars from '../ratedStars';
 
 import styles from './styles';
+import api from '../../services/api';
 
 interface Artista{
     bio: string,
@@ -23,7 +24,19 @@ interface Artista{
     avatar: string
 }
 
+
 const AttractionCard : React.FC<any> = ({dados}) => {
+
+    /*
+    useEffect(() => {
+        definirImagem(dados.avatar);
+    }, []) */
+
+    function definirImagem(url:any){
+        const img = api.getImage(url)
+        console.log(img)
+    }
+
     const { goBack,navigate } = useNavigation();
 
     function goBackScreen(){

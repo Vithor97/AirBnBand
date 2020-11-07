@@ -96,7 +96,7 @@ const api = {
                 selectEstados: dados.selectEstados,
                 telefone: dados.telefone,
                 tipoUsuario : dados.tipoUsuario,
-                avatar: dados.avatar ? dados.avatar : ""
+                avatar: dados.avatar ? dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1) : ""
             }).then(function() {
                 api.uploadImage(dados.avatar).then(()=>{
                     console.log('imagem foi inserida no storage com sucesso')
@@ -142,6 +142,11 @@ const api = {
         return hasSaved
     },
 
+    getImage:(path:any) => {
+        firebaseApp.storage().refFromURL(path).getDownloadURL().then((url) => {
+            return url
+        })
+    },
     uploadImage: async (uri: any) => {
         const response = await fetch(uri)
         const blob = await response.blob()
