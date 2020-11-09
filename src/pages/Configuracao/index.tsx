@@ -12,6 +12,7 @@ import MensagemErro from '../../components/errorMessage'
 
 import {Formik} from 'formik';
 import * as Yup from "yup";
+import * as ImagePicker from 'expo-image-picker';
 
 
 import Api from '../../services/api'
@@ -24,6 +25,22 @@ function Configuracao(){
     const { goBack } = useNavigation();
 
     const dadosUsuario: any = usuario
+
+    const [avatar, setAvatar] = useState<any>();
+
+    async function imagePickerCall() {   
+        const data = await ImagePicker.launchImageLibraryAsync({})
+        if( data.cancelled){
+            return
+        }
+        if(!data.uri){
+            return
+        }
+        //const dadosFotos = data.uri;
+        //console.log(dadosFotos.substring(dadosFotos.lastIndexOf('/') + 1))
+        //console.log(data.uri)
+        setAvatar(data)
+    }
 
     const FormSchema = Yup.object().shape({
         nome: Yup.string().min(4, "Minimun length of 4").required("Required"),
@@ -75,6 +92,10 @@ function Configuracao(){
                             valorForm = values;
                             valorForm.id = dadosUsuario.id
 
+                            if(avatar){
+                                valorForm.avatar = avatar.uri
+                            }
+
                             const valor = await Api.atualizaUsuario(valorForm, setUsuario)
 
                             if(valor=== true){
@@ -89,11 +110,11 @@ function Configuracao(){
                         {({values , handleChange, errors, handleSubmit, touched, setFieldTouched, setFieldValue})=>{
                             return (
                                 <>
-                                <TouchableOpacity onPress={()=>{}} style={styles.profileImageContainer}>
+                                <TouchableOpacity onPress={imagePickerCall} style={styles.profileImageContainer}>
                                     {/* <View style={styles.profileImageContainer}> */}
                                         <ImageBackground 
                                             imageStyle={{borderRadius: 15}}
-                                            source={{uri: dadosUsuario.avatar }}
+                                            source={{uri: avatar ? avatar.uri : dadosUsuario.avatar }}
                                             style={styles.profileImage}>
                                             <View style={styles.imageSelectIconContainer}>
                                                 <Icon 

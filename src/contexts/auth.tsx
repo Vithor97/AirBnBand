@@ -98,9 +98,9 @@ export const AuthProvider: React.FC = ({children}) =>{
             //procura usuario pelo documento
             let usuarioNoBanco = await Api.pegaUsuario(uid)
             dadosUser = usuarioNoBanco
-            const url = await Api.getImage(dadosUser.avatar)
-            console.log(url)
-            dadosUser.avatar = url
+            // const url = await Api.getImage(dadosUser.avatar)
+            // console.log(url)
+            //dadosUser.avatar = url
             console.log(dadosUser)
             setTipoUsuario(dadosUser.tipoUsuario)
             // console.log('na função logar')

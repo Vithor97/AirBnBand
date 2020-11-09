@@ -63,21 +63,6 @@ const api = {
         });
     },
 
-    // pegaSugestoesArtistas: ( setSugestoes: any, nome: String ) => {
-    //     return db.collection("users").where("tipoUsuario", "==", "Artista").where("**", "", "")
-    //         .onSnapshot( querySnapshot => {
-    //             let arrays: any = [];
-
-    //             querySnapshot.forEach( doc => {
-    //                 arrays.push( doc.data() );
-
-    //                 console.log(doc.data());
-    //             });
-
-    //         setSugestoes(arrays);
-    //     });
-    // },
-
     cadastraArtista: async (dados: any) =>{
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
@@ -114,6 +99,8 @@ const api = {
     cadastraContratante: async (dados: any) =>{ 
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
+        await api.uploadImage(dados.avatar)
+        const imageURL = await api.pegaImage(dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1))
         const uid = result.user?.uid
         await db.collection('users').doc(result.user?.uid).set({
                 id: uid,
@@ -129,12 +116,9 @@ const api = {
                 telefone: dados.telefone,
                 nomeEstabelecimento: dados.nomeEstabelecimento,
                 tipoUsuario : dados.tipoUsuario,
-                avatar: dados.avatar ? dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1) : ""
+                avatar: imageURL,
+                avatarId: dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)
         }).then(function() {
-            api.uploadImage(dados.avatar)
-            .then(()=>{
-                console.log('imagem foi inserida no storage com sucesso')
-            })
             hasSaved = true 
             console.log("Document successfully written!");
             console.log("HAS SAVED: " + hasSaved)
@@ -149,6 +133,12 @@ const api = {
     getImage: (path:any) => {
         console.log(path)
         return firebaseApp.storage().refFromURL("gs://airbnband-256a5.appspot.com/images/" + path).getDownloadURL().then((url) => {
+            return url
+        })
+    },
+    pegaImage: async (path:any) => {
+        console.log(path)
+        return await firebaseApp.storage().refFromURL("gs://airbnband-256a5.appspot.com/images/" + path).getDownloadURL().then((url) => {
             return url
         })
     },
@@ -182,9 +172,29 @@ const api = {
     atualizaUsuario: async (dados: any, setUsuario: any) =>{
         console.log('Metodo atualizaUsuario')
         try {
-            await db.collection('users').doc(dados.id).update(dados)
-            let resultadoUser = await api.pegaUsuario(dados.id)
-            //console.log(resultadoUser)
+            let dadosUsuario = await api.pegaUsuario(dados.id)
+            let idFoto = dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)
+
+            console.log('Id foto; ' + idFoto )
+            let mudaIdAvatar: any = dadosUsuario
+
+            if(mudaIdAvatar.avatarId !== dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)){
+             
+                
+                await api.uploadImage(dados.avatar)
+            }
+            let updateData: any = dados
+            
+            updateData.avatar = await api.pegaImage(dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1))
+            updateData.avatarId = idFoto
+            //console.log(updateData.avatarId)
+            
+
+            //console.log(updateData)
+
+            await db.collection('users').doc(updateData.id).update(updateData)
+            let resultadoUser = await api.pegaUsuario(updateData.id)
+            
 
             if (resultadoUser){
                 setUsuario(resultadoUser)
