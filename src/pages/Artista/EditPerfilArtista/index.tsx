@@ -13,7 +13,7 @@ import MensagemErro from '../../../components/errorMessage'
 
 import {Formik} from 'formik';
 import * as Yup from "yup";
-
+import * as ImagePicker from 'expo-image-picker';
 
 import Api from '../../../services/api'
 
@@ -26,6 +26,20 @@ function EditPerfilArtista(){
     const { signOut, usuario, setUsuario } = useContext(AuthContext);
     const { goBack } = useNavigation();
     const dadosUsuario: any = usuario
+
+    
+    const [avatar, setAvatar] = useState<any>();
+
+    async function imagePickerCall() {   
+        const data = await ImagePicker.launchImageLibraryAsync({})
+        if( data.cancelled){
+            return
+        }
+        if(!data.uri){
+            return
+        }
+        setAvatar(data)
+    }
     
     const [toggleCheckBox, setToggleCheckBox] = useState(dadosUsuario.contatoVisivel as any)
 
@@ -75,6 +89,10 @@ function EditPerfilArtista(){
                             valorForm.contatoVisivel = toggleCheckBox
                             valorForm.id = dadosUsuario.id
 
+                            if(avatar){
+                                valorForm.avatar = avatar.uri
+                            }
+
                             const valor = await Api.atualizaUsuarioArtista(valorForm, setUsuario)
 
                             if(valor=== true){
@@ -89,11 +107,11 @@ function EditPerfilArtista(){
                         {({values , handleChange, errors, handleSubmit, touched, setFieldTouched, setFieldValue})=>{
                             return (
                                 <>
-                                <TouchableOpacity onPress={()=>{}} style={styles.profileImageContainer}>
+                                <TouchableOpacity onPress={imagePickerCall} style={styles.profileImageContainer}>
                                     {/* <View style={styles.profileImageContainer}> */}
                                         <ImageBackground 
                                             imageStyle={{borderRadius: 15}}
-                                            source={{uri: "https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_1920x1200.jpg"}}
+                                            source={{uri: avatar ? avatar.uri : dadosUsuario.avatar }}
                                             style={styles.profileImage}>
                                             <View style={styles.imageSelectIconContainer}>
                                                 <Icon 
@@ -106,7 +124,7 @@ function EditPerfilArtista(){
                                 </TouchableOpacity>
 
                                 <Text style={styles.profileName}>
-                                    Vitor Miranda
+                                    {dadosUsuario.nome}
                                 </Text>
 
                                 <Text style={{left: '40%', fontSize: 15, fontWeight: 'bold'}}>
@@ -226,20 +244,6 @@ function EditPerfilArtista(){
                                     />
                                     <Text>{toggleCheckBox ? 'Visivel' : 'Não visivel'}</Text>
                                 </View>
-
-               
-
-                                {/* <Text style={styles.textInputTitle}>CEP: </Text>
-                                <View style={styles.action}>
-                                    <Icon name="map-marker-outline" size={20} />
-                                    <TextInput
-                                        value={values.cep}
-                                        onChangeText={handleChange('cep')}
-                                        placeholder="Cidade"
-                                        placeholderTextColor="#666666"
-                                        style={styles.textInput}/> 
-                                        {errors.cep ? mensagemDeErro(errors.cep) : null}               
-                                </View> */}
                                 
 
                                 <View style={{position: 'relative'}}>

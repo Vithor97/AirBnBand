@@ -17,19 +17,40 @@ Icon.loadFont();
 
 function AppTabsArtista(){
     return (
-        <Navigator tabBarOptions={{
-            style: {
-                elevation: 0,
-                shadowOpacity: 0,
-                height:64,
-            },
-            tabStyle: {
-                flexDirection:'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-            },
+        <Navigator 
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+    
+                if (route.name === 'HomeArtistaStack') {
+                    iconName = focused
+                    ? 'home'
+                    : 'home';
+                }
+                else if (route.name === 'ConfigArtista') {
+                    iconName = focused ? 'user' : 'user';
+                }
+                
+    
+                // You can return any component that you like here!
+                return <Icon name={iconName as string} size={35} color={color} />;
+                },
+            })}
+            tabBarOptions={{
+            // style: {
+            //     elevation: 0,
+            //     shadowOpacity: 0,
+            //     height:64,
+            // },
+            // tabStyle: {
+            //     flexDirection:'row',
+            //     alignItems: 'center',
+            //     justifyContent: 'center',
+            // },
             activeTintColor: colors.primary,
             inactiveTintColor: colors.black,
+            showLabel: false,
+            keyboardHidesTabBar: true,
 
         }}>
             <Screen name="HomeArtistaStack" component={HomeStackScreenArtist}/>

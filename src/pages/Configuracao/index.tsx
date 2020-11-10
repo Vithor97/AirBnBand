@@ -127,7 +127,7 @@ function Configuracao(){
                                 </TouchableOpacity>
 
                                 <Text style={styles.profileName}>
-                                    Vitor Miranda
+                                    {dadosUsuario.nome}
                                 </Text>
 
                                 <Text style={{left: '40%', fontSize: 15, fontWeight: 'bold'}}>

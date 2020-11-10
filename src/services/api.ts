@@ -207,8 +207,7 @@ const api = {
 
             await db.collection('users').doc(updateData.id).update(updateData)
             let resultadoUser = await api.pegaUsuario(updateData.id)
-            //console.log(resultadoUser)
-
+            
             if (resultadoUser){
                 setUsuario(resultadoUser)
                 return  true

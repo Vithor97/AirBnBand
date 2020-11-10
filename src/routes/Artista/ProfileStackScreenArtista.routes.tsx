@@ -9,8 +9,8 @@ const {Navigator, Screen} = createStackNavigator();
 function ProfileStackScreenArtista(){
     return (
             <Navigator screenOptions={{headerShown: true}}>
-                <Screen options={{title: 'Perfil do usuário'}} name="DetailsProfileArtista" component={DetailsProfileArtista}/>
-                <Screen options={{title: 'Editar Dados Artista'}} name="EditPerfilArtista" component={EditPerfilArtista}/>
+                <Screen options={{title: 'Perfil do usuário' ,headerStyle: {backgroundColor: '#FD9A0B'}}} name="DetailsProfileArtista" component={DetailsProfileArtista}/>
+                <Screen options={{title: 'Editar Dados Artista',  headerStyle: {backgroundColor: '#FD9A0B'}}} name="EditPerfilArtista" component={EditPerfilArtista}/>
             </Navigator>
     )
 }

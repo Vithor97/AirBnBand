@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   optionIconContainer: {
-    color: colors.red,
+    color: colors.primary,
     // color: colors.gmailRed,
   },
 
