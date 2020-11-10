@@ -6,3 +6,18 @@ O projeto consiste em um aplicativo para plataformas móveis, o mesmo nomeado Ai
 
 Feito para trabalho de graduação(TG) da FATEC carapicuíba
 </p>
+
+
+## ⚙️ Funcionalidades
+
+- [x] Artistas ou Contratantes podem se cadastrar na plataforma Mobile enviando:
+  - [x] uma imagem do ponto de coleta
+  - [x] nome da entidade, email de identificação e whatsapp (somente artistas)
+  - [x] e o endereço dos estabelecimentos para que ele possa aparecer no mapa
+- [x] Artistas podem selecionar regiões de atuação
+    - Contratante escolher artistats favoritos
+    - Filtro de pesquisas
+    - Chat entre artista e contratantes
+
+
+---
