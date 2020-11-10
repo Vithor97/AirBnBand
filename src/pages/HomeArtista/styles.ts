@@ -34,34 +34,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 30,
 
+        // flexDirection: "column",
+        // alignItems: "center",
+        // justifyContent: "center",
+        
         width: "97%",
         alignSelf: "center"
-    },
-
-    bio: {
-        bottom: 40,
-        marginHorizontal: 10,
-        // fontFamily: 'Poppins_400Regular',
-        fontSize: 14,
-        lineHeight: 14,
-        // color: '#7D7D7D',
-        color: colors.gray,
-    },
-
-    text_footer: {
-        color: colors.placeHolderAlternative,
-        // color: colors.gray,
-        fontWeight: 'bold',
-        fontSize: 13
-    },
-
-    action :{
-        flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 1,
-        // borderBottomColor: '#f2f2f2',
-        // borderBottomColor: colors.facebookBlue,
-        paddingBottom: 5
     },
 
     textInput: {
@@ -78,26 +56,81 @@ const styles = StyleSheet.create({
         //   backgroundColor: '#eee', 
         alignSelf: "center",
         //   right: 7,
-        top: -65
+        top: -65,
+
+        // backgroundColor: colors.black
     },
 
-    infos:{
+    centralizedInfoContainer:{
         alignSelf: "center",
+        alignItems: "center",
         textAlign: "justify",
-        bottom: 60,
+
+        marginTop: -60,
+        marginBottom: 10,
+        
+        // bottom: 60,
+        // backgroundColor: colors.gmailRed
     },
 
     bandNameStyle :{
         fontSize: 18,
         // marginBottom: -4,
         fontWeight: 'bold',
-        alignSelf: "center"
+        // alignSelf: "center"
     },
 
     musicalStyleStyle : {
         fontSize: 15,
         // left: 15
-        alignSelf: "center"
+        // alignSelf: "center"
+    },
+
+    infoTextContainer: {
+        // bottom: 40,
+        // marginHorizontal: 10,
+        // backgroundColor: colors.facebookBlue,
+        marginBottom: 10,
+
+        flexDirection: "row",
+        flexWrap: "wrap"
+
+        // justifyContent: "center"
+    },
+
+    infoLabel: {
+        fontSize: fonts.artistGeneralInfoTextSize,
+        lineHeight: fonts.artistGeneralInfoTextSize,
+        color: colors.black,
+
+        fontWeight: "bold"
+    },
+
+    infoText: {
+        // fontFamily: 'Poppins_400Regular',
+        // fontSize: 14,
+        fontSize: fonts.artistGeneralInfoTextSize,
+        lineHeight: fonts.artistGeneralInfoTextSize,
+        // color: '#7D7D7D',
+        color: colors.gray,
+    },
+
+    infoEstadoTextContainer: {
+        width: 50,
+
+        borderRadius: 15,
+        borderColor: colors.black,
+        borderWidth: 0.1,
+
+        fontSize: fonts.artistGeneralInfoTextSize,
+        backgroundColor: colors.primary,
+        marginRight: 5,
+        marginBottom: 5,
+        textAlign: "center",
+        
+        color: colors.white,
+        textShadowColor: colors.black,
+        textShadowRadius: 0.2,
     },
 
     // button: {
@@ -117,6 +150,22 @@ const styles = StyleSheet.create({
     // textSignUp: {
     //     fontSize: 15,
     //     fontWeight: 'bold'
+    // },
+    
+    // text_footer: {
+    //     color: colors.placeHolderAlternative,
+    //     // color: colors.gray,
+    //     fontWeight: 'bold',
+    //     fontSize: 13
+    // },
+
+    // action :{
+    //     flexDirection: 'row',
+    //     marginTop: 10,
+    //     borderBottomWidth: 1,
+    //     // borderBottomColor: '#f2f2f2',
+    //     // borderBottomColor: colors.facebookBlue,
+    //     paddingBottom: 5
     // },
 })
 
