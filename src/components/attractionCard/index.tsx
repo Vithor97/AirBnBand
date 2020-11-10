@@ -29,15 +29,15 @@ const AttractionCard : React.FC<any> = ({dados}) => {
 
     const [imageURL, setImageURL] = useState()
     
-    useEffect(() => {
-        definirImagem(dados.avatar);
-    }, []) 
+    // useEffect(() => {
+    //     definirImagem(dados.avatar);
+    // }, []) 
 
-    async function definirImagem(url:any){
-        const img = await api.getImage(url)
-        setImageURL(img)
-        return img
-    }
+    // async function definirImagem(url:any){
+    //     const img = await api.getImage(url)
+    //     setImageURL(img)
+    //     return img
+    // }
 
     const { goBack,navigate } = useNavigation();
 
@@ -46,7 +46,7 @@ const AttractionCard : React.FC<any> = ({dados}) => {
     }
 
     function goToProfileDetails(){
-        dados.avatar = imageURL
+        
         navigate('DetralhesPerfil', dados);
     }
 
@@ -56,7 +56,7 @@ const AttractionCard : React.FC<any> = ({dados}) => {
                 <View style={styles.imageContainer}>
                     <View style={styles.atractionImageBallFormContainer}>
                         <Image
-                            source={{uri: imageURL}}
+                            source={{uri: dados.avatar}}
                             style={styles.atractionImage}
                         />  
                     </View>

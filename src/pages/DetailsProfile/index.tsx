@@ -50,7 +50,7 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
             
                         <View  style={styles.avatarContainer}>
                             <Image
-                                source={{uri:avatar}}
+                                source={{uri: avatar}}
                                 style={styles.avatarImage}
                             />
                         </View>

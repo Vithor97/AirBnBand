@@ -2,17 +2,12 @@ import firebaseApp from '../../firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
-import { array } from 'yup';
-
 
 const db = firebaseApp.firestore();
 
 const api = {
     loginWithEmailAndPassword: async (email: string, senha: string) =>{
         const result = await firebaseApp.auth().signInWithEmailAndPassword(email, senha);
-
-        //console.log(result);
-
         return result;
     },
 
@@ -32,16 +27,11 @@ const api = {
 
         await db.collection('users').where("tipoUsuario", "==", "Artista").get()
         .then(snapshot =>{
-            //console.log(snapshot)
             if (snapshot.empty) {
                 return console.log('No matching documents.');
             }
-
             snapshot.forEach(doc => {
-                //console.log(doc.id, '=>', doc.data().CEP);
                 arrays.push(doc.data())
-               
-                //setUseer(doc.data())
             });
         })
         .catch(err => {
@@ -57,7 +47,6 @@ const api = {
             let arrays: any = []
             querySnapshot.forEach(function(doc) {
                 arrays.push(doc.data());
-                //console.log(doc.data())
             });
             setDados(arrays)
         });
@@ -66,6 +55,8 @@ const api = {
     cadastraArtista: async (dados: any) =>{
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
+        await api.uploadImage(dados.avatar)
+        const imageURL = await api.pegaImage(dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1))
         const uid = result.user?.uid
         await db.collection('users').doc(uid).set({
                 id: uid,
@@ -81,11 +72,8 @@ const api = {
                 selectEstados: dados.selectEstados,
                 telefone: dados.telefone,
                 tipoUsuario : dados.tipoUsuario,
-                avatar: dados.avatar ? dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1) : ""
+                avatar: dados.avatar ? imageURL : ""
             }).then(function() {
-                api.uploadImage(dados.avatar).then(()=>{
-                    console.log('imagem foi inserida no storage com sucesso')
-                })
                 hasSaved = true 
                 console.log("Document successfully written!");
                 console.log("HAS SAVED: " + hasSaved)
@@ -175,22 +163,16 @@ const api = {
             let dadosUsuario = await api.pegaUsuario(dados.id)
             let idFoto = dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)
 
-            console.log('Id foto; ' + idFoto )
             let mudaIdAvatar: any = dadosUsuario
 
             if(mudaIdAvatar.avatarId !== dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)){
              
-                
                 await api.uploadImage(dados.avatar)
             }
             let updateData: any = dados
             
             updateData.avatar = await api.pegaImage(dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1))
             updateData.avatarId = idFoto
-            //console.log(updateData.avatarId)
-            
-
-            //console.log(updateData)
 
             await db.collection('users').doc(updateData.id).update(updateData)
             let resultadoUser = await api.pegaUsuario(updateData.id)
@@ -208,8 +190,23 @@ const api = {
     atualizaUsuarioArtista: async (dados: any, setUsuario: any) =>{
         console.log('Metodo atualizaUsuario Artista')
         try {
-            await db.collection('users').doc(dados.id).update(dados)
-            let resultadoUser = await api.pegaUsuario(dados.id)
+
+            let dadosUsuario = await api.pegaUsuario(dados.id)
+            let idFoto = dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)
+
+            let mudaIdAvatar: any = dadosUsuario
+
+            if(mudaIdAvatar.avatarId !== dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)){
+             
+                await api.uploadImage(dados.avatar)
+            }
+            let updateData: any = dados
+            
+            updateData.avatar = await api.pegaImage(dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1))
+            updateData.avatarId = idFoto
+
+            await db.collection('users').doc(updateData.id).update(updateData)
+            let resultadoUser = await api.pegaUsuario(updateData.id)
             //console.log(resultadoUser)
 
             if (resultadoUser){

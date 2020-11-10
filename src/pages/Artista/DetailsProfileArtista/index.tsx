@@ -32,7 +32,7 @@ function DetailsProfileArtista(){
                 <View style={styles.perfilContainer}>
                     <Image 
                         style={styles.perfilAvatar}
-                        source={{uri: "https://media.istockphoto.com/vectors/man-avatar-profile-male-face-icon-vector-illustration-vector-id1142192538"}}
+                        source={{uri: dadosUsuario.avatar}}
                     />
 
                     <View style={styles.perfilInfoContainer}>

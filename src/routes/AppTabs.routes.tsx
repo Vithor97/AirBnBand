@@ -2,15 +2,11 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import colors from '../resources/values/colors.json';
 
 import Pesquisa from '../pages/Pesquisa';
-import Configuracao from '../pages/Configuracao';
-import Landing from '../pages/Landing';
-import DetailsProfile from '../pages/DetailsProfile';
-
-import DetailsProfileContratante from '../pages/DetailsProfileContratante';
 
 import ProfileContratante from './Contratante/ProfileStackScreenContratante.routes'
 
@@ -22,24 +18,34 @@ Icon.loadFont();
 
 function AppTabs(){
     return (
-        <Navigator tabBarOptions={{
-            style: {
-                
-                elevation: 0,
-                shadowOpacity: 0,
-                height: 60,       
+        <Navigator 
+        screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+  
+              if (route.name === 'Home') {
+                iconName = focused
+                  ? 'home'
+                  : 'home';
+              } else if (route.name === 'Pesquisa') {
+                iconName = focused ? 'search' : 'search';
+              }
+              else if (route.name === 'Perfil') {
+                iconName = focused ? 'user' : 'user';
+              }
+              
+  
+              // You can return any component that you like here!
+              return <Icon name={iconName as string} size={35} color={color} />;
             },
-            tabStyle: {
-                flexDirection:'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-            },
+          })}
+        tabBarOptions={{
             activeTintColor: colors.primary,
             inactiveTintColor: colors.black,
-            keyboardHidesTabBar: true
-            // activeBackgroundColor: colors.primary,
-            // showLabel: false,
-        }}>
+            showLabel: false,
+            keyboardHidesTabBar: true,
+        }}
+        >
             <Screen name="Home" component={HomeStackScreenContratante}/>
             <Screen name="Pesquisa" component={Pesquisa}/>
             <Screen name="Perfil" component={ProfileContratante}/>
