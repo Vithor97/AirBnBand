@@ -80,14 +80,6 @@ function DetailsProfileArtista(){
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
-                    <View style={styles.menuItem}>
-                        <Icon name="heart-outline" size={22} style={styles.optionIconContainer}/>
-
-                        <Text style={styles.menuItemText}>Favoritos</Text>
-                    </View>
-                </TouchableOpacity>
-
                 <TouchableOpacity onPress={sair}>
                     <View style={styles.menuItem}>
                         <Icon2 name="sign-out-alt" size={22} style={styles.optionIconContainer}/>

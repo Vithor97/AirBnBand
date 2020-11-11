@@ -52,6 +52,43 @@ const api = {
         });
     },
 
+    pegaArtistasFavoritos: async (usurarioId:any,setDados:any) => {
+        console.log("Dentro do metod de pega artista favorito")
+        let doc = db.collection('users').doc(usurarioId);
+        
+        doc.onSnapshot(async docSnapshot => {
+            console.log("snapshot")
+            const favoritos: Array<any> = await api.pegaFavoritos(usurarioId)
+            console.log(favoritos)
+
+            if(favoritos.length){
+                console.log("Array cheio")
+                try {
+                    await db.collection('users').where("id", "in", favoritos)
+                    .onSnapshot(function(querySnapshot) {
+                        let arrays: any = []
+                        querySnapshot.forEach(function(doc) {
+                            
+                            arrays.push(doc.data());
+                        });
+                        setDados(arrays)
+                    });
+                } catch (error) {
+                   console.log(error) 
+                }
+            }
+            else{
+                console.log("Array Vazio")
+                setDados([])
+            }
+        }, err => {
+            console.log(`Encountered error: ${err}`);
+        });
+
+        
+        
+    },
+
     cadastraArtista: async (dados: any) =>{
         let hasSaved: any  = false
         const result = await firebaseApp.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
@@ -72,7 +109,8 @@ const api = {
                 selectEstados: dados.selectEstados,
                 telefone: dados.telefone,
                 tipoUsuario : dados.tipoUsuario,
-                avatar: dados.avatar ? imageURL : ""
+                avatar: dados.avatar ? imageURL : "",
+ 
             }).then(function() {
                 hasSaved = true 
                 console.log("Document successfully written!");
@@ -105,7 +143,8 @@ const api = {
                 nomeEstabelecimento: dados.nomeEstabelecimento,
                 tipoUsuario : dados.tipoUsuario,
                 avatar: imageURL,
-                avatarId: dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)
+                avatarId: dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1),
+                favoritos: []
         }).then(function() {
             hasSaved = true 
             console.log("Document successfully written!");
@@ -217,6 +256,21 @@ const api = {
             console.log(error)
         }
     },
+    favoritar: async (idFavorito:any, idUsuario: any) => {
+        await db.collection('users').doc(idUsuario).update({
+            favoritos: firebaseApp.firestore.FieldValue.arrayUnion(idFavorito)
+        })
+    },
+    desfavoritar: async (idFavorito:any, idUsuario: any) => {
+        await db.collection('users').doc(idUsuario).update({
+            favoritos: firebaseApp.firestore.FieldValue.arrayRemove(idFavorito)
+        })
+    },
+    pegaFavoritos: async (idUsuario: any)=> {
+        let results: any =  await db.collection('users').doc(idUsuario).get()
+        //console.log("Dento do metodo pegaFavoritos")
+        return results.data().favoritos
+    }
 
 }
 

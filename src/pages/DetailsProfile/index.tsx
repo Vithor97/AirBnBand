@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { View, Text, Image, ScrollView, Linking, TouchableHighlight } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 
@@ -7,11 +7,23 @@ import BackArrow from '../../components/backArrow';
 import styles from './styles';
 
 import whatsappIcon from '../../resources/Icons/whatsapp2.png'
+import unfavoriteIcon from '../../resources/Icons/unfavorite.png'
+import heartOutlineIcon from '../../resources/Icons/heart-outline.png'
+
+import AuthContext from '../../contexts/auth'
+
+import api from '../../services/api';
 
 const DetailsProfile : React.FC<any> = ({route, navigation}) => {
+
+    const { usuario , setUsuario} = useContext(AuthContext);
+    const dadosUsuario: any = usuario
+    
+    
     
     const 
-    { 
+    {   
+        id,
         nome, 
         bio, 
         cnpj, 
@@ -26,11 +38,54 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
         tipoUsuario,
         avatar    
     } = route.params;
+    
+    
+    
+    useEffect(()=>{
 
-
+        async function getFavorites() {
+            const favoritos: any = await api.pegaFavoritos(dadosUsuario.id)
+            const temFavorito = favoritos.includes(id)
+             
+            if(temFavorito){
+                setIsFavorited(temFavorito)
+            }
+            else{
+                setIsFavorited(temFavorito)
+            }
+          }
+        
+          setLoading(false)
+        getFavorites();
+    }, [])
+    
+    const [isFavorited, setIsFavorited] = useState(false)
+    const [loading, setLoading] = useState(true)
     
     function handleLinkToWhatsapp(){
         Linking.openURL(`whatsapp://send?phone=${telefone}`)
+    }
+
+    async function handleToggleFavorite() {
+        //verificar se esse usuario está na lista de favoritos
+
+        //se estiver retorna true e setIsFavorited(true)
+
+        //senao estiver setIsFavorited(false)
+        //await api.desfavoritar(id, dadosUsuario.id)
+        if(isFavorited === true){
+            await api.desfavoritar(id, dadosUsuario.id)
+            setIsFavorited(false)
+        }
+        else{
+            await api.favoritar(id, dadosUsuario.id)
+            setIsFavorited(true)
+        }
+
+        
+
+        //await api.pegaFavoritos(dadosUsuario.id)
+
     }
 
     return (
@@ -44,16 +99,29 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
             <ScrollView style={styles.scrollViewContainer}>
                 <View style={styles.contentContainer}>
                     <View style={styles.nameAvatarContainer}>
+
                         <View style={styles.nameContainer}>
-                            <Text style={styles.artistName}>{nome}</Text>
+                            <Text style={styles.artistName}>{nomeArtistico}</Text>
+
+                            
+                            <RectButton onPress={handleToggleFavorite} 
+                                style={
+                                [styles.favoriteButton, 
+                                isFavorited  ?  styles.favorited : {},
+                                ]}
+                            >
+                                {isFavorited  ? <Image source={unfavoriteIcon}/> : <Image source={heartOutlineIcon}/> }
+                            </RectButton>
+                        
                         </View>
-            
+
                         <View  style={styles.avatarContainer}>
                             <Image
                                 source={{uri: avatar}}
                                 style={styles.avatarImage}
                             />
                         </View>
+   
                     </View>
 
                     <View style={styles.contentLabelContainer}>
@@ -98,7 +166,11 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                         <Image source={whatsappIcon}/>
                         <Text style={styles.contactButtonText}>Entrar em contato</Text>
                     </RectButton>
-                    
+
+
+        
+
+
                     <View style={styles.socialMediaContainer}>
                         <Image 
                             source={require('../../resources/Icons/instagram.png')}

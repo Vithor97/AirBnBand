@@ -42,19 +42,14 @@ const styles = StyleSheet.create({
   },
 
   nameContainer:{
-    width: '100%',
-    // height: 40,
-    // backgroundColor: colors.gmailRed,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-
-    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    left: 10
   },
 
   artistName: {
-    fontSize: fonts.artistInfoNameSize,
-
+    fontSize: 20,
+  
     color: colors.primary,
     // color: colors.black,
     // color: colors.white,
@@ -127,7 +122,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: 10,
-
+    
     // borderColor: colors.primary,
     // borderRadius: 10,
     // borderWidth: 2,
@@ -193,6 +188,23 @@ contactButtonText: {
   fontSize: 16,
   marginLeft: 16
 },
+
+
+favoriteButton: {
+  backgroundColor: '#8257e5',
+  width: 56,
+  height: 56,
+  borderRadius: 8,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginLeft: 15
+},
+favorited:{
+  backgroundColor: '#e33e3d' 
+},
+favoriteContainer: {
+  
+}
 })
 
 export default styles;

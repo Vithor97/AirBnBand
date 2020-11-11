@@ -22,6 +22,10 @@ function DetailsProfileContratante(){
         navigate('Configuracao');
     }
 
+    function vaiParaFavoritos(){
+        navigate('Favoritos');
+    }
+
     function sair(){
         signOut();
     }
@@ -76,7 +80,7 @@ function DetailsProfileContratante(){
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={vaiParaFavoritos}>
                     <View style={styles.menuItem}>
                         <Icon name="heart-outline" size={25} style={styles.optionIconContainer}/>
 

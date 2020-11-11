@@ -11,6 +11,7 @@ import Pesquisa from '../pages/Pesquisa';
 import ProfileContratante from './Contratante/ProfileStackScreenContratante.routes'
 
 import HomeStackScreenContratante from './Contratante/HomeStackScreenContratante.routes'
+import FavoriteStackScreenContratante from './Contratante/FavoriteStackScreenContratante.routes'
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -30,6 +31,9 @@ function AppTabs(){
               } else if (route.name === 'Pesquisa') {
                 iconName = focused ? 'search' : 'search';
               }
+              else if (route.name === 'Favoritos') {
+                iconName = focused ? 'heart' : 'heart';
+              }
               else if (route.name === 'Perfil') {
                 iconName = focused ? 'user' : 'user';
               }
@@ -48,6 +52,7 @@ function AppTabs(){
         >
             <Screen name="Home" component={HomeStackScreenContratante}/>
             <Screen name="Pesquisa" component={Pesquisa}/>
+            <Screen name="Favoritos" component={FavoriteStackScreenContratante}/>
             <Screen name="Perfil" component={ProfileContratante}/>
             {/* <Screen name="DetralhesPerfil" component={DetailsProfile}/> */}
 
