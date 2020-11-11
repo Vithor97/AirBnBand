@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { View, Text, TextInput, Image } from 'react-native';
-import {RectButton } from 'react-native-gesture-handler'
+import { View, Text, Image } from 'react-native';
 import colors from '../../resources/values/colors.json';
 import strings from '../../resources/values/strings.json';
 
@@ -13,7 +12,6 @@ import DefaultButton from '../../components/defaultButton';
 import AuthContext from '../../contexts/auth';
 
 import styles from './styles';
-// import logoImg from '../Resources/Icons/calendario.svg';
 import { useNavigation } from '@react-navigation/native';
 
 interface Usuario {
@@ -22,12 +20,10 @@ interface Usuario {
 }
 
 function Signin () {
-
     const {navigate} = useNavigation();
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-
     const [userr, setUserr] = useState<Usuario>({} as Usuario)
 
     //contexto
@@ -42,10 +38,10 @@ function Signin () {
     }
     
     async function passaUsuario(){
-
         if(!email){
             alert('Campo email vazio')
         }
+        
         if(!senha){
             alert('Campo senha vazio')
         }
@@ -63,6 +59,7 @@ function Signin () {
                     <Image source={require('../../resources/Icons/calendario.png')} style={styles.imageLogo} />
                 </Text>
             </View>
+
             <View style={styles.formContainer}>
                 <TextInputBox
                     placeholder={strings.email}  
@@ -70,15 +67,8 @@ function Signin () {
                     placeholderTextColor= {colors.white}
                     value={email}
                     onChangeText={(text:string) => setEmail(text)}
-                    /> 
-
-                {/* <TextInputBox
-                    placeholder={strings.email}
-                    placeholderTextColor= {colors.white}
-                    value={email}
-                    onChangeText={(text:string) => setEmail(text)}
-                /> */}
-                
+                /> 
+    
                 <TextInputBox
                     placeholder= {strings.password}
                     placeholderTextColor= {colors.white} 
@@ -86,39 +76,30 @@ function Signin () {
                     secureTextEntry={true}
                     value={senha}
                     onChangeText={(text:string) => setSenha(text)} 
-                    />
-
-                {/* <RectButton onPress={passaUsuario} style={styles.submitButton}>
-                    <Text style={styles.submitButtonText}> {strings.sign_in} </Text>
-                </RectButton> */}
+                />
 
                 <DefaultButton text={strings.sign_in} doIt={passaUsuario} />
 
                 <DivisorBar />
 
-
-                <View style={styles.socialMediaBox}>
+                <View style={styles.socialMediaBox}>                    
+                    <Image
+                        source={require('../../resources/Icons/facebook.png')}
+                        style={styles.faceBook}
+                    />
                     
-                        <Image 
-                            source={require('../../resources/Icons/facebook.png')}
-                            style={styles.faceBook}
-                        />
-                    
-                    
-                        <Image 
-                            source={require('../../resources/Icons/gmail.png')}
-                            style={styles.faceBook}
-                        />
-                    
+                    <Image 
+                        source={require('../../resources/Icons/gmail.png')}
+                        style={styles.faceBook}
+                    />
                 </View>
-
 
                 <Text style={styles.orText}> {strings.or} </Text>
 
                 <Text onPress={goToSignup} style={styles.signupButtonText}> {strings.create_account} </Text>
             </View>
 
-            <Waves />
+            <Waves/>
         </View>
     )
 }

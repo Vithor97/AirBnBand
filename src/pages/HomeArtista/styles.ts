@@ -86,6 +86,11 @@ const styles = StyleSheet.create({
         // alignSelf: "center"
     },
 
+    infoContainer: {
+        // backgroundColor: colors.black,
+        justifyContent: "space-between"
+    },
+
     infoTextContainer: {
         // bottom: 40,
         // marginHorizontal: 10,

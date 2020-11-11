@@ -42,30 +42,40 @@ function HomeArtista () {
                 </View>
 
                 <ScrollView>
-                    <View style={styles.infoTextContainer}>
-                        <Text style={styles.infoLabel}>Instagram: </Text>
+                    <View style={styles.infoContainer}>
+                        <View style={styles.infoTextContainer}>
+                            <Text style={styles.infoLabel}>Instagram: </Text>
 
-                        <Text style={styles.infoText}>
-                            {dadosUsuario.instagram}
-                        </Text>
-                    </View>
+                            <Text style={styles.infoText}>
+                                {dadosUsuario.instagram}
+                            </Text>
+                        </View>
 
-                    <View style={styles.infoTextContainer}>
-                        <Text style={styles.infoLabel}>Bio: </Text>
-                        
-                        <Text style={styles.infoText}>
-                            {dadosUsuario.bio}
-                        </Text>
-                    </View>
+                        <View style={styles.infoTextContainer}>
+                            <Text style={styles.infoLabel}>Bio: </Text>
+                            
+                            <Text style={styles.infoText}>
+                                {dadosUsuario.bio}
+                            </Text>
+                        </View>
 
-                    <View style={styles.infoTextContainer}>
-                        <Text style={styles.infoLabel}>Estados onde atua: </Text>
-                    </View>
+                        <View style={styles.infoTextContainer}>
+                            <Text style={styles.infoLabel}>Estados onde atua: </Text>
+                        </View>
 
-                    <View style={styles.infoTextContainer}>
-                        {dadosUsuario.selectEstados.map( ( estado : any ) => {
-                            return <Text key={estado} style={styles.infoEstadoTextContainer}>{estado}</Text> 
-                        })}
+                        <View style={styles.infoTextContainer}>
+                            {dadosUsuario.selectEstados.map( ( estado : any ) => {
+                                return <Text key={estado} style={styles.infoEstadoTextContainer}>{estado}</Text> 
+                            })}
+                        </View>
+
+                        <View style={styles.infoTextContainer}>
+                            <Text style={styles.infoLabel}>Telefone: </Text>
+                            
+                            <Text style={styles.infoText}>
+                                {dadosUsuario.telefone}
+                            </Text>
+                        </View>
                     </View>
                 </ScrollView>
 
