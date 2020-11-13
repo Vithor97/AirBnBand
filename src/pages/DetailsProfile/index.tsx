@@ -166,7 +166,7 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                             end={{x:1, y:1}}
                             colors={
                                 [ '#F6D37A', '#9836B6' ]
-                        }>
+                        }> 
                             <Image 
                                 source={require('../../resources/Icons/instagram.png')}
                                 style={styles.socialMediaIcon}
