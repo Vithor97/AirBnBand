@@ -61,9 +61,7 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
     }
 
     function handleLinkToInstagram(){
-        // Linking.openURL(`whatsapp://send?phone=${telefone}`)
-
-        console.log("Vai para o insta")
+        Linking.openURL(`https://www.instagram.com/${instagram}`);
     }
 
     async function handleToggleFavorite() {
