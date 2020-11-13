@@ -68,7 +68,24 @@ function CadastroArtista () {
     const Estilos = [
         {id: 0, nome: "Escolha Estilo Musical", value:""},
         {id: 1, nome: "Forró", value:"forro"},
-        {id: 2, nome: "Rock", value:"rock"},        
+        {id: 2, nome: "Rock", value:"rock"}, 
+        {id: 3, nome: "Pagode", value:"pagode"}, 
+        {id: 4, nome: "Heavy Metal", value:"heavy_metal"}, 
+        {id: 5, nome: "Axé", value:"axe"}, 
+        {id: 6, nome: "Indie", value:"indie"}, 
+        {id: 7, nome: "Bossa Nova", value:"bossa_nova"},
+        {id: 8, nome: "Death Metal", value:"death_metal"},
+        {id: 9, nome: "Folk", value:"folk"},
+        {id: 10, nome: "Reggae", value:"reggae"},
+        {id: 11, nome: "Pop", value:"pop"},
+        {id: 12, nome: "Nacional", value:"nacional"},
+        {id: 13, nome: "Reggaeton", value:"reggaeton"},
+        {id: 14, nome: "Country", value:"country"},
+        {id: 13, nome: "Sertanejo", value:"sertanejo"},
+        {id: 14, nome: "Trance", value:"trance"},
+        {id: 15, nome: "Kpop", value:"kpop"},
+        {id: 16, nome: "Eletrônica", value:"eletronica"},
+        {id: 666, nome: "Pisadinha", value:"pisadinha"},
     ]
 
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();

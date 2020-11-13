@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, Linking, TouchableHighlight } from 'reac
 import { RectButton } from 'react-native-gesture-handler'
 
 import BackArrow from '../../components/backArrow';
+import { LinearGradient } from 'expo-linear-gradient'
 
 import styles from './styles';
 
@@ -15,14 +16,10 @@ import AuthContext from '../../contexts/auth'
 import api from '../../services/api';
 
 const DetailsProfile : React.FC<any> = ({route, navigation}) => {
-
     const { usuario , setUsuario} = useContext(AuthContext);
     const dadosUsuario: any = usuario
     
-    
-    
-    const 
-    {   
+    const {   
         id,
         nome, 
         bio, 
@@ -39,10 +36,7 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
         avatar    
     } = route.params;
     
-    
-    
     useEffect(()=>{
-
         async function getFavorites() {
             const favoritos: any = await api.pegaFavoritos(dadosUsuario.id)
             const temFavorito = favoritos.includes(id)
@@ -66,6 +60,12 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
         Linking.openURL(`whatsapp://send?phone=${telefone}`)
     }
 
+    function handleLinkToInstagram(){
+        // Linking.openURL(`whatsapp://send?phone=${telefone}`)
+
+        console.log("Vai para o insta")
+    }
+
     async function handleToggleFavorite() {
         //verificar se esse usuario está na lista de favoritos
 
@@ -82,37 +82,29 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
             setIsFavorited(true)
         }
 
-        
-
         //await api.pegaFavoritos(dadosUsuario.id)
-
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                {/* <View style={styles.backArrowContainer}> */}
-                    <BackArrow/>
-                {/* </View> */}
+                <BackArrow/>
+                
+                <RectButton onPress={handleToggleFavorite} 
+                    style={
+                    [styles.favoriteButton, 
+                        isFavorited  ?  styles.favorited : {},
+                    ]}
+                >
+                    {isFavorited  ? <Image source={unfavoriteIcon}/> : <Image source={heartOutlineIcon}/> }
+                </RectButton>
             </View>
 
             <ScrollView style={styles.scrollViewContainer}>
                 <View style={styles.contentContainer}>
                     <View style={styles.nameAvatarContainer}>
-
                         <View style={styles.nameContainer}>
                             <Text style={styles.artistName}>{nomeArtistico}</Text>
-
-                            
-                            <RectButton onPress={handleToggleFavorite} 
-                                style={
-                                [styles.favoriteButton, 
-                                isFavorited  ?  styles.favorited : {},
-                                ]}
-                            >
-                                {isFavorited  ? <Image source={unfavoriteIcon}/> : <Image source={heartOutlineIcon}/> }
-                            </RectButton>
-                        
                         </View>
 
                         <View  style={styles.avatarContainer}>
@@ -167,21 +159,22 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                         <Text style={styles.contactButtonText}>Entrar em contato</Text>
                     </RectButton>
 
-
-        
-
-
-                    <View style={styles.socialMediaContainer}>
-                        <Image 
-                            source={require('../../resources/Icons/instagram.png')}
-                            style={styles.socialMediaIcon}
-                        />
-
-                        <Text style={styles.contentText}>Instagram:</Text>
-                    </View>
-
-          
-        
+                    <RectButton onPress={handleLinkToInstagram} style={styles.instagramPageButton}>
+                        <LinearGradient
+                            style={styles.instagramLinearGradient}
+                            start={{x:0, y:0}}
+                            end={{x:1, y:1}}
+                            colors={
+                                [ '#F6D37A', '#9836B6' ]
+                        }>
+                            <Image 
+                                source={require('../../resources/Icons/instagram.png')}
+                                style={styles.socialMediaIcon}
+                            />
+                            
+                            <Text style={styles.contactButtonText}>Visitar perfil</Text>
+                        </LinearGradient>
+                    </RectButton>
                 </View>
             </ScrollView>
         </View>

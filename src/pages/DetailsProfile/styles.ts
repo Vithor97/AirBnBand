@@ -20,12 +20,36 @@ const styles = StyleSheet.create({
 
   header: {
     width: '90%',
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // backgroundColor: colors.black
   },
 
   backArrowContainer:{
     width: '15%',
     marginBottom: 30,
+  },
+
+  favoriteButton: {
+    backgroundColor: colors.primary,
+    // borderColor: colors.primary,
+    borderWidth: 1,
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+    alignSelf: "flex-end",
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginLeft: 15
+  },
+
+  favorited:{
+    backgroundColor: '#e33e3d',
+    // backgroundColor: colors.primary,
+  },
+
+  favoriteContainer: {
+    
   },
 
   scrollViewContainer: {
@@ -44,7 +68,7 @@ const styles = StyleSheet.create({
   nameContainer:{
     flexDirection: 'row',
     justifyContent: "space-between",
-    left: 10
+    // left: 10
   },
 
   artistName: {
@@ -173,6 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginRight: 5
   },
+
   contactButton: {
     backgroundColor: '#04d361',
     flex: 1,
@@ -181,30 +206,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 8
-},
-contactButtonText: {
-  color: '#FFF',
-  fontSize: 16,
-  marginLeft: 16
-},
+    marginRight: 8,
+    marginBottom: 10
+  },
 
+  instagramPageButton: {
+    // backgroundColor: '#614A9D',
+    // backgroundColor: '#F2A745',
 
-favoriteButton: {
-  backgroundColor: '#8257e5',
-  width: 56,
-  height: 56,
-  borderRadius: 8,
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginLeft: 15
-},
-favorited:{
-  backgroundColor: '#e33e3d' 
-},
-favoriteContainer: {
-  
-}
+    flex: 1,
+    height: 56,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+    marginBottom: 10
+  },
+
+  instagramLinearGradient: {
+    width:  "100%",
+    height: "100%",
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  contactButtonText: {
+    color: '#FFF',
+    fontSize: 16,
+    marginLeft: 16
+  },
 })
 
 export default styles;
