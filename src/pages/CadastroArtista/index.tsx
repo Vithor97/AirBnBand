@@ -34,6 +34,7 @@ console.ignoredYellowBox = [
 ]
 
 function CadastroArtista () {
+
     const items = [{
         id: '92iijs7yta',
         name: 'RJ'
@@ -63,13 +64,15 @@ function CadastroArtista () {
         name: 'BR'
         }
     ];
+
     const Estilos = [
         {id: 0, nome: "Escolha Estilo Musical", value:""},
         {id: 1, nome: "Forró", value:"forro"},
         {id: 2, nome: "Rock", value:"rock"},        
     ]
+
     const viewPager  = useRef<ViewPager | null | HTMLInputElement | any>();
-    const teste  = useRef<MultiSelect | null | HTMLInputElement | any>();
+    const multiselect  = useRef<MultiSelect | null | HTMLInputElement | any>();
 
     const [selectedItems , setSelectedItems ] = useState([])
     
@@ -83,7 +86,6 @@ function CadastroArtista () {
     let [page, setPagee] = useState(0)
 
     //Seta se tem erro de validação no form
-    const [liberado, setLiberado] = useState(true)
     const tipoUsuario = "Artista";
     const [avatar, setAvatar] = useState<any>();
 
@@ -116,7 +118,7 @@ function CadastroArtista () {
         .min(4, strings.errorMessages.minimumLenght)
         .required(strings.errorMessages.required),
         instagram: Yup.string().required(strings.errorMessages.required),
-        bio: Yup.string().required(strings.errorMessages.required).max(25, "Maximo 50 caracteres"),
+        bio: Yup.string().required(strings.errorMessages.required).max(600, "Maximo 600 caracteres"),
         cnpj: Yup.string().required(strings.errorMessages.required),
         telefone: Yup.string().required(strings.errorMessages.required),
         nomeArtistico: Yup.string().required(strings.errorMessages.required),
@@ -279,6 +281,8 @@ function CadastroArtista () {
                                                     placeholder={strings.cnpj}
                                                     placeholderTextColor= {colors.white}
                                                     value={values.cnpj}
+                                                    maxLength={14}
+                                                    keyboardType="numeric"
                                                     onBlur={()=>setFieldTouched('cnpj', true)}
                                                     onChangeText={handleChange("cnpj")}
                                                 />
@@ -330,14 +334,12 @@ function CadastroArtista () {
                                                             <MultiSelect
                                                                 items={items}
                                                                 uniqueKey="name"
-                                                                //ref={(component) => { console.log("component") }}
                                                                 onSelectedItemsChange={onSelectedItemsChange}
-                                                                ref={teste}  
+                                                                ref={multiselect}  
                                                                 selectedItems={selectedItems}
                                                                 selectText="Estados"
                                                                 searchInputPlaceholderText="Search Items..."
                                                                 onChangeInput={ (text)=> console.log(text)}
-                                                                //altFontFamily="ProximaNova-Light"
                                                                 tagRemoveIconColor="#E10101"
                                                                 tagBorderColor="#FD9A0B"
                                                                 tagTextColor="#FD9A0B"
@@ -371,15 +373,13 @@ function CadastroArtista () {
                                                         style={styles.dropdownList}
                                                         onValueChange={(itemValue, itemIndex) =>{
                                                             setEstiloMusical(itemValue)
-                                                            
                                                             Estilos.forEach(e =>{
                                                                 if(e.id === itemIndex){
                                                                     values.estiloMusical = e.value
                                                                     setFieldTouched("estiloMusical", true)
                                                                 }
                                                             })
-                                                            
-                                                            console.log(values.estiloMusical)
+
                                                             }
                                                         }
                                                         mode="dropdown">

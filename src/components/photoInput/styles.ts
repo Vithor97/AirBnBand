@@ -45,7 +45,8 @@ const photoInput = StyleSheet.create({
 
   photoInputText:{
     color: colors.primary,
-    alignSelf: "center"
+    alignSelf: "center",
+    marginBottom: 15
   },
 })
 

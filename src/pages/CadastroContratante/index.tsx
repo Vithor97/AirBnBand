@@ -238,12 +238,25 @@ function CadastroContratante () {
                                         </BorderlessButton>
                                     </View>
                                     <Text style={backArrow.photoInputText}>{strings.addImage}</Text>
+                                    {errors.nomeEstabelecimento &&  touched.nomeEstabelecimento && mensagemDeErro(errors.nomeEstabelecimento)} 
+                                                        
+                                    <TextInput
+                                        style={styles.textInput}
+                                        placeholder={strings.nomeEstabelecimento}
+                                        placeholderTextColor= {colors.white}
+                                        value={values.nomeEstabelecimento}
+                                        onBlur={()=>setFieldTouched('nomeEstabelecimento', true)}
+                                        onChangeText={handleChange("nomeEstabelecimento")}
+                                    />
+
                                     {errors.cnpj &&  touched.cnpj && mensagemDeErro(errors.cnpj)}    
                                     <TextInput
                                         style={styles.textInput}
                                         placeholder={strings.cnpj}
                                         placeholderTextColor= {colors.white}
                                         value={values.cnpj}
+                                        maxLength={14}
+                                        keyboardType="numeric"
                                         onBlur={()=>setFieldTouched('cnpj', true)}
                                         onChangeText={handleChange("cnpj")}
                                     />
@@ -253,17 +266,10 @@ function CadastroContratante () {
                                         placeholder={strings.telephone}
                                         placeholderTextColor= {colors.white}
                                         value={values.telefone}
+                                        maxLength={14}
+                                        keyboardType="numeric"
                                         onBlur={()=>setFieldTouched('telefone', true)}
                                         onChangeText={handleChange("telefone")}
-                                    />
-                                    {errors.nomeEstabelecimento &&  touched.nomeEstabelecimento && mensagemDeErro(errors.nomeEstabelecimento)}                          
-                                    <TextInput
-                                        style={styles.textInput}
-                                        placeholder={strings.nomeEstabelecimento}
-                                        placeholderTextColor= {colors.white}
-                                        value={values.nomeEstabelecimento}
-                                        onBlur={()=>setFieldTouched('nomeEstabelecimento', true)}
-                                        onChangeText={handleChange("nomeEstabelecimento")}
                                     />
                                 </View>
                             </View>
@@ -278,11 +284,11 @@ function CadastroContratante () {
                                         style={styles.textInput}
                                         placeholder={strings.postalCode}
                                         placeholderTextColor= {colors.white}
-                                        keyboardType="numeric"
                                         value={values.cep}
                                         onBlur={()=>setFieldTouched('cep', true)}
                                         onChangeText={handleChange("cep")}
-                                        maxLength={10} 
+                                        keyboardType="numeric"
+                                        maxLength={8} 
                                     />
                                     <DefaultButton text="Buscar endereço" doIt={async () => buscarEndereco(values.cep, setFieldValue)}/> 
                                     
@@ -291,7 +297,7 @@ function CadastroContratante () {
                                         style={styles.textInput}
                                         placeholder= "UF"
                                         placeholderTextColor= {colors.white}
-                                        value={values.uf}
+                                        value={values.uf.toUpperCase()}
                                         onChangeText={handleChange("uf")}
                                         onBlur={()=>setFieldTouched('uf', true)}
                                         maxLength={2}
