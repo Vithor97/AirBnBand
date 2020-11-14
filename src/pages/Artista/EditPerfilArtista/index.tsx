@@ -80,7 +80,7 @@ function EditPerfilArtista(){
                             instagram: dadosUsuario.instagram as string,
                             bio: dadosUsuario.bio as string,
                             qtdIntegrantes: dadosUsuario.qtdIntegrantes as string,
-                            
+                            avatar: dadosUsuario.avatar as string
                         }}
                         
                         onSubmit={async(values)=>{
@@ -88,9 +88,9 @@ function EditPerfilArtista(){
                             valorForm = values;
                             valorForm.contatoVisivel = toggleCheckBox
                             valorForm.id = dadosUsuario.id
-
+                            
                             if(avatar){
-                                valorForm.avatar = avatar.uri
+                                valorForm.avatar = avatar.uri    
                             }
 
                             const valor = await Api.atualizaUsuarioArtista(valorForm, setUsuario)

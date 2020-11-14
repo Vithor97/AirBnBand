@@ -234,9 +234,7 @@ const api = {
             let idFoto = dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)
 
             let mudaIdAvatar: any = dadosUsuario
-
             if(mudaIdAvatar.avatarId !== dados.avatar.substring(dados.avatar.lastIndexOf('/') + 1)){
-             
                 await api.uploadImage(dados.avatar)
             }
             let updateData: any = dados

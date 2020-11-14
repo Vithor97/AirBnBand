@@ -151,11 +151,13 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                             }
                         </View>
                     </View>
-
-                    <RectButton onPress={handleLinkToWhatsapp} style={styles.contactButton}>
+                    {contatoVisivel 
+                    &&  <RectButton onPress={handleLinkToWhatsapp} style={styles.contactButton}>
                         <Image source={whatsappIcon}/>
                         <Text style={styles.contactButtonText}>Entrar em contato</Text>
                     </RectButton>
+                    }
+                   
 
                     <RectButton onPress={handleLinkToInstagram} style={styles.instagramPageButton}>
                         <LinearGradient
