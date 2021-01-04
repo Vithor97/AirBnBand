@@ -15,9 +15,13 @@ import AuthContext from '../../contexts/auth'
 
 import api from '../../services/api';
 
+import { useNavigation } from '@react-navigation/native';
+
 const DetailsProfile : React.FC<any> = ({route, navigation}) => {
     const { usuario , setUsuario} = useContext(AuthContext);
     const dadosUsuario: any = usuario
+
+    const { navigate } = useNavigation();
     
     const {   
         id,
@@ -62,6 +66,11 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
 
     function handleLinkToInstagram(){
         Linking.openURL(`https://www.instagram.com/${instagram}`);
+    }
+
+    function handleToChat(){
+        //Manda para o chat
+        navigate('Chat')
     }
 
     async function handleToggleFavorite() {
@@ -173,6 +182,24 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
                             />
                             
                             <Text style={styles.contactButtonText}>Visitar perfil</Text>
+                        </LinearGradient>
+                    </RectButton>
+
+                    <RectButton onPress={handleToChat} style={styles.instagramPageButton}>
+                        <LinearGradient
+                            style={styles.instagramLinearGradient}
+                            start={{x:0, y:0}}
+                            end={{x:1, y:1}}
+                            colors={
+                                [ '#FE6400', '#FB863B' ]
+                        }> 
+
+                            <Image 
+                                source={require('../../resources/Icons/chatIcon.png')}
+                                style={styles.socialMediaIcon}
+                            />
+                            
+                            <Text style={styles.contactButtonText}>Chat</Text>
                         </LinearGradient>
                     </RectButton>
                 </View>
