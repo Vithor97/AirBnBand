@@ -70,7 +70,7 @@ const DetailsProfile : React.FC<any> = ({route, navigation}) => {
 
     function handleToChat(){
         //Manda para o chat
-        navigate('Chat')
+        navigation.navigate('Chat', {id: id, nome: nome})
     }
 
     async function handleToggleFavorite() {

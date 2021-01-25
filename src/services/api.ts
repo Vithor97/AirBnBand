@@ -268,6 +268,12 @@ const api = {
         let results: any =  await db.collection('users').doc(idUsuario).get()
         //console.log("Dento do metodo pegaFavoritos")
         return results.data().favoritos
+    },
+    //add novo campo /APENAS TESTE/
+    addNewField: async (idUsuario: any) =>{
+        await db.collection('users').doc(idUsuario).update({
+            chats: [{chatId: 'oioioi'}]
+        })
     }
 
 }
