@@ -329,7 +329,48 @@ const api = {
             }
         });
     },
+    onChatList:  async (userId:any, setChatList:any) => {
 
+
+        let doc = db.collection('users').doc(userId);
+        let i = 0
+        doc.onSnapshot(async docSnapshot =>{
+            let data: any = docSnapshot.data()
+            let r = data.chats.map( (d:any)=>{
+                return d.with
+            })
+            let chatsId = data.chats.map( (d:any)=>{
+                return d.chatId
+            })
+            if(r.length){
+                try {
+                    await db.collection('users').where("id", "in", r)
+                    .onSnapshot(function(querySnapshot) {
+                        let arrays: any = []
+                        querySnapshot.forEach(function(doc) {
+                            
+                            let results: any = doc.data()
+             
+                            arrays.push({
+                                id: results.id,
+                                nome: results.nome,
+                                chatId: chatsId[i]
+                            });
+                            i++
+                        });
+                        setChatList(arrays)
+                    });
+                } catch (error) {
+                   console.log(error) 
+                }
+            }
+            else{
+                setChatList([])
+            }
+        })
+        
+        
+    }
     
 
 }

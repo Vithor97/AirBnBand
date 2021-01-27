@@ -101,7 +101,8 @@ export const AuthProvider: React.FC = ({children}) =>{
             // const url = await Api.getImage(dadosUser.avatar)
             // console.log(url)
             //dadosUser.avatar = url
-            console.log(dadosUser)
+
+            //console.log(dadosUser)
             setTipoUsuario(dadosUser.tipoUsuario)
             // console.log('na função logar')
             // console.log(dadosUser)
