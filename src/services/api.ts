@@ -274,7 +274,63 @@ const api = {
         await db.collection('users').doc(idUsuario).update({
             chats: [{chatId: 'oioioi'}]
         })
-    }
+    },
+
+    newChatUsers: async(user: any, user2: any, firstMessage: any, setChatId:any) =>{
+        let now = new Date();
+        let newChat = await db.collection('chats').add({
+            messages: [],
+            users: [user.id, user2.id]
+        });
+
+        setChatId(newChat.id)
+
+        db.collection('chats').doc(newChat.id).update({
+            messages: firebaseApp.firestore.FieldValue.arrayUnion({
+                author: user.id,
+                name: user.nome,
+                body: firstMessage,
+                date: now
+            })
+        });
+
+        db.collection('users').doc(user.id).update({
+            chats: firebaseApp.firestore.FieldValue.arrayUnion({
+                chatId: newChat.id,
+                lastMessage: firstMessage,
+                lastMessageDate: now,
+                with: user2.id
+            })
+        })
+
+        db.collection('users').doc(user2.id).update({
+            chats: firebaseApp.firestore.FieldValue.arrayUnion({
+                chatId: newChat.id,
+                lastMessage: firstMessage,
+                lastMessageDate: now,
+                with: user.id
+            })
+        })
+    },
+
+    onChatContent: (chatId:any, setList:any, setUsers:any) =>{
+        let arrays: any = []
+        return db.collection('chats').doc(chatId).onSnapshot((doc)=>{
+            if(doc.exists){
+                let data:any = doc.data();
+                data.messages.map((t:any, index:any)=>{
+                    console.log(index+1)
+                    arrays.push({_id: index+1, text: t.body, createdAt: t.date.toDate(), user: {_id: t.author, name: t.name}})
+                    //setList((prevState:any) => [...prevState, {_id: index+1, text: t.body, createdAt: t.date.toDate(), user: {_id: t.author, name:t.author } }])
+                })
+
+                setList(arrays.sort(function(a: any, b: any){return b._id - a._id}))
+        
+            }
+        });
+    },
+
+    
 
 }
 
