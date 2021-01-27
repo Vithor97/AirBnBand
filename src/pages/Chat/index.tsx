@@ -20,17 +20,15 @@ const Chat: React.FC<any> = ({route}) => {
 
     useEffect(() => {
       setUsers([dadosUsuario.nome,usuario2.nome])
-      console.log(`Valor do chatid: ${chatId}`)
-
-      if(idChat !== '' || idChat !== undefined){
+      
+      if(idChat !== undefined && idChat !== ''){
+        console.log(`Valor do idChat: ${idChat}`)
         let sub = api.onChatContent(idChat, setMessages, users)
         return sub
       }
-
-      if(chatId === '' || chatId == undefined){
-        return
-      }
-      else{
+      
+      if(chatId !== undefined && chatId !== '' ){
+        console.log(`Valor do chatid: ${chatId}`)
         setUsers([])
         let unsub = api.onChatContent(chatId, setMessages, users)
         return unsub
@@ -38,9 +36,7 @@ const Chat: React.FC<any> = ({route}) => {
       
     }, [chatId])
 
-     useEffect(() => {
-      setChatId(idChat)
-    }, [])
+
   
     const onSend = useCallback(async (messages = []) => {
       

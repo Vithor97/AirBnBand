@@ -12,6 +12,7 @@ import ProfileContratante from './Contratante/ProfileStackScreenContratante.rout
 
 import HomeStackScreenContratante from './Contratante/HomeStackScreenContratante.routes'
 import FavoriteStackScreenContratante from './Contratante/FavoriteStackScreenContratante.routes'
+import ChatStackScreen from './ChatStackScreen.routes'
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -34,9 +35,15 @@ function AppTabs(){
               else if (route.name === 'Favoritos') {
                 iconName = focused ? 'heart' : 'heart';
               }
+
+              else if (route.name === 'ChatScreen') {
+                iconName = focused ? 'comments' : 'comments';
+              }
+
               else if (route.name === 'Perfil') {
                 iconName = focused ? 'user' : 'user';
               }
+             
               
   
               // You can return any component that you like here!
@@ -53,10 +60,10 @@ function AppTabs(){
             <Screen name="Home" component={HomeStackScreenContratante}/>
             <Screen name="Pesquisa" component={Pesquisa}/>
             <Screen name="Favoritos" component={FavoriteStackScreenContratante}/>
+            <Screen name="ChatScreen" component={ChatStackScreen}/>
             <Screen name="Perfil" component={ProfileContratante}/>
-            {/* <Screen name="DetralhesPerfil" component={DetailsProfile}/> */}
 
-            {/* <Screen name="Configuracao" component={Configuracao}/> */}
+            
         </Navigator>
 
     )
