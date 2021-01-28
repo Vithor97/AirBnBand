@@ -65,6 +65,7 @@ function Favoritos () {
             <ScrollView style={styles.attractionCardsContainer}>
                 {
                     dados.map((m:any) => {
+                        console.log(m)
                         return <AttractionCard key={m.id} dados = {m}/>
                     })
                 }

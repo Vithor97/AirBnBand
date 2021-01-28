@@ -44,6 +44,9 @@ const Chat: React.FC<any> = ({route}) => {
         console.log('Não tem menssagens')
         await api.newChatUsers(dadosUsuario, usuario2, messages[0].text, setChatId)
       }
+      else{
+        console.log('tem mensagens')
+      }
 
       //implementar o envio de mensagens
 

@@ -52,42 +52,7 @@ const api = {
         });
     },
 
-    pegaArtistasFavoritos: async (usurarioId:any,setDados:any) => {
-        console.log("Dentro do metod de pega artista favorito")
-        let doc = db.collection('users').doc(usurarioId);
-        
-        doc.onSnapshot(async docSnapshot => {
-            console.log("snapshot")
-            const favoritos: Array<any> = await api.pegaFavoritos(usurarioId)
-            console.log(favoritos)
-
-            if(favoritos.length){
-                console.log("Array cheio")
-                try {
-                    await db.collection('users').where("id", "in", favoritos)
-                    .onSnapshot(function(querySnapshot) {
-                        let arrays: any = []
-                        querySnapshot.forEach(function(doc) {
-                            
-                            arrays.push(doc.data());
-                        });
-                        setDados(arrays)
-                    });
-                } catch (error) {
-                   console.log(error) 
-                }
-            }
-            else{
-                console.log("Array Vazio")
-                setDados([])
-            }
-        }, err => {
-            console.log(`Encountered error: ${err}`);
-        });
-
-        
-        
-    },
+   
 
     cadastraArtista: async (dados: any) =>{
         let hasSaved: any  = false
@@ -254,6 +219,40 @@ const api = {
             console.log(error)
         }
     },
+
+    pegaArtistasFavoritos: async (usurarioId:any,setDados:any) => {
+        console.log("Dentro do metod de pega artista favorito")
+        let doc = db.collection('users').doc(usurarioId);
+        
+        doc.onSnapshot(async docSnapshot => {
+            console.log("snapshot")
+            const favoritos: Array<any> = await api.pegaFavoritos(usurarioId)
+            console.log(favoritos)
+
+            if(favoritos.length){
+                console.log("Array cheio")
+                try {
+                    await db.collection('users').where("id", "in", favoritos)
+                    .onSnapshot(function(querySnapshot) {
+                        let arrays: any = []
+                        querySnapshot.forEach(function(doc) {
+                            //console.log(doc.data())
+                            arrays.push(doc.data());
+                        });
+                        setDados(arrays)
+                    });
+                } catch (error) {
+                   console.log(error) 
+                }
+            }
+            else{
+                console.log("Array Vazio")
+                setDados([])
+            }
+        }, err => {
+            console.log(`Encountered error: ${err}`);
+        });   
+    },
     favoritar: async (idFavorito:any, idUsuario: any) => {
         await db.collection('users').doc(idUsuario).update({
             favoritos: firebaseApp.firestore.FieldValue.arrayUnion(idFavorito)
@@ -284,7 +283,7 @@ const api = {
         });
 
         setChatId(newChat.id)
-
+        console.log('metodo newChatUsers')
         db.collection('chats').doc(newChat.id).update({
             messages: firebaseApp.firestore.FieldValue.arrayUnion({
                 author: user.id,
@@ -342,23 +341,35 @@ const api = {
             let chatsId = data.chats.map( (d:any)=>{
                 return d.chatId
             })
+
+            let message = data.chats.map( (d:any)=>{
+                return d.lastMessage
+            })
             if(r.length){
                 try {
                     await db.collection('users').where("id", "in", r)
                     .onSnapshot(function(querySnapshot) {
-                        let arrays: any = []
+                        let arrayDeObjetos: any = []
                         querySnapshot.forEach(function(doc) {
-                            
                             let results: any = doc.data()
-             
-                            arrays.push({
+                            // console.log({
+                            //     id: results.id,
+                            //     nome: results.nome,
+                            //     lastMessage: message[i],
+                            //     chatId: chatsId[i],
+                            //     avatar: results.avatar,
+                            // })
+                            arrayDeObjetos.push({
                                 id: results.id,
                                 nome: results.nome,
-                                chatId: chatsId[i]
+                                lastMessage: message[i],
+                                chatId: chatsId[i],
+                                avatar: results.avatar,
                             });
-                            i++
+                            i++;
                         });
-                        setChatList(arrays)
+                        i=0;
+                        setChatList(arrayDeObjetos)
                     });
                 } catch (error) {
                    console.log(error) 
@@ -367,6 +378,8 @@ const api = {
             else{
                 setChatList([])
             }
+        }, (err)=>{
+            console.log('erro')
         })
         
         

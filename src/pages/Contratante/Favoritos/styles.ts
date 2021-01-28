@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     attractionCardsContainer: {
       width: "100%",
       // marginBottom: 10,
-      paddingTop: 10,
     },
 });
 
