@@ -47,6 +47,7 @@ const ListChat: React.FC<any>  =({navigation}) =>{
         async function getDados(){
             setData([])
             await api.onChatList(dadosUsuario.id, setData);
+            
         }
 
         getDados()

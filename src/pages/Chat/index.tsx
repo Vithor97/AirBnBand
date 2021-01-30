@@ -36,11 +36,25 @@ const Chat: React.FC<any> = ({route}) => {
       
     }, [chatId])
 
+      const onSendd = (messages: any) => {
+      console.log(`Tem ${messagess.length} mensagens`)
+      console.log(messages)
+      if(messagess.length === 0  && Array.isArray(messagess)){
+        console.log('Não tem menssagens')
+        
+      }
+      else{
+        console.log('tem mensagens')
+      }
+
+      
+      return setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    }
 
   
     const onSend = useCallback(async (messages = []) => {
-      
-      if(!messagess.length && Array.isArray(messagess)){
+      console.log(`Tem ${messagess.length} mensagens`)
+      if(messagess.length === 0  && Array.isArray(messagess)){
         console.log('Não tem menssagens')
         await api.newChatUsers(dadosUsuario, usuario2, messages[0].text, setChatId)
       }
@@ -63,7 +77,7 @@ const Chat: React.FC<any> = ({route}) => {
           },
           }}
           messages={messagess}
-          onSend={messages => onSend(messages)}
+          onSend={messages => onSendd(messages)}
           user={{
             _id: dadosUsuario.id,
           }}

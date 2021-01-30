@@ -328,62 +328,128 @@ const api = {
             }
         });
     },
-    onChatList:  async (userId:any, setChatList:any) => {
+    // onChatList:  async (userId:any, setChatList:any) => {
 
+    //     let doc = db.collection('users').doc(userId);
+    //     let i = 0
+    //     doc.onSnapshot(async docSnapshot =>{
+    //         let data: any = docSnapshot.data()
+    //         let r = data.chats.map( (d:any)=>{
+    //             return d.with
+    //         })
+    //         let chatsId = data.chats.map( (d:any)=>{
+    //             return d.chatId
+    //         })
 
-        let doc = db.collection('users').doc(userId);
-        let i = 0
-        doc.onSnapshot(async docSnapshot =>{
-            let data: any = docSnapshot.data()
-            let r = data.chats.map( (d:any)=>{
-                return d.with
-            })
-            let chatsId = data.chats.map( (d:any)=>{
-                return d.chatId
-            })
+    //         let message = data.chats.map( (d:any)=>{
+    //             return d.lastMessage
+    //         })
+    //         if(r.length){
+    //             try {
+    //                 await db.collection('users').where("id", "in", r)
+    //                 .onSnapshot(function(querySnapshot) {
+    //                     let arrayDeObjetos: any = []
+    //                     querySnapshot.forEach(function(doc) {
+    //                         let results: any = doc.data()
+    //                         // console.log({
+    //                         //     id: results.id,
+    //                         //     nome: results.nome,
+    //                         //     lastMessage: message[i],
+    //                         //     chatId: chatsId[i],
+    //                         //     avatar: results.avatar,
+    //                         // })
+    //                         arrayDeObjetos.push({
+    //                             id: results.id,
+    //                             nome: results.nome,
+    //                             lastMessage: message[i],
+    //                             chatId: chatsId[i],
+    //                             avatar: results.avatar,
+    //                         });
+    //                         i++;
+    //                     });
+    //                     i=0;
+    //                     setChatList(arrayDeObjetos)
+    //                 });
+    //             } catch (error) {
+    //                console.log(error) 
+    //             }
+    //         }
+    //         else{
+    //             setChatList([])
+    //         }
+    //     }, (err)=>{
+    //         console.log('erro')
+    //     })
+           
+    // }
 
-            let message = data.chats.map( (d:any)=>{
-                return d.lastMessage
-            })
-            if(r.length){
-                try {
-                    await db.collection('users').where("id", "in", r)
-                    .onSnapshot(function(querySnapshot) {
-                        let arrayDeObjetos: any = []
-                        querySnapshot.forEach(function(doc) {
-                            let results: any = doc.data()
-                            // console.log({
-                            //     id: results.id,
-                            //     nome: results.nome,
-                            //     lastMessage: message[i],
-                            //     chatId: chatsId[i],
-                            //     avatar: results.avatar,
-                            // })
-                            arrayDeObjetos.push({
-                                id: results.id,
-                                nome: results.nome,
-                                lastMessage: message[i],
-                                chatId: chatsId[i],
-                                avatar: results.avatar,
-                            });
-                            i++;
-                        });
-                        i=0;
-                        setChatList(arrayDeObjetos)
-                    });
-                } catch (error) {
-                   console.log(error) 
-                }
-            }
-            else{
-                setChatList([])
-            }
-        }, (err)=>{
-            console.log('erro')
-        })
+    // onChatList:  (userId:any, setChatList:any) => {
         
+    //      return db.collection('users').doc(userId).onSnapshot(val=>{
+    //         if(val.exists){
+    //             let data:any = val.data();
+    //             console.log('teve alteracao')
+    //             if(data.chats.length >=0){
+    //                 setChatList([])
+    //                 let arr: Array<any> = []
+    //                 console.log('existem')
+    //                 data.chats.forEach((chatInfo:any, index:any) =>{
+    //                    return db.collection('users').doc(chatInfo.with).get().then((a:any)=>{
+
+    //                     setChatList((prevState:any) => [...prevState,{
+    //                         id: a.data().id,
+    //                         nome: a.data().nome,
+    //                         lastMessage: chatInfo.lastMessage,
+    //                         chatId: chatInfo.chatId,
+    //                         avatar: a.data().avatar,
+    //                     }]);
+    //                     arr.push(index)
+    //                    })
         
-    }
+    //                 })
+    //                 console.log(arr)
+    //                 //setChatList(arrayDeObjetos)
+   
+    //             }
+    //         }
+    //         else{
+    //             console.log('nao existem')
+    //         }
+            
+    //     })     
+    // }
+
+    pegaChats: async (idUsuario: any)=> {
+        let results: any =  await db.collection('users').doc(idUsuario).get()
+        return results.data().chats
+    },
+
+    onChatList: async (userId:any, setChatList:any) => {
+        
+        return db.collection('users').doc(userId).onSnapshot(async val=>{
+            const chats: Array<any> = await api.pegaChats(userId)
+
+            if(chats.length){
+                let s = chats.map(valor =>{
+                    return db.collection('users').doc(valor.with).get().then((a:any)=>{
+                        return {
+                            id: a.data().id,
+                            nome: a.data().nome,
+                            lastMessage: valor.lastMessage,
+                            chatId: valor.chatId,
+                            avatar: a.data().avatar,
+                            
+                        }
+                    })
+                })
+                Promise.all(s).then(function(results) {
+                    setChatList(results)
+                    console.log(results)
+                })
+            }
+           
+       })     
+   }
     
 
 }
