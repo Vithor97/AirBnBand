@@ -11,6 +11,7 @@ const Chat: React.FC<any> = ({route}) => {
     const [messagess, setMessages] = useState([]);
     const [chatId, setChatId] = useState('');
     const [users, setUsers] = useState<any>([]);
+    const [usuarios, setUsuarios] = useState<any>([]);
 
     const { usuario } = useContext(AuthContext);
     const dadosUsuario: any = usuario
@@ -20,7 +21,7 @@ const Chat: React.FC<any> = ({route}) => {
 
     useEffect(() => {
       setUsers([dadosUsuario.nome,usuario2.nome])
-      
+      setUsuarios([dadosUsuario,usuario2])
       if(idChat !== undefined && idChat !== ''){
         console.log(`Valor do idChat: ${idChat}`)
         let sub = api.onChatContent(idChat, setMessages, users)
@@ -34,39 +35,38 @@ const Chat: React.FC<any> = ({route}) => {
         return unsub
       }
       
-    }, [chatId])
+    }, [chatId, messagess])
 
-      const onSendd = (messages: any) => {
-      console.log(`Tem ${messagess.length} mensagens`)
-      console.log(messages)
-      if(messagess.length === 0  && Array.isArray(messagess)){
-        console.log('Não tem menssagens')
-        
-      }
-      else{
-        console.log('tem mensagens')
-      }
 
-      
-      return setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-    }
+    const onSendd = async (messages: any) => {
 
-  
-    const onSend = useCallback(async (messages = []) => {
-      console.log(`Tem ${messagess.length} mensagens`)
       if(messagess.length === 0  && Array.isArray(messagess)){
         console.log('Não tem menssagens')
         await api.newChatUsers(dadosUsuario, usuario2, messages[0].text, setChatId)
       }
       else{
         console.log('tem mensagens')
+        await api.sendMessage(idChat,dadosUsuario.id,messages[0].text,usuarios )
       }
+      //return setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    }
 
-      //implementar o envio de mensagens
+  
+    // const onSend = useCallback(async (messages = []) => {
+    //   console.log(`Tem ${messagess.length} mensagens`)
+    //   if(messagess.length === 0  && Array.isArray(messagess)){
+    //     console.log('Não tem menssagens')
+    //     await api.newChatUsers(dadosUsuario, usuario2, messages[0].text, setChatId)
+    //   }
+    //   else{
+    //     console.log('tem mensagens')
+    //   }
+
+    //   //implementar o envio de mensagens
 
       
-      return setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-    }, [])
+    //   return setMessages(previousMessages => GiftedChat.append(previousMessages, messagess))
+    // }, [])
 
     return (
       

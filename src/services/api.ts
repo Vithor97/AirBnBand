@@ -449,7 +449,46 @@ const api = {
             }
            
        })     
-   }
+   },
+
+   sendMessage:async (chatData:any, userId:any,  body:any, users:any) => {
+    let now = new Date();
+    // console.log('valor chtaData: ' + chatData)
+    // console.log(userId)
+    //console.log(body)
+    console.log(users)
+
+
+    db.collection('chats').doc(chatData).update({
+        messages: firebaseApp.firestore.FieldValue.arrayUnion({
+            author: userId,
+            body,
+            date: now,
+            name: users[0].nome
+        })
+    });
+
+    for(let i in users){
+        let u = await db.collection('users').doc(users[i].id).get();
+        let uData:any = u.data();
+        if(uData.chats){
+            let chats = [...uData.chats];
+
+            for(let e in chats){
+                if(chats[e].chatId === chatData) {
+                    chats[e].lastMessage = body;
+                    chats[e].lastMessageDate = now
+
+                }
+            }
+
+            await db.collection('users').doc(users[i].id).update({
+                chats
+            })
+        }
+    }
+
+}
     
 
 }
