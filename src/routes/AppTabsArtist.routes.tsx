@@ -5,11 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import colors from '../resources/values/colors.json';
 
-import Configuracao from '../pages/Configuracao';
-import HomeArtista from '../pages/HomeArtista';
-
 import HomeStackScreenArtist from './Artista/HomeStackScreenArtist.routes'
 import ConfigArtista from './Artista/ProfileStackScreenArtista.routes'
+import ChatStackScreen from './ChatStackScreen.routes'
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -30,9 +28,11 @@ function AppTabsArtista(){
                 else if (route.name === 'ConfigArtista') {
                     iconName = focused ? 'user' : 'user';
                 }
-                
     
-                // You can return any component that you like here!
+                else if (route.name === 'ChatScreen') {
+                    iconName = focused ? 'comments' : 'comments';
+                }
+                
                 return <Icon name={iconName as string} size={35} color={color} />;
                 },
             })}
@@ -54,6 +54,7 @@ function AppTabsArtista(){
 
         }}>
             <Screen name="HomeArtistaStack" component={HomeStackScreenArtist}/>
+            <Screen name="ChatScreen" component={ChatStackScreen}/>
             <Screen name="ConfigArtista" component={ConfigArtista}/>
         </Navigator>
 
