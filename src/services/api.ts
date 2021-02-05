@@ -312,13 +312,13 @@ const api = {
         })
     },
 
-    onChatContent: (chatId:any, setList:any, setUsers:any) =>{
+    onChatContent:  (chatId:any, setList:any, setUsers:any) =>{
         let arrays: any = []
         return db.collection('chats').doc(chatId).onSnapshot((doc)=>{
             if(doc.exists){
                 let data:any = doc.data();
                 data.messages.map((t:any, index:any)=>{
-                    console.log(index+1)
+                    
                     arrays.push({_id: index+1, text: t.body, createdAt: t.date.toDate(), user: {_id: t.author, name: t.name}})
                     //setList((prevState:any) => [...prevState, {_id: index+1, text: t.body, createdAt: t.date.toDate(), user: {_id: t.author, name:t.author } }])
                 })
@@ -453,10 +453,6 @@ const api = {
 
    sendMessage:async (chatData:any, userId:any,  body:any, users:any) => {
     let now = new Date();
-    // console.log('valor chtaData: ' + chatData)
-    // console.log(userId)
-    //console.log(body)
-    console.log(users)
 
 
     db.collection('chats').doc(chatData).update({

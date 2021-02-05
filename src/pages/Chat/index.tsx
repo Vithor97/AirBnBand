@@ -20,21 +20,23 @@ const Chat: React.FC<any> = ({route}) => {
     let { idChat } = route.params
 
     useEffect(() => {
-      setUsers([dadosUsuario.nome,usuario2.nome])
-      setUsuarios([dadosUsuario,usuario2])
-      if(idChat !== undefined && idChat !== ''){
-        console.log(`Valor do idChat: ${idChat}`)
-        let sub = api.onChatContent(idChat, setMessages, users)
-        return sub
-      }
-      
-      if(chatId !== undefined && chatId !== '' ){
-        console.log(`Valor do chatid: ${chatId}`)
-        setUsers([])
-        let unsub = api.onChatContent(chatId, setMessages, users)
-        return unsub
-      }
-      
+     
+        setUsers([dadosUsuario.nome,usuario2.nome])
+        setUsuarios([dadosUsuario,usuario2])
+        if(idChat !== undefined && idChat !== ''){
+          //console.log(`Valor do idChat: ${idChat}`)
+          let sub =  api.onChatContent(idChat, setMessages, users)
+          //console.log(sub)
+          return sub
+        }
+        
+        if(chatId !== undefined && chatId !== '' ){
+          setUsers([])
+          let unsub =  api.onChatContent(chatId, setMessages, users)
+          return unsub
+        }
+
+  
     }, [chatId, messagess])
 
 
@@ -46,9 +48,10 @@ const Chat: React.FC<any> = ({route}) => {
       }
       else{
         console.log('tem mensagens')
-        await api.sendMessage(idChat,dadosUsuario.id,messages[0].text,usuarios )
+        let chat = idChat == undefined || null || '' ? chatId : idChat
+       //console.log('chat: ' + chat)
+        await api.sendMessage(chat,dadosUsuario.id,messages[0].text,usuarios)
       }
-      //return setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
     }
 
   
