@@ -1,25 +1,16 @@
 import React, { createContext, useState, useEffect } from "react";
-import * as auth from "../services/auth";
 
-import { createStackNavigator } from "@react-navigation/stack";
-import AuthStack from "../routes/AuthStack.routes";
-import { AxiosResponse } from "axios";
+
+
 import { AsyncStorage } from "react-native";
 
 //firebase api
 import Api from '../services/api'
-import api from "../services/api";
-
 
 interface User {
     name: string;
     email: string;
 }
-interface Usuario {
-    email: string;
-    senha: string;
-}
-
   
 interface AuthContextData {
     signed: boolean;
@@ -75,10 +66,10 @@ export const AuthProvider: React.FC = ({children}) =>{
 
     //Funções que vão ser fornecidas a escopo global
     async function signIn() {
-        const response = await auth.signIn(); //depois fazer usando api mesmo
-        setUser(response.user);
+        // const response = await auth.signIn(); //depois fazer usando api mesmo
+        // setUser(response.user);
 
-        console.log(response)
+        // console.log(response)
     
         //api.defaults.headers.Authorization = `Baerer ${response.token}`;
     
@@ -90,19 +81,14 @@ export const AuthProvider: React.FC = ({children}) =>{
 
         try {
             let userr = await Api.loginWithEmailAndPassword(email, senha)
-            //let userr = await base.auth().signInWithEmailAndPassword(email, senha)
-            //console.log(userr)
+  
             let dadosUser: any
             var valor = userr.user?.email
             var uid = userr.user?.uid
             //procura usuario pelo documento
             let usuarioNoBanco = await Api.pegaUsuario(uid)
             dadosUser = usuarioNoBanco
-            // const url = await Api.getImage(dadosUser.avatar)
-            // console.log(url)
-            //dadosUser.avatar = url
-
-            //console.log(dadosUser)
+  
             setTipoUsuario(dadosUser.tipoUsuario)
             // console.log('na função logar')
             // console.log(dadosUser)
