@@ -1,0 +1,24 @@
+{
+    "primary" : "#FD9A0B",
+    "primaryDark" : "#c79100",
+    "primaryDarkAlternative" : "#E88C09",
+    "primaryLight" : "#FFF350",
+
+    "secundary" : "#fff130",
+    "secundaryDark" : "#c8bf00",
+    "secundaryLight" : "#ffff6b",
+
+    "placeHolder" : "#C4C4C4",
+    "placeHolderAlternative" : "#8A927F",
+
+    "background" : "#FFFFFF",
+    "backgroundAlternative" : "#000000",
+
+    "white" : "#FFFFFF",
+    "black" : "#000000",
+    "gray" : "#7D7D7D",
+    "red" : "#FF6347",
+
+    "facebookBlue" : "#4267B2",
+    "gmailRed" : "#DB4437"
+}
